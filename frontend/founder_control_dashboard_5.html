@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sent Requests Management - FundLink</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .card-elevation {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col">
+<header class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2.5">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h1 class="text-lg font-bold tracking-tight">FundLink</h1>
+</div>
+<div class="hidden md:flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
+<span class="material-symbols-outlined text-[16px] text-primary">shield_person</span>
+<span class="text-xs font-semibold text-primary uppercase tracking-wider">Stealth Mode Active</span>
+</div>
+</div>
+<nav class="flex items-center gap-6">
+<a class="text-sm font-medium text-slate-500 hover:text-primary transition-colors" href="#">Discover</a>
+<a class="text-sm font-semibold text-primary border-b-2 border-primary py-5" href="#">Sent Requests</a>
+<div class="h-4 w-[1px] bg-slate-200 dark:bg-slate-700"></div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
+<img alt="Founder avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXgOihvjY0lBpfDaezPh12J9-Ux67PCt5hLJhC_yKxIvkLdLjOxlYLePZ_Z5qawV-lcHdBVrBcDiSDi9tqIMMPqYZ9ejkmQmDmg5X9sTLA3z6D55O5ocB0P85Vtoj0Dfyx8mA68zlXCeX_ZaZZ_z-zTjldnb4VVLufS36KW0WfLcKR6xO3-Dte7q-aKjjA87UwOw-gVlrjc8IYM1cJCIWifcb6Fi0LJQuLcl4-l9ik_hKs7g-rak7Q_-YQOwQJgUMplXgfhRIlzzs"/>
+</div>
+</div>
+</nav>
+</div>
+</header>
+<main class="flex-1 max-w-[1200px] mx-auto w-full px-6 py-8">
+<div class="mb-6 bg-slate-100 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg p-3 flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-500 text-[20px]">info</span>
+<p class="text-[13px] text-slate-600 dark:text-slate-400">
+                Requests are automatically withdrawn after 7 days of inactivity to maintain platform hygiene and founder privacy.
+            </p>
+</div>
+<div class="mb-8">
+<h1 class="text-2xl font-bold text-slate-900 dark:text-white">Sent Requests Management</h1>
+<p class="text-sm text-slate-500 mt-1">Track and manage your outgoing connection requests to investors.</p>
+</div>
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+<div class="flex flex-wrap items-center gap-3">
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-slate-500">Status:</span>
+                        All Requests
+                        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+<div class="relative">
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+<span class="text-slate-500">Date:</span>
+                        Last 30 days
+                        <span class="material-symbols-outlined text-[18px]">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+<div class="w-full md:w-auto flex-1 md:max-w-xs relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[20px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Search by investor name..." type="text"/>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between mb-2 px-2">
+<span class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Active Requests (4)</span>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col md:flex-row md:items-center gap-4 card-elevation transition-all hover:translate-y-[-2px]">
+<div class="h-12 w-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary">corporate_fare</span>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Blue Horizon Ventures</h3>
+<p class="text-xs text-slate-500">London, UK • Institutional VC</p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 text-xs font-bold rounded-full border border-amber-100 dark:border-amber-800/50 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                                Pending
+                            </span>
+<span class="text-xs text-slate-400">Sent Oct 24, 2024</span>
+</div>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">schedule</span>
+<span class="text-xs text-slate-500 italic">Awaiting investor review</span>
+</div>
+<div class="flex items-center gap-1.5 pl-0.5">
+<span class="material-symbols-outlined text-slate-400 text-[14px]">timer</span>
+<span class="text-[11px] text-slate-500 font-medium">Auto-withdrawal in 6 days</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-3">
+<button class="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                        Withdraw Request
+                    </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col md:flex-row md:items-center gap-4 card-elevation transition-all hover:translate-y-[-2px]">
+<div class="h-12 w-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary">token</span>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Apex Growth Partners</h3>
+<p class="text-xs text-slate-500">New York, NY • Growth Fund</p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full border border-blue-100 dark:border-blue-800/50 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                                Viewed
+                            </span>
+<span class="text-xs text-slate-400">Sent Oct 22, 2024</span>
+</div>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[18px]">visibility</span>
+<span class="text-xs text-slate-500">Viewed 4 hours ago</span>
+</div>
+<div class="flex items-center gap-1.5 pl-0.5">
+<span class="material-symbols-outlined text-slate-400 text-[14px]">timer</span>
+<span class="text-[11px] text-slate-500 font-medium">Auto-withdrawal in 4 days</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-3">
+<button class="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                        Withdraw Request
+                    </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col md:flex-row md:items-center gap-4 card-elevation transition-all hover:translate-y-[-2px]">
+<div class="h-12 w-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Nova Seed Fund</h3>
+<p class="text-xs text-slate-500">Berlin, Germany • Early Stage</p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full border border-purple-100 dark:border-purple-800/50 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
+                                Awaiting Action
+                            </span>
+<span class="text-xs text-slate-400">Sent Oct 18, 2024</span>
+</div>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-purple-500 text-[18px]">quick_reference_all</span>
+<span class="text-xs text-slate-500">Shortlisted by investor</span>
+</div>
+<div class="flex items-center gap-1.5 pl-0.5">
+<span class="material-symbols-outlined text-slate-400 text-[14px]">timer</span>
+<span class="text-[11px] text-slate-500 font-medium">Auto-withdrawal in 1 day</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-3">
+<button class="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                        Withdraw Request
+                    </button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-5 rounded-xl flex flex-col md:flex-row md:items-center gap-4 card-elevation opacity-75 hover:opacity-100 transition-all">
+<div class="h-12 w-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center shrink-0 border border-slate-200 dark:border-slate-700">
+<span class="material-symbols-outlined text-slate-400">domain</span>
+</div>
+<div class="flex-1 grid grid-cols-1 md:grid-cols-3 gap-4">
+<div>
+<h3 class="font-bold text-slate-900 dark:text-white">Ironclad Capital</h3>
+<p class="text-xs text-slate-500">Singapore • Series A</p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="flex items-center gap-2">
+<span class="px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-xs font-bold rounded-full border border-slate-200 dark:border-slate-700 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+                                Pending
+                            </span>
+<span class="text-xs text-slate-400">Sent Oct 15, 2024</span>
+</div>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 text-[18px]">mail</span>
+<span class="text-xs text-slate-500 italic">Delivered to inbox</span>
+</div>
+<div class="flex items-center gap-1.5 pl-0.5">
+<span class="material-symbols-outlined text-red-400/70 text-[14px]">timer</span>
+<span class="text-[11px] text-red-500/80 font-bold">Auto-withdrawal in 2 hours</span>
+</div>
+</div>
+</div>
+<div class="shrink-0 flex items-center gap-3">
+<button class="px-4 py-2 border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 text-sm font-semibold rounded-lg hover:bg-red-50 hover:text-red-600 hover:border-red-100 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+                        Withdraw Request
+                    </button>
+</div>
+</div>
+</div>
+<div class="mt-12 p-6 bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl">
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white">How requests work</h4>
+<p class="text-sm text-slate-500 mt-1 leading-relaxed">Your startup's detailed profile remains anonymous until an investor accepts your connection request. Withdrawing a request immediately revokes the investor's ability to view your "Stealth Mode" details. <strong>Note:</strong> Requests are automatically withdrawn after 7 days of inactivity to maintain platform efficiency and ensure your data doesn't remain shared with inactive leads.</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="fixed bottom-0 w-full bg-slate-900 text-white py-2 px-6 z-50">
+<div class="max-w-[1200px] mx-auto flex items-center justify-between text-[11px] font-medium tracking-wide uppercase opacity-80">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span> System Secure</span>
+<span class="hidden sm:inline">Anonymity layer: ACTIVE</span>
+<span class="hidden sm:inline">Encrypted end-to-end</span>
+<span class="hidden sm:inline">Auto-withdrawal: ENABLED (7D)</span>
+</div>
+<div>
+                © 2024 FundLink Matchmaking Platform
+            </div>
+</div>
+</footer>
+</div>
+
+</body></html>

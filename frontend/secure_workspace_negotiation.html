@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Secure Workspace Negotiation | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .workspace-shadow {
+            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cfd7e7;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-[#0d121b] dark:text-white transition-colors duration-200">
+    <div class="relative flex h-screen w-full flex-col overflow-hidden">
+        <!-- Top Navigation Bar -->
+        <header
+            class="flex items-center justify-between border-b border-solid border-[#e7ebf3] dark:border-[#2a3347] bg-white dark:bg-[#1a2133] px-8 py-3 z-20">
+            <div class="flex items-center gap-4">
+                <div class="size-6 text-primary">
+                    <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <h2 class="text-lg font-bold tracking-[-0.015em]">FundLink</h2>
+            </div>
+            <div class="flex items-center gap-6">
+                <nav class="hidden md:flex items-center gap-8">
+                    <a class="text-sm font-medium hover:text-primary transition-colors"
+                        href="founder_control_dashboard_2.html">Dashboard</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Matches</a>
+                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Vault</a>
+                </nav>
+                <div class="h-8 w-px bg-[#e7ebf3] dark:bg-[#2a3347]"></div>
+                <div class="flex items-center gap-3">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-xs font-bold leading-none">Alexander Wright</p>
+                        <p class="text-[10px] text-[#4c669a] leading-none mt-1">Lead Founder</p>
+                    </div>
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-9 border border-[#e7ebf3] dark:border-[#2a3347]"
+                        data-alt="Professional profile photo of a male founder"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAjEGUWYfzDDQ6C4EiQX09oNjyqFujyF574wuApmgKh4HygUQCHei1fVlUmZQIdWU8Ng8EN__LnkaPqt80fR2FAmt2cehs5I8bCSCnOpJjf6hiU3O09fBxWoIwzX81hmY_ysIUNNkm77-cH-4Tvdhm0hsJqeWHSSKEmphBw3GqE-8Kfp9Z4JbvTo8v1mJol7xFWmtKKIQAs4FS3mR_Vu8JlSoHYqy-2oTTvPa-Yx6ckT8HbUP2XsQoso4_fhKPvYYKa-f9ThjtVWqs");'>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Workspace Content -->
+        <main class="flex-1 flex flex-col p-6 overflow-hidden">
+            <!-- Workspace Header Section -->
+            <div class="max-w-[1400px] mx-auto w-full mb-6 flex items-end justify-between">
+                <div class="flex flex-col gap-1">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="material-symbols-outlined text-primary text-sm">lock</span>
+                        <p class="text-xs font-semibold text-primary uppercase tracking-wider">Secure Workspace •
+                            Variant 5 of 6</p>
+                    </div>
+                    <h1 class="text-2xl font-bold tracking-tight">Project Aethelgard - Series A Round</h1>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
+                        <span class="text-sm text-[#4c669a] font-medium">Status: Active Negotiation</span>
+                    </div>
+                </div>
+                <button id="btn-end-conversation"
+                    class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-bold transition-all shadow-sm">
+                    <span class="material-symbols-outlined text-[18px]">cancel</span>
+                    <span>End Conversation</span>
+                </button>
+            </div>
+            <!-- Security Warning Banner -->
+            <div class="max-w-[1400px] mx-auto w-full mb-6">
+                <div class="flex items-center gap-4 rounded-xl border border-primary/20 bg-primary/5 p-4">
+                    <div class="bg-primary rounded-lg p-2 flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined text-sm">security</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <p class="text-sm font-bold leading-tight">Secure Environment Active</p>
+                        <p class="text-sm text-[#4c669a] font-normal leading-normal">Documents are view-only. Do not
+                            share credentials. External sharing and media attachments are strictly prohibited.</p>
+                    </div>
+                    <div class="ml-auto flex items-center gap-2">
+                        <div
+                            class="px-2 py-1 rounded bg-white dark:bg-[#1a2133] border border-primary/10 text-[10px] font-bold text-primary uppercase">
+                            Encryption: AES-256</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Split Workspace Container -->
+            <div class="max-w-[1400px] mx-auto w-full flex-1 flex gap-6 overflow-hidden">
+                <!-- Left Pane: Chat (Text Only) -->
+                <div
+                    class="flex-[2] flex flex-col bg-white dark:bg-[#1a2133] rounded-xl border border-[#e7ebf3] dark:border-[#2a3347] workspace-shadow overflow-hidden">
+                    <div
+                        class="px-6 py-4 border-b border-[#e7ebf3] dark:border-[#2a3347] flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[#4c669a]">forum</span>
+                            <h3 class="font-bold text-sm">Private Negotiation Channel</h3>
+                        </div>
+                        <span class="text-[10px] font-medium text-[#4c669a] uppercase tracking-tighter italic">Text Only
+                            Mode</span>
+                    </div>
+                    <div id="chat-container" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 custom-scrollbar">
+                        <!-- Message -->
+                        <div class="flex flex-col items-start max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
+                                <span class="text-[10px] text-[#4c669a]">10:24 AM</span>
+                            </div>
+                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
+                                <p class="text-sm leading-relaxed">Regarding the intellectual property clause in Section
+                                    4.2 of the term sheet—we noticed the carve-out for previous academic research isn't
+                                    fully defined. Can you clarify if the university retains any commercialization
+                                    rights?</p>
+                            </div>
+                        </div>
+                        <!-- Message -->
+                        <div class="flex flex-col items-end self-end max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] text-[#4c669a]">10:28 AM</span>
+                                <span class="text-[11px] font-bold text-primary uppercase">Founder</span>
+                            </div>
+                            <div class="bg-primary p-4 rounded-xl rounded-tr-none text-white">
+                                <p class="text-sm leading-relaxed">The University of Aethelgard has signed a full
+                                    release for this specific technology stack. I've uploaded the supplemental IP
+                                    Disclosure (Exhibit C) for your review in the viewer to the right.</p>
+                            </div>
+                        </div>
+                        <!-- Message -->
+                        <div class="flex flex-col items-start max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
+                                <span class="text-[10px] text-[#4c669a]">10:31 AM</span>
+                            </div>
+                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
+                                <p class="text-sm leading-relaxed">Thank you. Reviewing now. We are looking for specific
+                                    language regarding the sub-licensing rights for the Asian market subsidiaries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text Only Input Area -->
+                    <div class="p-4 border-t border-[#e7ebf3] dark:border-[#2a3347] bg-white dark:bg-[#1a2133]">
+                        <div class="relative">
+                            <textarea id="chat-input"
+                                class="w-full rounded-lg border-[#cfd7e7] dark:border-[#2a3347] bg-background-light dark:bg-[#101622] text-sm focus:ring-primary focus:border-primary p-3 min-h-[100px] resize-none pr-12"
+                                placeholder="Type a secure message... (File attachments disabled for security)"></textarea>
+                            <button id="btn-send-message"
+                                class="absolute bottom-3 right-3 p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
+                                <span class="material-symbols-outlined">send</span>
+                            </button>
+                        </div>
+                        <p class="text-[10px] text-center mt-2 text-[#4c669a] flex items-center justify-center gap-1">
+                            <span class="material-symbols-outlined text-[12px]">info</span>
+                            This channel is end-to-end encrypted and audited for compliance.
+                        </p>
+                    </div>
+                </div>
+                <!-- Right Pane: Document Viewer (View-Only) -->
+                <div
+                    class="flex-[3] flex flex-col bg-white dark:bg-[#1a2133] rounded-xl border border-[#e7ebf3] dark:border-[#2a3347] workspace-shadow overflow-hidden">
+                    <div
+                        class="px-6 py-3 border-b border-[#e7ebf3] dark:border-[#2a3347] flex justify-between items-center bg-[#fcfcfd] dark:bg-[#1e273a]">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-red-500/10 p-1.5 rounded">
+                                <span class="material-symbols-outlined text-red-500 text-lg">description</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm leading-none">Exhibit C - IP_Disclosure_Final.pdf</h3>
+                                <p class="text-[10px] text-[#4c669a] mt-1">Uploaded 12 min ago • 2.4 MB</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div
+                                class="flex bg-background-light dark:bg-[#101622] rounded-lg p-1 border border-[#e7ebf3] dark:border-[#2a3347]">
+                                <button class="p-1 hover:bg-white dark:hover:bg-[#1a2133] rounded transition-all"><span
+                                        class="material-symbols-outlined text-sm">zoom_in</span></button>
+                                <button class="p-1 hover:bg-white dark:hover:bg-[#1a2133] rounded transition-all"><span
+                                        class="material-symbols-outlined text-sm">zoom_out</span></button>
+                                <div class="w-px h-4 bg-[#e7ebf3] dark:bg-[#2a3347] mx-1 self-center"></div>
+                                <button class="p-1 hover:bg-white dark:hover:bg-[#1a2133] rounded transition-all"><span
+                                        class="material-symbols-outlined text-sm">search</span></button>
+                            </div>
+                            <div
+                                class="px-3 py-1.5 rounded-lg bg-yellow-500/10 text-yellow-600 text-[11px] font-bold border border-yellow-500/20 flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[14px]">visibility</span>
+                                VIEW ONLY
+                            </div>
+                        </div>
+                    </div>
+                    <!-- PDF Emulator View -->
+                    <div class="flex-1 bg-[#4b5563] relative flex justify-center p-8 overflow-y-auto custom-scrollbar">
+                        <div
+                            class="w-full max-w-[800px] min-h-[1100px] bg-white shadow-2xl p-16 flex flex-col gap-8 text-[#1a1a1a]">
+                            <div class="flex justify-between items-start border-b-2 border-primary pb-4">
+                                <div>
+                                    <h4 class="text-xl font-bold uppercase tracking-widest text-primary">IP Disclosure
+                                        Release</h4>
+                                    <p class="text-xs text-[#666] mt-1">Document Ref: AA-772-0129-C</p>
+                                </div>
+                                <div class="text-right">
+                                    <p class="text-[10px] font-bold">STRICTLY CONFIDENTIAL</p>
+                                    <p class="text-[10px] text-red-500">INTERNAL USE ONLY</p>
+                                </div>
+                            </div>
+                            <div class="space-y-4">
+                                <h5 class="text-sm font-bold uppercase">Section 1: Academic Patent Release</h5>
+                                <div class="h-2 w-full bg-gray-100 rounded"></div>
+                                <div class="h-2 w-full bg-gray-100 rounded"></div>
+                                <div class="h-2 w-3/4 bg-gray-100 rounded"></div>
+                                <h5 class="text-sm font-bold uppercase mt-6">Section 2: Commercial Rights Transfer</h5>
+                                <div class="h-2 w-full bg-gray-100 rounded"></div>
+                                <div class="h-2 w-full bg-gray-100 rounded"></div>
+                                <div class="h-2 w-full bg-gray-100 rounded"></div>
+                                <div class="h-2 w-1/2 bg-gray-100 rounded"></div>
+                            </div>
+                            <!-- Watermark -->
+                            <div
+                                class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] rotate-45">
+                                <span class="text-9xl font-bold text-black uppercase">SECURE VIEW</span>
+                            </div>
+                            <div class="mt-auto border-t pt-4 text-[9px] text-gray-400 flex justify-between">
+                                <p>© 2024 Aethelgard Technologies Inc. - All Rights Reserved</p>
+                                <p>Page 1 of 14</p>
+                            </div>
+                        </div>
+                        <!-- View-only Lock Overlays (Visual Cues) -->
+                        <div class="absolute bottom-6 right-6">
+                            <div
+                                class="bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-[10px] font-medium flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">file_download_off</span>
+                                Downloads Disabled
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="px-6 py-3 border-t border-[#e7ebf3] dark:border-[#2a3347] flex justify-between items-center bg-[#fcfcfd] dark:bg-[#1e273a]">
+                        <div class="flex gap-4">
+                            <button class="text-xs font-bold text-primary flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">list</span>
+                                Table of Contents
+                            </button>
+                            <button class="text-xs font-bold text-[#4c669a] flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[16px]">history</span>
+                                Version History
+                            </button>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <p class="text-[11px] text-[#4c669a]">Current Viewer: <strong>Investor (Partner)</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer Stats / Meta -->
+        <footer
+            class="bg-white dark:bg-[#1a2133] border-t border-[#e7ebf3] dark:border-[#2a3347] px-8 py-2 flex justify-between items-center z-10">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <div class="size-1.5 bg-green-500 rounded-full"></div>
+                    <p class="text-[10px] font-bold text-[#4c669a] uppercase tracking-tight">System Status: Nominal</p>
+                </div>
+                <div class="h-3 w-px bg-[#e7ebf3] dark:bg-[#2a3347]"></div>
+                <p class="text-[10px] text-[#4c669a]">Session ID: FL-9920-AETH</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <p class="text-[10px] text-[#4c669a]">Last active: 2 minutes ago</p>
+                <div class="flex -space-x-2">
+                    <div class="size-6 rounded-full border-2 border-white dark:border-[#1a2133] bg-center bg-cover"
+                        data-alt="Investor avatar small"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCdq8qXeQhQR0JKoKEXnv7QAf0hgQ8nOPleNGoVbcN7NAg05gGq9DCJW9GmIQhkfS17pWXULuBpeYhkag6TVFUv4-XnWOg3lDFuuozqOOWtCrlXo-NOXu5TyAS5aljxV3jwG3OnXJlh74fULDLPv8yCmit3FMZEB4Qp6GgfbWfPt0v2g7ifP8wMkCE46jKCXMeRbuX2tHdePcE_VGsHUbnLtmZN1LkgHFc9tuMgeqtHxoP2zrRDHG4Xy9hyK-4IHC_TCv0dCnEiMvw");'>
+                    </div>
+                    <div class="size-6 rounded-full border-2 border-white dark:border-[#1a2133] bg-center bg-cover"
+                        data-alt="Founder avatar small"
+                        style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD9WWi3xqGdyBgwOvY5cd3Mt_-RBgxyGCHW6R2Srwab1SVXdW-IdbBvaIkUz1z8IL6PPyMww0QuXKkE3mwGykJALPOBes9g3hXFlGJQNJY501haCOHybz58VjNp-D-HoN-3WkopaZQkJo97zLKrsVl6gH5S7pKo1dzbTZ9DUT8bsKO0GpnWcPXO4-ztvCalNJJBctyhs7oBgH-AbyxyciM_6ZnurKOoRoAEpf3Qez_fZO3otIE6otel8nP1GGwQ2Zp7gw3qYKInELs");'>
+                    </div>
+                    <div
+                        class="size-6 rounded-full border-2 border-white dark:border-[#1a2133] bg-primary flex items-center justify-center text-[8px] text-white font-bold">
+                        +1</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    </footer>
+    <script type="module" src="../js/main.js"></script>
+    <script>
+        // Inline Chat Controller for Demo
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatContainer = document.getElementById('chat-container');
+            const chatInput = document.getElementById('chat-input');
+            const sendBtn = document.getElementById('btn-send-message');
+            const endBtn = document.getElementById('btn-end-conversation');
+
+            // Scroll to bottom initially
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            function appendMessage(text, isFounder = true) {
+                const alignClass = isFounder ? 'items-end self-end' : 'items-start';
+                const bgClass = isFounder ? 'bg-primary text-white' : 'bg-background-light dark:bg-[#2a3347] text-[#0d121b] dark:text-white';
+                const roundedClass = isFounder ? 'rounded-tr-none' : 'rounded-tl-none';
+                const senderLabels = isFounder
+                    ? `<span class="text-[10px] text-[#4c669a]">Just now</span> <span class="text-[11px] font-bold text-primary uppercase">Founder</span>`
+                    : `<span class="text-[11px] font-bold text-primary uppercase">Investor</span> <span class="text-[10px] text-[#4c669a]">Just now</span>`;
+
+                // Flex direction for labels
+                const labelFlex = isFounder ? 'flex items-center gap-2 mb-1' : 'flex items-center gap-2 mb-1';
+
+                const html = `
+                <div class="flex flex-col ${alignClass} max-w-[85%] animate-fade-in-up">
+                    <div class="${labelFlex}">
+                        ${senderLabels}
+                    </div>
+                    <div class="${bgClass} p-4 rounded-xl ${roundedClass} shadow-sm">
+                        <p class="text-sm leading-relaxed">${text}</p>
+                    </div>
+                </div>`;
+
+                chatContainer.insertAdjacentHTML('beforeend', html);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+
+            function handleSend() {
+                const text = chatInput.value.trim();
+                if (!text) return;
+
+                appendMessage(text, true);
+                chatInput.value = '';
+
+                // Simulate Investor Reply
+                setTimeout(() => {
+                    const replies = [
+                        "That clarifies things significantly. Let me run this by our legal counsel.",
+                        "Understood. Could you also verify the cap table numbers in Exhibit B?",
+                        "Thanks. We are moving towards a preliminary term sheet loop next week.",
+                        "Noted. Please ensure the data privacy compliance doc is updated as well."
+                    ];
+                    const randomReply = replies[Math.floor(Math.random() * replies.length)];
+                    appendMessage(randomReply, false);
+                }, 2500);
+            }
+
+            // Events
+            sendBtn.addEventListener('click', handleSend);
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    handleSend();
+                }
+            });
+
+            // End Conversation
+            if (endBtn) {
+                endBtn.addEventListener('click', () => {
+                    if (confirm("Confirm: End Negotiation Session? \n\nAll documents will be locked.")) {
+                        // Redirect to dashboard
+                        window.location.href = 'founder_control_dashboard_2.html';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

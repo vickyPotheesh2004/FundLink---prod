@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Investor Portfolio Overview | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary: #135bec;
+            --background-light: #f6f6f8;
+            --background-dark: #0f172a;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }.portfolio-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .portfolio-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#0f172a",
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-slate-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <header
+            class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-3 sticky top-0 z-50">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 text-primary">
+                    <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                        <span class="material-symbols-outlined text-2xl">shield_lock</span>
+                    </div>
+                    <h2 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight tracking-tight">FundLink
+                    </h2>
+                </div>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                        href="investor_evaluation_dashboard_5.html">Evaluation Feed</a>
+                    <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                        href="investor_evaluation_dashboard_3.html">My Requests</a>
+                    <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
+                        href="investor_evaluation_dashboard_2.html">Portfolio</a>
+                    <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                        href="investor_evaluation_dashboard_4.html">Investment Thesis</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-4">
+                <div class="text-right hidden sm:block">
+                    <p class="text-xs font-semibold text-[#0d121b] dark:text-white">Marcus Capital</p>
+                    <p class="text-[10px] text-[#4c669a] dark:text-slate-400 uppercase tracking-widest">Master Account
+                    </p>
+                </div>
+                <div
+                    class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800">
+                    <img alt="Profile" class="w-full h-full object-cover"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaVfnYb7X8Sy9sQLjhHbify2C4C83lW72rPan9AJZu2tMaW5U-8uqQO15s55hVBnmnEF2tzMITBkea_KON2CKcL7E8HGOFZfa3zUElWH-re94JKAWmGJRa2NIlESJnlVdYaGuUbbDdFjznSej0rEmBM2g6TY-y92SnaklY_nUzZC2u5P1KxTRHQk0ve1HZ9BOm_vjk3fKpJQslt3-rXtLbdZEele_6a5_WzoRBHKY7GZk9Ngjphl8DkVa6b_JFi0Gz8TbbQq92rU" />
+                </div>
+            </div>
+        </header>
+        <main class="flex-1 p-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <h1 class="text-3xl font-black text-[#0d121b] dark:text-white tracking-tight">Portfolio Overview
+                        </h1>
+                        <p class="text-slate-500 dark:text-slate-400 mt-1">Private management of active assets and
+                            ongoing negotiations.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div
+                            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-center shadow-sm">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Assets</p>
+                            <p class="text-xl font-bold text-primary">12</p>
+                        </div>
+                        <div
+                            class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-4 py-2 rounded-lg text-center shadow-sm">
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Deployment</p>
+                            <p class="text-xl font-bold text-slate-900 dark:text-white">$8.4M</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div
+                        class="portfolio-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+                        <div class="p-6 flex-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-[#0d121b] dark:text-white tracking-tight mb-1">
+                                        Project Delta</h3>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">Fintech</span>
+                                        <span
+                                            class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">Equity</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-green-500">verified</span>
+                            </div>
+                            <div class="space-y-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Investment Date</span>
+                                    <span class="text-sm font-semibold">Oct 14, 2023</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Amount Invested</span>
+                                    <span class="text-sm font-bold text-[#0d121b] dark:text-white">$1,200,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Current Stage</span>
+                                    <span
+                                        class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Series
+                                        A-1</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                                Open Workspace
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="portfolio-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+                        <div class="p-6 flex-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-[#0d121b] dark:text-white tracking-tight mb-1">
+                                        Project Sigma</h3>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">Industry
+                                            AI</span>
+                                        <span
+                                            class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">Convertible</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-green-500">verified</span>
+                            </div>
+                            <div class="space-y-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Investment Date</span>
+                                    <span class="text-sm font-semibold">Jan 08, 2024</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Amount Invested</span>
+                                    <span class="text-sm font-bold text-[#0d121b] dark:text-white">$750,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Current Stage</span>
+                                    <span
+                                        class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Seed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                                Open Workspace
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="portfolio-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+                        <div class="p-6 flex-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-[#0d121b] dark:text-white tracking-tight mb-1">
+                                        Project Alpha</h3>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">Healthcare</span>
+                                        <span
+                                            class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">Equity</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-green-500">verified</span>
+                            </div>
+                            <div class="space-y-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Investment Date</span>
+                                    <span class="text-sm font-semibold">Nov 22, 2023</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Amount Invested</span>
+                                    <span class="text-sm font-bold text-[#0d121b] dark:text-white">$2,500,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Current Stage</span>
+                                    <span
+                                        class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Series
+                                        B</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                                Open Workspace
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="portfolio-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+                        <div class="p-6 flex-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-[#0d121b] dark:text-white tracking-tight mb-1">
+                                        Project Gamma</h3>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">Climate
+                                            Tech</span>
+                                        <span
+                                            class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">SAFE</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-slate-300">verified</span>
+                            </div>
+                            <div class="space-y-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Investment Date</span>
+                                    <span class="text-sm font-semibold">Feb 15, 2024</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Amount Invested</span>
+                                    <span class="text-sm font-bold text-[#0d121b] dark:text-white">$450,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Current Stage</span>
+                                    <span
+                                        class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Pre-Seed</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                                Open Workspace
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="portfolio-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col opacity-90">
+                        <div class="p-6 flex-1">
+                            <div class="flex justify-between items-start mb-4">
+                                <div>
+                                    <h3 class="text-lg font-bold text-[#0d121b] dark:text-white tracking-tight mb-1">
+                                        Project Epsilon</h3>
+                                    <div class="flex gap-2">
+                                        <span
+                                            class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">SaaS</span>
+                                        <span
+                                            class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">Equity</span>
+                                    </div>
+                                </div>
+                                <span class="material-symbols-outlined text-green-500">verified</span>
+                            </div>
+                            <div class="space-y-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Investment Date</span>
+                                    <span class="text-sm font-semibold">Dec 10, 2022</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Amount Invested</span>
+                                    <span class="text-sm font-bold text-[#0d121b] dark:text-white">$3,000,000</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xs font-medium text-slate-400 uppercase">Current Stage</span>
+                                    <span
+                                        class="text-xs font-bold px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded">Series
+                                        C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                            <button
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
+                                Open Workspace
+                            </button>
+                        </div>
+                    </div>
+                    <div
+                        class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl flex flex-col items-center justify-center p-8 text-center bg-white/50 dark:bg-slate-900/50 hover:bg-white dark:hover:bg-slate-900 transition-colors cursor-pointer group">
+                        <div
+                            class="size-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+                            <span class="material-symbols-outlined text-2xl">add</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-[#0d121b] dark:text-white">Register Investment</h4>
+                        <p class="text-xs text-slate-500 mt-1 max-w-[180px]">Securely add a completed deal to your
+                            managed portfolio.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer
+            class="bg-slate-900 text-white px-8 py-2.5 flex items-center justify-between text-[11px] font-medium tracking-wide">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-green-400">lock</span>
+                    <span>End-to-End Encrypted Environment</span>
+                </div>
+                <div class="flex items-center gap-1.5 opacity-60">
+                    <span class="material-symbols-outlined text-sm">visibility_off</span>
+                    <span>Zero Public Visibility</span>
+                </div>
+            </div>
+            <div class="opacity-60 flex items-center gap-4">
+                <span>Portfolio Audit Log Active</span>
+                <span class="bg-slate-700 px-2 py-0.5 rounded text-[10px]">v2.4.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <script type="module">
+        import { Auth } from '../../js/modules/auth.js';
+        if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
+            alert('Access Restricted: Investor Account Required');
+            window.location.href = 'role_commitment_&_authentication_1.html';
+        }
+    </script>
+</body>
+
+</html>

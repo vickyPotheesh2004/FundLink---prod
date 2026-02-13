@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FundLink | Comprehensive Founder Verification</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style type="text/tailwindcss">
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .step-completed {
+            color: #135bec;
+        }
+        .step-active {
+            color: #135bec;
+            border-bottom: 2px solid #135bec;
+        }
+        .form-card-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08), 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #135bec;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 min-h-screen flex flex-col">
+<header class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-xl">security</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight">FundLink</h2>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                1. Mandate
+            </div>
+<div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+                2. Identity
+            </div>
+<div class="text-sm font-bold step-active pb-1">3. Verification</div>
+</nav>
+<button class="flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">help_outline</span>
+<span>Help</span>
+</button>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center py-12 px-4 max-w-5xl mx-auto w-full">
+<div class="text-center mb-10">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-bold uppercase tracking-wider mb-4">
+<span class="material-symbols-outlined text-sm">analytics</span>
+            Step 3: AI Verification Analysis
+        </div>
+<h1 class="text-4xl font-extrabold tracking-tight mb-4 text-gray-900 dark:text-white">Founder Strategic Verification</h1>
+<p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            This detailed questionnaire powers our AI matching layer. Provide accurate, professional data to ensure high-fidelity investor matchmaking.
+        </p>
+</div>
+<div class="w-full bg-white dark:bg-gray-900 rounded-2xl border border-gray-200 dark:border-gray-800 form-card-shadow overflow-hidden">
+<form class="divide-y divide-gray-100 dark:divide-gray-800">
+<section class="p-8 md:p-10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">badge</span>
+<h3 class="text-xl font-bold tracking-tight">1. Identity &amp; Role</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Authority Level</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Solo Founder</option>
+<option>Co-Founder &amp; CEO</option>
+<option>Co-Founder &amp; CTO</option>
+<option>Early Employee with Equity</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Incorporation Status</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Not Yet Incorporated</option>
+<option>Pvt Ltd (India)</option>
+<option>Delaware C-Corp</option>
+<option>Other Jurisdiction</option>
+</select>
+</div>
+</div>
+</section>
+<section class="p-8 md:p-10 bg-gray-50/30 dark:bg-gray-800/10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">business_center</span>
+<h3 class="text-xl font-bold tracking-tight">2. Company Reality</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Current Stage</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Ideation / MVP Development</option>
+<option>Early Traction / Beta</option>
+<option>Revenue Generating</option>
+<option>Scaling</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Founder Commitment</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Full-time (100%+)</option>
+<option>Part-time (Transitioning)</option>
+<option>Side Project</option>
+</select>
+</div>
+</div>
+</section>
+<section class="p-8 md:p-10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">lightbulb</span>
+<h3 class="text-xl font-bold tracking-tight">3. Problem &amp; Solution Clarity</h3>
+</div>
+<div class="space-y-6">
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">The Core Problem (Max 200 chars)</label>
+<textarea class="w-full p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 focus:ring-2 focus:ring-primary/20 resize-none" placeholder="What specific pain point are you addressing?" rows="2"></textarea>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Your Unique Solution (Max 200 chars)</label>
+<textarea class="w-full p-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 focus:ring-2 focus:ring-primary/20 resize-none" placeholder="How does your product solve this uniquely?" rows="2"></textarea>
+</div>
+</div>
+</section>
+<section class="p-8 md:p-10 bg-gray-50/30 dark:bg-gray-800/10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">trending_up</span>
+<h3 class="text-xl font-bold tracking-tight">4. Market &amp; Intent</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Primary Customer Type</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 focus:ring-2 focus:ring-primary/20">
+<option>B2B Enterprise</option>
+<option>B2B SaaS / SMB</option>
+<option>B2C Consumer</option>
+<option>D2C</option>
+<option>B2B2C</option>
+</select>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Revenue Model</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Subscription / Recurring</option>
+<option>Transactional / Commission</option>
+<option>Ad-based</option>
+<option>Freemium</option>
+<option>Pre-revenue</option>
+</select>
+</div>
+</div>
+</section>
+<section class="p-8 md:p-10">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">payments</span>
+<h3 class="text-xl font-bold tracking-tight">5. Funding Intent</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Target Raise Amount ($)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-medium">$</span>
+<input class="w-full h-12 pl-8 pr-4 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 focus:ring-2 focus:ring-primary/20" placeholder="e.g. 500,000" type="text"/>
+</div>
+</div>
+<div>
+<label class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Fundraising Timeline</label>
+<select class="w-full h-12 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 focus:ring-2 focus:ring-primary/20">
+<option>Immediate (Active Round)</option>
+<option>1-3 Months</option>
+<option>3-6 Months</option>
+<option>Just Networking</option>
+</select>
+</div>
+</div>
+</section>
+<section class="p-8 md:p-10 bg-primary/5">
+<div class="flex items-center gap-3 mb-8">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/10 rounded-lg">gavel</span>
+<h3 class="text-xl font-bold tracking-tight">6. Platform Commitment</h3>
+</div>
+<div class="space-y-4">
+<label class="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-pointer hover:border-primary transition-colors">
+<input class="mt-1 size-5 rounded text-primary focus:ring-primary border-gray-300" type="checkbox"/>
+<div class="text-sm">
+<p class="font-bold text-gray-900 dark:text-white">IP Protection Agreement</p>
+<p class="text-gray-500 dark:text-gray-400 text-xs">I certify that all information shared is my own intellectual property or that of my company.</p>
+</div>
+</label>
+<label class="flex items-start gap-3 p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl cursor-pointer hover:border-primary transition-colors">
+<input class="mt-1 size-5 rounded text-primary focus:ring-primary border-gray-300" type="checkbox"/>
+<div class="text-sm">
+<p class="font-bold text-gray-900 dark:text-white">Asymmetric Anonymity Protocol</p>
+<p class="text-gray-500 dark:text-gray-400 text-xs">I agree to maintain investor anonymity until a formal Mutual Introduction is established by the platform.</p>
+</div>
+</label>
+</div>
+</section>
+<div class="p-8 md:p-10 text-center">
+<button class="w-full md:w-auto md:px-12 h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-3 mx-auto" type="submit">
+<span>Submit for AI Analysis</span>
+<span class="material-symbols-outlined text-xl">rocket_launch</span>
+</button>
+<p class="mt-4 text-[11px] text-gray-500 uppercase tracking-widest font-bold flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">verified</span>
+                    Military-Grade Data Encryption Active
+                </p>
+</div>
+</form>
+</div>
+<div class="mt-12 flex flex-wrap justify-center items-center gap-8 text-xs text-gray-400 font-medium">
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">lock</span> ISO 27001 Certified Storage</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">visibility_off</span> Zero-Knowledge Verification</span>
+<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">gpp_good</span> KYC/AML Ready</span>
+</div>
+</main>
+<footer class="py-12 px-6 border-t border-gray-200 dark:border-gray-800 text-center bg-white dark:bg-background-dark/50">
+<div class="max-w-4xl mx-auto">
+<p class="text-xs text-gray-500 mb-4 leading-relaxed">
+            FundLink uses proprietary asymmetric matching algorithms. Your data is never sold to third parties. 
+            Verification takes typically 2-4 hours of automated processing.
+        </p>
+<div class="flex justify-center gap-6">
+<a class="text-xs font-semibold underline hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+<a class="text-xs font-semibold underline hover:text-primary transition-colors" href="#">Platform Mandate</a>
+<a class="text-xs font-semibold underline hover:text-primary transition-colors" href="#">Ethics Charter</a>
+</div>
+<p class="mt-6 text-[10px] text-gray-400">© 2024 FundLink Technologies Private Limited.</p>
+</div>
+</footer>
+
+</body></html>

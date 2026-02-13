@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>FundLink | Received Interests</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-shadow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-auto min-screen w-full">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 hidden lg:flex flex-col h-screen sticky top-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">FundLink</h1>
+<p class="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">Privacy-First</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+                    Dashboard
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-bold rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined text-xl">move_to_inbox</span>
+                    Received Interests
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-xl">workspaces</span>
+                    Active Workspaces
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-xl">person_pin</span>
+                    Founder Profile
+                </a>
+<div class="pt-4 pb-2">
+<p class="px-3 text-[10px] font-bold text-slate-400 uppercase tracking-widest">System</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-xl">insights</span>
+                    Network Insights
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="p-4 mt-auto">
+<div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700">
+<p class="text-xs font-semibold mb-2">Pro Subscription</p>
+<p class="text-[11px] text-slate-500 mb-3">Get advanced match filtering and priority support.</p>
+<button class="w-full py-2 bg-primary text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                        Upgrade Now
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Top Header -->
+<header class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md sticky top-0 z-10 px-8 flex items-center justify-between">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search mandates, investors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold leading-none">Aryan Sharma</p>
+<p class="text-[10px] text-slate-500">Founder, HealthStream</p>
+</div>
+<div class="size-9 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-200 dark:border-slate-700">
+<img alt="Founder Profile" class="w-full h-full object-cover" data-alt="Portrait of a young professional entrepreneur" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvh4MB1Nq6opH8PtvVjwhLigbhH7Sga4TtKd-zpm2I2WfMzlH93XV3YOuca_cfcdFr_x_vtrhcLVBREnsEohSKgyBvZ1eo7vNYoYVBS1q8NCerjQEEzmlTgmsJilcofysDIoh82wJSrj8CJ6zDGUjUwcR-mqjHftBe9G6Dp4kGSUPAKu2CChI7c6qdoQTkLnnzro-iv8B2UbAk8iiidYPThnh7ZPz4hXzkGmbfOiCXIJnw0CgkNZTOP5EuZEuRSaRj8IYWCB3CvJo"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-8">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase">Action Required</span>
+<span class="text-slate-400 text-sm">•</span>
+<span class="text-slate-500 text-sm">12 Active Requests</span>
+</div>
+<h2 class="text-3xl font-black tracking-tight text-slate-900 dark:text-white">Received Interests</h2>
+<p class="text-slate-500 mt-2 max-w-2xl text-sm leading-relaxed">
+                            Review and manage incoming investor connection requests. Your startup's detailed data remains <span class="text-primary font-semibold">strictly private</span> until you choose to accept an interest.
+                        </p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-2 px-4 py-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm font-semibold rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Status Tabs -->
+<div class="flex border-b border-slate-200 dark:border-slate-800 mb-6 gap-8">
+<button class="pb-4 text-sm font-bold border-b-2 border-primary text-primary flex items-center gap-2">
+                        Pending <span class="bg-primary/10 px-2 py-0.5 rounded text-[10px]">12</span>
+</button>
+<button class="pb-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+                        Accepted
+                    </button>
+<button class="pb-4 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-700 dark:hover:text-slate-300 transition-colors">
+                        Non-Matches
+                    </button>
+</div>
+<!-- Request Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+<!-- Interest Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 card-shadow flex flex-col sm:flex-row gap-5 items-start">
+<div class="size-16 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-3xl">corporate_fare</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> 95% Thesis Match
+                                </span>
+<span class="text-slate-300 dark:text-slate-700">|</span>
+<span class="text-slate-500 text-[11px] font-medium">Received 2h ago</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">Global Ventures III</h3>
+<p class="text-slate-500 text-sm mt-1 mb-4 line-clamp-1 italic">"Focused on Series A healthcare platforms in Southeast Asia."</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Ticket Size Range</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">$2M — $5M</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Investor Type</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Institutional VC</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">handshake</span> Accept
+                                </button>
+<button class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">close</span> Decline
+                                </button>
+</div>
+</div>
+</div>
+<!-- Interest Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 card-shadow flex flex-col sm:flex-row gap-5 items-start">
+<div class="size-16 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">bolt</span> 82% Thesis Match
+                                </span>
+<span class="text-slate-300 dark:text-slate-700">|</span>
+<span class="text-slate-500 text-[11px] font-medium">Received 5h ago</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">Nexus Capital Partners</h3>
+<p class="text-slate-500 text-sm mt-1 mb-4 line-clamp-1 italic">"We support high-growth B2B SaaS and Fintech founders."</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Ticket Size Range</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">$500K — $1.5M</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Investor Type</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Seed/Early Fund</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">handshake</span> Accept
+                                </button>
+<button class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">close</span> Decline
+                                </button>
+</div>
+</div>
+</div>
+<!-- Interest Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 card-shadow flex flex-col sm:flex-row gap-5 items-start opacity-80 grayscale-[0.5] hover:opacity-100 hover:grayscale-0 transition-all">
+<div class="size-16 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-3xl">token</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">info</span> 68% Thesis Match
+                                </span>
+<span class="text-slate-300 dark:text-slate-700">|</span>
+<span class="text-slate-500 text-[11px] font-medium">Received Yesterday</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">Evergreen Angels</h3>
+<p class="text-slate-500 text-sm mt-1 mb-4 line-clamp-1 italic">"Early stage tech-first ventures in India and APAC."</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Ticket Size Range</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">$100K — $400K</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Investor Type</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Angel Syndicate</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">handshake</span> Accept
+                                </button>
+<button class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">close</span> Decline
+                                </button>
+</div>
+</div>
+</div>
+<!-- Interest Card 4 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 card-shadow flex flex-col sm:flex-row gap-5 items-start opacity-80 grayscale-[0.5] hover:opacity-100 hover:grayscale-0 transition-all">
+<div class="size-16 rounded-lg bg-slate-50 dark:bg-slate-800 flex items-center justify-center shrink-0 border border-slate-100 dark:border-slate-700">
+<span class="material-symbols-outlined text-primary text-3xl">domain</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">info</span> 64% Thesis Match
+                                </span>
+<span class="text-slate-300 dark:text-slate-700">|</span>
+<span class="text-slate-500 text-[11px] font-medium">Received Yesterday</span>
+</div>
+<h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">Pinnacle Growth Fund</h3>
+<p class="text-slate-500 text-sm mt-1 mb-4 line-clamp-1 italic">"Late seed and early Series A market leaders."</p>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Ticket Size Range</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">$1M — $3M</p>
+</div>
+<div>
+<p class="text-[10px] text-slate-400 uppercase font-bold tracking-wider">Investor Type</p>
+<p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Venture Capital</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex-1 py-2.5 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">handshake</span> Accept
+                                </button>
+<button class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-sm font-bold rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">close</span> Decline
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Pagination/Load More -->
+<div class="mt-8 flex justify-center">
+<button class="px-6 py-2.5 text-sm font-bold text-slate-600 dark:text-slate-400 hover:text-primary transition-colors flex items-center gap-2">
+                        View More Requests
+                        <span class="material-symbols-outlined">expand_more</span>
+</button>
+</div>
+<!-- Privacy Disclaimer -->
+<div class="mt-12 bg-slate-900 dark:bg-primary/5 rounded-2xl p-6 flex flex-col md:flex-row items-center gap-6 border border-slate-800 dark:border-primary/20">
+<div class="size-12 rounded-full bg-primary/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+<div class="flex-1 text-center md:text-left">
+<h4 class="text-white font-bold mb-1">Privacy Guarantee</h4>
+<p class="text-slate-400 text-sm max-w-xl">
+                            Declining a request will notify the investor of a "Non-match" without disclosing your company name or detailed metrics. Your privacy remains our top priority.
+                        </p>
+</div>
+<div class="shrink-0">
+<a class="text-primary text-sm font-bold hover:underline" href="#">Learn more about Secure Workspaces</a>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

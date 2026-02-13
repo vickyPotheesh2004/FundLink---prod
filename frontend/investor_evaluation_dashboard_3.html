@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Sent Requests | FundLink Investor</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary: #135bec;
+            --background-light: #f6f6f8;
+            --background-dark: #101622;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .card-3d {
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-3d:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-slate-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-3 sticky top-0 z-50">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3 text-primary">
+                        <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                            <span class="material-symbols-outlined text-2xl">shield_lock</span>
+                        </div>
+                        <h2 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight tracking-tight">
+                            FundLink</h2>
+                    </div>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_5.html">Evaluation Feed</a>
+                        <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
+                            href="investor_evaluation_dashboard_3.html">My Requests</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_2.html">Portfolio</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_4.html">Investment Thesis</a>
+                    </nav>
+                </div>
+                <div class="flex flex-1 justify-end gap-6 items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs font-semibold text-[#0d121b] dark:text-white">Marcus Capital</p>
+                            <p class="text-[10px] text-[#4c669a] dark:text-slate-400 uppercase tracking-widest">LP Tier
+                                1</p>
+                        </div>
+                        <div
+                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800">
+                            <img alt="Investor profile" class="w-full h-full object-cover"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBt05RZ0ObQcv85uTbJqNOr2HCBeTa2zLt5TZKShZQQKspBThremdsXlLhMoF3Nyq90YJuYsP8lGrwBRFIgNsy6TheWsVaC5zGxrq6XVv-enAIw_hZXgwJYxZer8Jwgx_MSK91F0WgvZIZBfJjvF6y8iGrRs3w1qIjEniL5zmUCR5RYYNwDdbR49WMFCTweGGOmDKzcc-3FQIHjzXDCdmwYlVKJvm-tKA1Wj_Kc4ugoESHw2pQ69hwTbVXCG0mPBg5IfmAej8esy4" />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1 p-8">
+                <div class="max-w-6xl mx-auto">
+                    <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="material-symbols-outlined text-primary text-2xl">outbound</span>
+                                <h1 class="text-3xl font-black text-[#0d121b] dark:text-white tracking-tight">Sent
+                                    Requests</h1>
+                            </div>
+                            <p class="text-slate-500 dark:text-slate-400">Manage your outgoing connection requests and
+                                maintain pipeline discipline.</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                                <input
+                                    class="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm focus:ring-primary focus:border-primary w-64"
+                                    placeholder="Search codename..." type="text" />
+                            </div>
+                            <button
+                                class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                <span class="material-symbols-outlined text-sm">filter_list</span>
+                                Filter
+                            </button>
+                        </div>
+                    </div>
+                    <div id="sent-requests-container" class="grid grid-cols-1 gap-4">
+                        <!-- Dynamic Requests will be injected here -->
+                    </div>
+                    <template id="request-card-template">
+                        <div
+                            class="card-3d bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                            <div class="flex items-center gap-5">
+                                <div
+                                    class="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-primary">
+                                    <span class="material-symbols-outlined text-3xl">rocket_launch</span>
+                                </div>
+                                <div>
+                                    <h3
+                                        class="text-base font-bold text-[#0d121b] dark:text-white tracking-tight uppercase request-name">
+                                    </h3>
+                                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Detailed Analysis
+                                        • Seed</p>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 flex-1 max-w-2xl">
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">Sent
+                                        Date</p>
+                                    <p class="text-sm font-semibold request-date"></p>
+                                </div>
+                                <div>
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                                        Current Status</p>
+                                    <div class="flex items-center gap-1.5 request-status-badge">
+                                        <!-- Status Content -->
+                                    </div>
+                                </div>
+                                <div class="hidden md:block">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">AI
+                                        Match Score</p>
+                                    <p class="text-sm font-bold text-primary request-score">--% Match</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button
+                                    class="px-4 py-2 text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors">View
+                                    Details</button>
+                                <button
+                                    class="px-4 py-2 text-sm font-bold text-red-600 dark:text-red-400 border border-red-100 dark:border-red-900/30 bg-red-50 dark:bg-red-900/10 hover:bg-red-100 dark:hover:bg-red-900/20 rounded-lg transition-colors">Withdraw</button>
+                            </div>
+                        </div>
+                    </template>
+
+                    <div
+                        class="mt-12 flex flex-col md:flex-row items-center justify-between p-6 bg-slate-50 dark:bg-slate-900/30 rounded-2xl border-2 border-dashed border-slate-200 dark:border-slate-800">
+                        <div class="flex items-center gap-4 mb-4 md:mb-0">
+                            <div
+                                class="size-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                                <span class="material-symbols-outlined">gavel</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-bold">Pipeline Discipline</h4>
+                                <p class="text-xs text-slate-500">Withdrawing stale requests keeps your match quality
+                                    high and respects founder time.</p>
+                            </div>
+                        </div>
+                        <div class="text-xs font-bold text-slate-400">
+                            Active Requests: <span id="active-count">0</span> / 20 Limit
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <script type="module">
+                import { Auth } from '../../js/modules/auth.js';
+
+                if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
+                    alert('Access Restricted: Investor Account Required');
+                    window.location.href = 'role_commitment_&_authentication_1.html';
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const container = document.getElementById('sent-requests-container');
+                    const template = document.getElementById('request-card-template');
+
+                    // Fetch requests meant for 'FOUNDER' sent by 'INVESTOR' (me)
+                    // In Auth.js mock, we store everything in one list. Use JSON.parse(localStorage...) helper from Auth logic or direct
+                    const allRequests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
+                    const myRequests = allRequests.filter(r => r.from === 'INVESTOR');
+
+                    document.getElementById('active-count').innerText = myRequests.length;
+
+                    if (myRequests.length === 0) {
+                        container.innerHTML = `
+                            <div class="text-center py-12 opacity-60">
+                                <span class="material-symbols-outlined text-4xl mb-2">inbox</span>
+                                <p class="text-sm font-bold">No active connection requests.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    myRequests.forEach(req => {
+                        const clone = template.content.cloneNode(true);
+
+                        clone.querySelector('.request-name').innerText = req.to === 'FOUNDER' ? 'Project Delta (Demo)' : req.to;
+                        clone.querySelector('.request-date').innerText = new Date(req.timestamp).toLocaleDateString();
+                        clone.querySelector('.request-score').innerText = Math.floor(Math.random() * (99 - 80) + 80) + '% Match';
+
+                        const statusBadge = clone.querySelector('.request-status-badge');
+                        if (req.status === 'pending') {
+                            statusBadge.innerHTML = `
+                                <span class="size-2 rounded-full bg-slate-400 animate-pulse"></span>
+                                <p class="text-sm font-bold text-slate-600 dark:text-slate-400">Awaiting Acceptance</p>
+                            `;
+                        } else if (req.status === 'accepted') {
+                            statusBadge.innerHTML = `
+                                <span class="size-2 rounded-full bg-green-500"></span>
+                                <p class="text-sm font-bold text-green-600 dark:text-green-400">Connection Open</p>
+                            `;
+                        }
+
+                        container.appendChild(clone);
+                    });
+                });
+            </script>
+        </div>
+        </main>
+        <footer
+            class="bg-slate-900 text-white px-8 py-2.5 flex items-center justify-between text-[11px] font-medium tracking-wide">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-1.5">
+                    <span class="material-symbols-outlined text-sm text-green-400">lock</span>
+                    <span>Privacy-First Mode Active</span>
+                </div>
+                <div class="flex items-center gap-1.5 opacity-60">
+                    <span class="material-symbols-outlined text-sm">visibility_off</span>
+                    <span>Zero Peer Visibility</span>
+                </div>
+            </div>
+            <div class="opacity-60 flex items-center gap-4">
+                <span>Secure Tunnel: AES-256</span>
+                <span>Last refresh: 30 seconds ago</span>
+            </div>
+        </footer>
+    </div>
+    </div>
+
+</body>
+
+</html>

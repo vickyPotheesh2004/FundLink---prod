@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Founder Profile &amp; Pitch Deck - FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f8f9fb",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'soft-3d': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgba(255, 255, 255, 0.5)',
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+    <div class="relative flex min-h-screen w-full flex-col">
+        <header
+            class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md">
+            <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-2.5">
+                        <div
+                            class="bg-primary p-1.5 rounded-lg flex items-center justify-center shadow-lg shadow-primary/20">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 48 48"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd"
+                                    d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                                    fill="currentColor" fill-rule="evenodd"></path>
+                            </svg>
+                        </div>
+                        <h1 class="text-lg font-bold tracking-tight">FundLink</h1>
+                    </div>
+                    <div
+                        class="hidden md:flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 rounded-full border border-emerald-100 dark:border-emerald-800">
+                        <span class="material-symbols-outlined text-[16px] text-emerald-600">verified_user</span>
+                        <span class="text-[11px] font-bold text-emerald-600 uppercase tracking-wider">Privacy First
+                            Architecture</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div
+                        class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
+                        <img alt="Founder avatar" data-alt="Minimalist abstract profile avatar"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXgOihvjY0lBpfDaezPh12J9-Ux67PCt5hLJhC_yKxIvkLdLjOxlYLePZ_Z5qawV-lcHdBVrBcDiSDi9tqIMMPqYZ9ejkmQmDmg5X9sTLA3z6D55O5ocB0P85Vtoj0Dfyx8mA68zlXCeX_ZaZZ_z-zTjldnb4VVLufS36KW0WfLcKR6xO3-Dte7q-aKjjA87UwOw-gVlrjc8IYM1cJCIWifcb6Fi0LJQuLcl4-l9ik_hKs7g-rak7Q_-YQOwQJgUMplXgfhRIlzzs" />
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="flex-1 max-w-[1200px] mx-auto w-full px-6 py-8 flex gap-8">
+            <aside class="w-64 shrink-0 hidden md:block">
+                <nav class="space-y-1">
+                    <a class="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-slate-900 text-primary font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-800"
+                        href="founder_control_dashboard_2.html">
+                        <span class="material-symbols-outlined text-[20px]">person</span>
+                        <span>Profile</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="founder_control_dashboard_3.html">
+                        <span class="material-symbols-outlined text-[20px]">hub</span>
+                        <span>Find Investors</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="incoming_connection_requests.html">
+                        <span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
+                        <span>Inbox</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="founder_control_dashboard_1.html">
+                        <span class="material-symbols-outlined text-[20px]">send</span>
+                        <span>Sent Requests</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="founder_control_dashboard_4.html">
+                        <span class="material-symbols-outlined text-[20px]">settings</span>
+                        <span>Settings</span>
+                    </a>
+                </nav>
+                <div
+                    class="mt-10 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
+                    <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Match Status</p>
+                    <div class="flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-xs font-medium text-slate-600 dark:text-slate-300">Active in Pool</span>
+                    </div>
+                </div>
+            </aside>
+            <main class="flex-1 space-y-8 pb-20">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white">Founder Profile</h2>
+                    <p class="text-sm text-slate-500 mt-1">Manage your startup identity and pitch assets for
+                        matchmaking.</p>
+                </div>
+                <section
+                    class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Company Details</h3>
+                        <button class="text-xs font-semibold text-primary hover:underline">Edit Info</button>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Company Name</label>
+                            <p class="text-sm font-semibold">Skyline AI Systems</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Industry</label>
+                            <p class="text-sm font-semibold">B2B SaaS / Enterprise AI</p>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Funding Stage</label>
+                            <p class="text-sm font-semibold">Seed / Series A</p>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Proposed Idea/Innovation
+                        </h3>
+                        <button class="text-xs font-semibold text-primary hover:underline">Edit Details</button>
+                    </div>
+                    <div class="space-y-5">
+                        <div class="grid grid-cols-1 gap-4">
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1.5 uppercase tracking-wide"
+                                    for="innovation-title">Title of proposed idea/innovation</label>
+                                <input
+                                    class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 focus:ring-primary focus:border-primary placeholder:text-slate-400"
+                                    id="innovation-title" placeholder="Enter title..." type="text"
+                                    value="Autonomous Multi-Agent Orchestration Engine" />
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-500 mb-1.5 uppercase tracking-wide"
+                                    for="innovation-objective">Objective</label>
+                                <textarea
+                                    class="w-full bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-lg text-sm text-slate-900 dark:text-slate-100 focus:ring-primary focus:border-primary placeholder:text-slate-400 resize-none"
+                                    id="innovation-objective"
+                                    placeholder="Describe the objective and impact of your innovation..."
+                                    rows="4">To enable enterprise-scale automation of complex reasoning workflows by deploying collaborative LLM agents that interact with proprietary datasets while maintaining zero-trust data privacy protocols.</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Founder Information</h3>
+                        <button class="text-xs font-semibold text-primary hover:underline">Edit Profile</button>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="h-12 w-12 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                                <span class="material-symbols-outlined text-slate-400">alternate_email</span>
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold">Aditya Sharma</p>
+                                <p class="text-xs text-slate-500">Managing Director &amp; Lead Founder</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-lg">
+                            <p class="text-xs font-medium text-slate-500 mb-2">Founder Bio (Private)</p>
+                            <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                                Serial entrepreneur with a background in distributed systems and NLP. Previously scaled
+                                a fintech platform to $10M ARR. Focused on solving enterprise workflow bottlenecks using
+                                LLMs.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section
+                    class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800 border-primary/20 bg-gradient-to-br from-white to-slate-50">
+                    <div class="flex items-center gap-2 mb-6">
+                        <span class="material-symbols-outlined text-primary">drive_presentation</span>
+                        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-900 dark:text-white">Pitch
+                            Deck</h3>
+                    </div>
+                    <div
+                        class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-8 transition-all hover:border-primary/50 group bg-white/50 dark:bg-slate-900/50">
+                        <div class="flex flex-col items-center justify-center text-center">
+                            <div
+                                class="w-12 h-12 bg-primary/5 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                                <span class="material-symbols-outlined text-primary text-3xl">upload_file</span>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-900 dark:text-white mb-1">Click to upload or drag
+                                and drop</p>
+                            <p class="text-xs text-slate-400 mb-6">Restrictive access enabled. PDF format only (Max
+                                15MB).</p>
+                            <button
+                                class="px-6 py-2.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-sm">
+                                Select PDF File
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-8">
+                        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Current Document
+                        </p>
+                        <div
+                            class="flex items-center justify-between p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm">
+                            <div class="flex items-center gap-4">
+                                <div
+                                    class="w-10 h-10 bg-red-50 dark:bg-red-900/20 rounded flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-red-500">picture_as_pdf</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-900 dark:text-white">
+                                        Skyline_AI_Pitch_Deck_v2.4.pdf</p>
+                                    <p class="text-[11px] text-slate-400 uppercase">Uploaded Dec 14, 2023 • 4.2 MB</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button class="p-2 text-slate-400 hover:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">visibility</span>
+                                </button>
+                                <button class="p-2 text-slate-400 hover:text-red-500 transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="flex justify-end pt-4 pb-8">
+                    <button id="calculate-readiness-btn"
+                        class="px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center gap-2">
+                        <span class="material-symbols-outlined">insights</span>
+                        Analyze Profile for Match Readiness
+                    </button>
+                </div>
+            </main>
+        </div>
+        <footer class="fixed bottom-0 w-full bg-slate-900 text-white py-2 px-6 z-[60]">
+            <div
+                class="max-w-[1200px] mx-auto flex items-center justify-between text-[11px] font-medium tracking-wide uppercase opacity-80">
+                <div class="flex items-center gap-4">
+                    <span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                        System Secure</span>
+                    <span>Asymmetric Matchmaking Active</span>
+                </div>
+                <div>
+                    © 2024 FundLink • Bangalore, India
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    </footer>
+    </div>
+    <!-- AI Readiness Modal -->
+    <div id="readiness-modal" class="hidden relative z-[100]" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div id="readiness-backdrop"
+            class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0 ease-out duration-300">
+        </div>
+
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="readiness-panel"
+                    class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl border border-slate-200 dark:border-slate-700 opacity-0 scale-95 duration-300 ease-out">
+
+                    <!-- Header -->
+                    <div
+                        class="bg-slate-50 dark:bg-slate-900/50 px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+                        <div class="flex items-center gap-3">
+                            <div class="bg-primary/10 p-2 rounded-lg">
+                                <span class="material-symbols-outlined text-primary">analytics</span>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="modal-title">Readiness
+                                    Assessment</h3>
+                                <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">AI Architect
+                                    Function</p>
+                            </div>
+                        </div>
+                        <button onclick="closeReadinessModal()"
+                            class="text-slate-400 hover:text-slate-600 transition-colors">
+                            <span class="material-symbols-outlined">close</span>
+                        </button>
+                    </div>
+
+                    <div class="p-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <!-- Left: Score -->
+                            <div
+                                class="md:col-span-1 flex flex-col items-center justify-center border-r border-slate-100 dark:border-slate-800 pr-8">
+                                <div class="relative w-48 h-48 flex items-center justify-center mb-6">
+                                    <!--- Background Ring -->
+                                    <svg class="w-full h-full transform -rotate-90">
+                                        <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12"
+                                            fill="transparent" class="text-slate-100 dark:text-slate-800" />
+                                        <!-- Progress Ring -->
+                                        <circle id="readiness-score-ring" cx="96" cy="96" r="88" stroke="currentColor"
+                                            stroke-width="12" fill="transparent"
+                                            class="text-primary transition-all duration-1000 ease-out"
+                                            stroke-dasharray="552.9" stroke-dashoffset="552.9" stroke-linecap="round" />
+                                    </svg>
+                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                                        <span class="text-5xl font-bold text-slate-900 dark:text-white"
+                                            id="readiness-score-val">0</span>
+                                        <span class="text-sm font-medium text-slate-400 uppercase mt-1">Readiness
+                                            Score</span>
+                                    </div>
+                                </div>
+                                <div class="w-full space-y-3">
+                                    <div
+                                        class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+                                        <span>Pitch Strength</span>
+                                        <span class="text-green-600">High</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-500 w-[85%]"></div>
+                                    </div>
+                                    <div
+                                        class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
+                                        <span>Market Validation</span>
+                                        <span class="text-yellow-600">Medium</span>
+                                    </div>
+                                    <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
+                                        <div class="h-full bg-yellow-500 w-[60%]"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Analysis -->
+                            <div class="md:col-span-2 space-y-6">
+                                <div>
+                                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3">Gap
+                                        Analysis</h4>
+                                    <div
+                                        class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4 flex gap-4">
+                                        <div
+                                            class="shrink-0 bg-red-100 dark:bg-red-900/30 p-2 rounded-lg h-fit text-red-600">
+                                            <span class="material-symbols-outlined">warning</span>
+                                        </div>
+                                        <div>
+                                            <h5 class="text-sm font-bold text-red-700 dark:text-red-400 mb-1">Critical
+                                                Missing Data</h5>
+                                            <p class="text-sm text-red-600 dark:text-red-300 leading-relaxed"
+                                                id="readiness-gap-text">
+                                                Your financial projections lack a detailed Unit Economics breakdown.
+                                                Investors at Series A require clear CAC/LTV visibility.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <div>
+                                        <h4
+                                            class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3 text-green-600 flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-sm">check_circle</span>
+                                            Strengths
+                                        </h4>
+                                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 marker:text-green-500 list-disc pl-4"
+                                            id="readiness-strengths">
+                                            <!-- Dynamic Load -->
+                                            <li>Strong Technical Founder Profile</li>
+                                            <li>Clear Proprietary IP (Patents)</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <h4
+                                            class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3 text-orange-500 flex items-center gap-2">
+                                            <span class="material-symbols-outlined text-sm">build</span> To Improve
+                                        </h4>
+                                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 marker:text-orange-500 list-disc pl-4"
+                                            id="readiness-improvements">
+                                            <!-- Dynamic Load -->
+                                            <li>Define Go-To-Market Loop</li>
+                                            <li>Clarify Competitive Moat</li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div
+                                    class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3">
+                                    <button onclick="closeReadinessModal()"
+                                        class="px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700">Dismiss</button>
+                                    <button
+                                        class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
+                                        Update Pitch Deck
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module">
+        import { Auth } from '../js/modules/auth.js';
+        import { AIClient } from '../js/modules/AIClient.js';
+
+        const aiClient = new AIClient();
+
+        // Check if readiness is already complete on load
+        if (Auth.isReadinessComplete()) {
+            document.getElementById('calculate-readiness-btn').innerText = "Readiness Assessment Complete";
+            document.getElementById('calculate-readiness-btn').classList.add('bg-green-600', 'hover:bg-green-700');
+            // Assuming there's a way to unlock navigation, we would do it here.
+            // For now, we rely on the visual indicator.
+        }
+
+        document.getElementById('calculate-readiness-btn').addEventListener('click', async () => {
+            if (Auth.isReadinessComplete()) {
+                alert("You have already completed the Readiness Assessment.");
+                return;
+            }
+
+            const btn = document.getElementById('calculate-readiness-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Analyzing...`;
+            btn.disabled = true;
+
+            try {
+                // Mock Data for the pitch
+                const pitchData = {
+                    description: "High quality pitch description with sufficient length to trigger a good score...",
+                    // ... other mock fields
+                };
+
+                const result = await aiClient.evaluateReadiness(pitchData);
+
+                // Show Modal
+                document.getElementById('readiness-modal').classList.remove('hidden');
+                setTimeout(() => {
+                    document.getElementById('readiness-backdrop').classList.remove('opacity-0');
+                    document.getElementById('readiness-panel').classList.remove('opacity-0', 'scale-95');
+                }, 10);
+
+                // Update UI with Result
+                document.getElementById('readiness-score-val').innerText = result.score;
+
+                // Animate Ring (Simplified logic for demo)
+                const circle = document.getElementById('readiness-score-ring');
+                const circumference = 2 * Math.PI * 88;
+                const offset = circumference - (result.score / 100) * circumference;
+                circle.style.strokeDashoffset = offset;
+
+                // Populate Analysis (Using the new detailed structure)
+                const strengthsList = document.getElementById('readiness-strengths');
+                strengthsList.innerHTML = result.analysis.strengths.map(s => `<li>${s}</li>`).join('');
+
+                const improvementList = document.getElementById('readiness-improvements');
+                // Use gap_analysis.critical for improvements
+                improvementList.innerHTML = result.analysis.gap_analysis.critical.map(s => `<li>${s}</li>`).join('');
+
+                // Mark as complete in Auth
+                Auth.setReadinessComplete();
+                btn.innerText = "Readiness Assessment Complete";
+                btn.classList.remove('bg-primary', 'hover:bg-blue-700');
+                btn.classList.add('bg-green-600', 'hover:bg-green-700');
+                alert("Readiness Assessment Complete. Investor discovery is now unlocked.");
+
+            } catch (error) {
+                console.error(error);
+                alert("Analysis failed. Please try again.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+
+        // Modal Close Logic
+        window.closeReadinessModal = () => {
+            document.getElementById('readiness-backdrop').classList.add('opacity-0');
+            document.getElementById('readiness-panel').classList.add('opacity-0', 'scale-95');
+            setTimeout(() => {
+                document.getElementById('readiness-modal').classList.add('hidden');
+            }, 300);
+        };
+    </script>
+</body>
+
+</html>

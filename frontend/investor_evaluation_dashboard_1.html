@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Investor Institutional Profile | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style type="text/tailwindcss">
+        :root {
+            --primary: #135bec;
+            --background-light: #f6f6f8;
+            --background-dark: #101622;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .high-contrast-text { color: #0d121b; }
+        .dark .high-contrast-text { color: #ffffff; }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-slate-200">
+    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+        <div class="layout-container flex h-full grow flex-col">
+            <header
+                class="flex items-center justify-between whitespace-nowrap border-b border-solid border-[#e7ebf3] dark:border-slate-800 bg-white dark:bg-slate-900 px-8 py-3 sticky top-0 z-50">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-3 text-primary">
+                        <div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+                            <span class="material-symbols-outlined text-2xl">shield_lock</span>
+                        </div>
+                        <h2 class="text-[#0d121b] dark:text-white text-xl font-bold leading-tight tracking-tight">
+                            FundLink</h2>
+                    </div>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_5.html">Evaluation Feed</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_3.html">My Requests</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="investor_evaluation_dashboard_2.html">Portfolio</a>
+                        <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
+                            href="investor_evaluation_dashboard_1.html">Institutional Profile</a>
+                    </nav>
+                </div>
+                <div class="flex flex-1 justify-end gap-6 items-center">
+                    <div class="flex items-center gap-4">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs font-semibold text-[#0d121b] dark:text-white uppercase">Marcus Capital</p>
+                            <p
+                                class="text-[10px] text-[#4c669a] dark:text-slate-400 uppercase tracking-widest font-bold">
+                                Verified Account</p>
+                        </div>
+                        <div
+                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800">
+                            <img class="w-full h-full object-cover" data-alt="Investor profile avatar"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaVfnYb7X8Sy9sQLjhHbify2C4C83lW72rPan9AJZu2tMaW5U-8uqQO15s55hVBnmnEF2tzMITBkea_KON2CKcL7E8HGOFZfa3zUElWH-re94JKAWmGJRa2NIlESJnlVdYaGuUbbDdFjznSej0rEmBM2g6TY-y92SnaklY_nUzZC2u5P1KxTRHQk0ve1HZ9BOm_vjk3fKpJQslt3-rXtLbdZEele_6a5_WzoRBHKY7GZk9Ngjphl8DkVa6b_JFi0Gz8TbbQq92rU" />
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <main class="flex-1 overflow-y-auto bg-[#f8f9fb] dark:bg-slate-950/50">
+                <div class="max-w-6xl mx-auto px-8 py-12">
+                    <div
+                        class="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-12 border-b border-slate-200 dark:border-slate-800 pb-12">
+                        <div class="flex gap-8 items-start">
+                            <div
+                                class="size-24 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl flex items-center justify-center shadow-sm">
+                                <span class="material-symbols-outlined text-5xl text-slate-300">account_balance</span>
+                            </div>
+                            <div>
+                                <div class="flex items-center gap-3 mb-2">
+                                    <h1
+                                        class="text-4xl font-black text-[#0d121b] dark:text-white tracking-tighter uppercase">
+                                        Marcus Capital</h1>
+                                    <span
+                                        class="px-2 py-1 bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-extrabold rounded-md uppercase tracking-widest border border-green-100 dark:border-green-800">Institutional</span>
+                                </div>
+                                <p class="text-slate-500 dark:text-slate-400 text-lg max-w-2xl font-medium">Pan-European
+                                    early-stage venture capital focusing on the infrastructure layer of the digital
+                                    economy.</p>
+                                <div class="flex gap-6 mt-6">
+                                    <div class="flex flex-col">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">AUM
+                                            (Verified)</span>
+                                        <span class="text-sm font-black text-[#0d121b] dark:text-white">$1.2B <span
+                                                class="text-slate-300 dark:text-slate-600 font-normal ml-1 italic">(Masked
+                                                for non-connections)</span></span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">HQ
+                                            Location</span>
+                                        <span class="text-sm font-black text-[#0d121b] dark:text-white">Zurich,
+                                            CH</span>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span
+                                            class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active
+                                            Status</span>
+                                        <span class="text-sm font-black text-green-600 uppercase">Deploying Seed/Series
+                                            A</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <button
+                                class="flex items-center justify-center gap-2 px-6 py-3 bg-primary text-white rounded-lg text-sm font-black uppercase tracking-wider shadow-xl shadow-primary/20 hover:bg-blue-700 transition-all">
+                                <span class="material-symbols-outlined text-lg">upload_file</span>
+                                Upload Fund Deck
+                            </button>
+                            <button
+                                class="flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 text-[#0d121b] dark:text-white rounded-lg text-sm font-black uppercase tracking-wider hover:bg-slate-50 transition-all">
+                                <span class="material-symbols-outlined text-lg">description</span>
+                                LP Report (PDF)
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                        <div class="lg:col-span-2 space-y-12">
+                            <section>
+                                <h3
+                                    class="text-xs font-black text-primary uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                                    <span class="w-8 h-[1px] bg-primary"></span>
+                                    Investment Philosophy
+                                </h3>
+                                <div
+                                    class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800">
+                                    <p class="text-lg leading-relaxed text-[#0d121b] dark:text-slate-200 font-medium">
+                                        We operate on the principle of asymmetric discipline. We believe that the
+                                        greatest value in the next decade will be captured by companies solving
+                                        foundational infrastructure problems rather than application-layer convenience.
+                                        <br /><br />
+                                        Our approach is research-driven and long-term. We do not chase trends. We
+                                        partner with founders who demonstrate an obsession with unit economics and
+                                        technical moats. We are high-conviction, concentrated investors, typically
+                                        leading rounds where we can take a meaningful ownership stake.
+                                    </p>
+                                </div>
+                            </section>
+                            <section>
+                                <h3
+                                    class="text-xs font-black text-primary uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                                    <span class="w-8 h-[1px] bg-primary"></span>
+                                    Team Bio &amp; Governance
+                                </h3>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div
+                                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4">
+                                        <div class="size-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+                                        </div>
+                                        <div>
+                                            <h4
+                                                class="text-sm font-black text-[#0d121b] dark:text-white uppercase tracking-tight">
+                                                Dr. Helena Vance</h4>
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Managing
+                                                Partner</p>
+                                            <p class="text-xs text-slate-500 leading-normal">Former CTO at Global Pay.
+                                                Specialist in distributed ledger security and fintech regulatory
+                                                frameworks.</p>
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 flex gap-4">
+                                        <div class="size-16 rounded-lg bg-slate-100 dark:bg-slate-800 flex-shrink-0">
+                                        </div>
+                                        <div>
+                                            <h4
+                                                class="text-sm font-black text-[#0d121b] dark:text-white uppercase tracking-tight">
+                                                Marcus Thorne</h4>
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">General
+                                                Partner</p>
+                                            <p class="text-xs text-slate-500 leading-normal">20 years in PE and VC.
+                                                Focuses on capital structure and international market expansion
+                                                strategy.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="space-y-8">
+                            <div class="bg-slate-900 dark:bg-black p-8 rounded-xl text-white">
+                                <h3 class="text-[10px] font-black text-slate-500 uppercase tracking-[0.2em] mb-6">
+                                    Institutional Identity</h3>
+                                <div class="space-y-6">
+                                    <div>
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                                            Fund Structure</p>
+                                        <p class="text-sm font-bold">Standard Closed-end VC</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                                            Vintage Years</p>
+                                        <p class="text-sm font-bold">2018, 2021, 2024</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">
+                                            Avg. Check Size</p>
+                                        <p class="text-sm font-bold">$1.5M - $5.0M</p>
+                                    </div>
+                                    <div class="pt-4 border-t border-slate-800">
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="material-symbols-outlined text-primary text-sm">verified</span>
+                                            <span class="text-[10px] font-bold uppercase text-slate-300">Third-Party
+                                                Audit Active</span>
+                                        </div>
+                                        <p class="text-[11px] text-slate-500 leading-relaxed italic">"Assets and
+                                            investment history have been verified by FundLink Institutional Compliance."
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800">
+                                <h3
+                                    class="text-[10px] font-black text-[#0d121b] dark:text-white uppercase tracking-widest mb-4">
+                                    Privacy Visibility</h3>
+                                <div class="space-y-3">
+                                    <label
+                                        class="flex items-center justify-between p-3 rounded bg-slate-50 dark:bg-slate-800/50 cursor-pointer">
+                                        <span class="text-xs font-bold">AUM Visibility</span>
+                                        <div class="w-8 h-4 bg-primary rounded-full relative">
+                                            <div class="absolute right-0.5 top-0.5 size-3 bg-white rounded-full"></div>
+                                        </div>
+                                    </label>
+                                    <label
+                                        class="flex items-center justify-between p-3 rounded border border-slate-100 dark:border-slate-800 cursor-pointer opacity-60">
+                                        <span class="text-xs font-bold">Portfolio Names</span>
+                                        <div class="w-8 h-4 bg-slate-300 rounded-full relative">
+                                            <div class="absolute left-0.5 top-0.5 size-3 bg-white rounded-full"></div>
+                                        </div>
+                                    </label>
+                                    <p class="text-[10px] text-slate-400 leading-tight pt-2">
+                                        Founders only see this profile after you have accepted a connection request.
+                                        Anonymous by default during discovery.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer
+                class="bg-slate-900 text-white px-8 py-2.5 flex items-center justify-between text-[11px] font-medium tracking-wide">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm text-green-400">lock</span>
+                        <span>Privacy-First Mode Active</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 opacity-60">
+                        <span class="material-symbols-outlined text-sm">visibility_off</span>
+                        <span>Zero Peer Visibility</span>
+                    </div>
+                </div>
+                <div class="opacity-60 flex items-center gap-2">
+                    <span class="size-1.5 rounded-full bg-blue-500"></span>
+                    Institutional Profile: 100% Complete
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script type="module">
+        import { Auth } from '../../js/modules/auth.js';
+        if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
+            alert('Access Restricted: Investor Account Required');
+            window.location.href = 'role_commitment_&_authentication_1.html';
+        }
+    </script>
+</body>
+
+</html>

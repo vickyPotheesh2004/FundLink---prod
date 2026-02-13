@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FundLink | Investor Mandate Verification</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    boxShadow: {
+                        'form': '0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.05)',
+                        '3d': '0 20px 50px -12px rgba(0, 0, 0, 0.1), 0 0 1px 1px rgba(0, 0, 0, 0.05)'
+                    }
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply font-display text-slate-900 bg-background-light dark:bg-background-dark dark:text-slate-100;
+            }
+        }
+        .step-complete { color: #135bec; }
+        .step-active { color: #135bec; border-bottom: 2px solid #135bec; }
+        .form-section-header {
+            @apply flex items-center gap-3 mb-6 pb-2 border-b border-slate-100 dark:border-slate-800;
+        }
+        .form-label {
+            @apply block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2 dark:text-slate-400;
+        }
+        .form-input {
+            @apply w-full h-11 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm;
+        }
+        .form-select {
+            @apply w-full h-11 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none text-sm appearance-none;
+        }
+        .checkbox-card {
+            @apply flex items-start gap-3 p-4 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/30 hover:border-primary/30 transition-all cursor-pointer;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <header
+        class="flex items-center justify-between px-8 py-4 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div
+                class="size-8 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-xl">account_balance</span>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">FundLink</h2>
+        </div>
+        <div class="flex items-center gap-8">
+            <nav class="hidden md:flex gap-10">
+                <div
+                    class="text-[11px] font-bold uppercase tracking-widest step-complete flex items-center gap-1.5 opacity-60">
+                    <span class="material-symbols-outlined text-base">check_circle</span>
+                    Mandate
+                </div>
+                <div
+                    class="text-[11px] font-bold uppercase tracking-widest step-complete flex items-center gap-1.5 opacity-60">
+                    <span class="material-symbols-outlined text-base">check_circle</span>
+                    Identity
+                </div>
+                <div class="text-[11px] font-bold uppercase tracking-widest step-active flex items-center gap-1.5 pb-1">
+                    3. Verification
+                </div>
+            </nav>
+            <button
+                class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-lg">contact_support</span>
+                Support
+            </button>
+        </div>
+    </header>
+    <main class="flex-grow py-12 px-4 max-w-5xl mx-auto w-full">
+        <div class="max-w-3xl mx-auto text-center mb-12">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 bg-primary/10 text-primary text-[10px] font-bold uppercase tracking-widest rounded-full mb-6 border border-primary/20">
+                Final Step: Mandate Validation
+            </div>
+            <h1 class="text-4xl font-extrabold tracking-tight mb-4">Investment Mandate Verification</h1>
+            <p class="text-slate-500 dark:text-slate-400 leading-relaxed">
+                Detailed verification of your deployment capacity and investment thesis is required to enable asymmetric
+                matching. This data remains confidential and is only used for algorithmic discovery.
+            </p>
+        </div>
+        <div
+            class="bg-white dark:bg-slate-900 rounded-2xl shadow-3d border border-slate-200/60 dark:border-slate-800 overflow-hidden">
+            <form class="divide-y divide-slate-100 dark:divide-slate-800">
+                <div class="p-8 md:p-10">
+                    <div class="form-section-header">
+                        <span class="material-symbols-outlined text-primary">badge</span>
+                        <h3 class="font-bold text-lg">Identity &amp; Mandate</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="form-label">Investment Entity Name</label>
+                            <input class="form-input" placeholder="e.g. Blue Chip Ventures India" type="text" />
+                        </div>
+                        <div>
+                            <label class="form-label">Capital Authority Level</label>
+                            <select class="form-select">
+                                <option>General Partner (GP)</option>
+                                <option>Managing Director</option>
+                                <option>Principal / Investment Committee</option>
+                                <option>Associate / VP</option>
+                                <option>Family Office Principal</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-10">
+                    <div class="form-section-header">
+                        <span class="material-symbols-outlined text-primary">psychology</span>
+                        <h3 class="font-bold text-lg">Investment Thesis</h3>
+                    </div>
+                    <div class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="form-label">Primary Domains / Sectors</label>
+                                <input class="form-input" placeholder="Fintech, SaaS, DeepTech..." type="text" />
+                            </div>
+                            <div>
+                                <label class="form-label">Geographic Focus</label>
+                                <select class="form-select">
+                                    <option>India (Domestic Only)</option>
+                                    <option>India &amp; Southeast Asia</option>
+                                    <option>Global Mandate</option>
+                                    <option>Emerging Markets</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Preferred Stages</label>
+                            <div class="flex flex-wrap gap-3">
+                                <label
+                                    class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                    <input class="rounded border-slate-300 text-primary focus:ring-primary"
+                                        type="checkbox" />
+                                    <span>Pre-Seed</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                    <input class="rounded border-slate-300 text-primary focus:ring-primary"
+                                        type="checkbox" />
+                                    <span>Seed</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                    <input checked="" class="rounded border-slate-300 text-primary focus:ring-primary"
+                                        type="checkbox" />
+                                    <span>Series A</span>
+                                </label>
+                                <label
+                                    class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-700 text-sm cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
+                                    <input class="rounded border-slate-300 text-primary focus:ring-primary"
+                                        type="checkbox" />
+                                    <span>Series B+</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Typical Ticket Size (USD)</label>
+                            <div class="flex items-center gap-4">
+                                <input class="form-input" placeholder="Min (e.g. $500k)" type="text" />
+                                <span class="text-slate-400 font-medium">to</span>
+                                <input class="form-input" placeholder="Max (e.g. $2M)" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-10">
+                    <div class="form-section-header">
+                        <span class="material-symbols-outlined text-primary">show_chart</span>
+                        <h3 class="font-bold text-lg">Activity &amp; Seriousness</h3>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="form-label">Deployment Status</label>
+                            <div class="grid grid-cols-1 gap-3">
+                                <label class="checkbox-card">
+                                    <input class="mt-1 text-primary focus:ring-primary" name="status" type="radio" />
+                                    <div>
+                                        <p class="text-sm font-bold">Actively Investing</p>
+                                        <p class="text-xs text-slate-500">Evaluating 3+ deals per month</p>
+                                    </div>
+                                </label>
+                                <label class="checkbox-card">
+                                    <input class="mt-1 text-primary focus:ring-primary" name="status" type="radio" />
+                                    <div>
+                                        <p class="text-sm font-bold">Opportunistic</p>
+                                        <p class="text-xs text-slate-500">Wait-and-watch approach</p>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="form-label">Lead / Follow Preference</label>
+                            <select class="form-select">
+                                <option>Lead Rounds Only</option>
+                                <option>Co-invest / Follow Only</option>
+                                <option>Agnostic (Lead or Follow)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-10">
+                    <div class="form-section-header">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        <h3 class="font-bold text-lg">Process &amp; Expectations</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="form-label">Typical DD Timeline (Weeks)</label>
+                            <input class="form-input max-w-[200px]" placeholder="e.g. 4" type="number" />
+                        </div>
+                        <div>
+                            <label class="form-label">Founder Expectations &amp; Value-Add</label>
+                            <textarea class="form-input h-32 py-3 resize-none"
+                                placeholder="What should founders know about your investment process?"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-8 md:p-10 bg-slate-50/30 dark:bg-slate-900/50">
+                    <div class="form-section-header">
+                        <span class="material-symbols-outlined text-primary">security</span>
+                        <h3 class="font-bold text-lg">Confidentiality &amp; Platform Rules</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <label class="checkbox-card">
+                            <input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary" required=""
+                                type="checkbox" />
+                            <div>
+                                <p class="text-sm font-bold">Non-Disclosure Commitment</p>
+                                <p class="text-xs text-slate-500">I agree to maintain strict confidentiality of all
+                                    startup materials accessed via FundLink.</p>
+                            </div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary" required=""
+                                type="checkbox" />
+                            <div>
+                                <p class="text-sm font-bold">No External Data Leakage</p>
+                                <p class="text-xs text-slate-500">I understand that document misuse or external sharing
+                                    leads to permanent platform blacklisting.</p>
+                            </div>
+                        </label>
+                        <label class="checkbox-card">
+                            <input class="mt-1 rounded border-slate-300 text-primary focus:ring-primary"
+                                type="checkbox" />
+                            <div>
+                                <p class="text-sm font-bold">Peer Visibility</p>
+                                <p class="text-xs text-slate-500">Allow other verified institutional investors to see my
+                                    high-level mandate for co-investment discovery.</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="p-8 md:p-10 text-center">
+                    <div class="mb-8">
+                        <p class="text-xs text-slate-400 italic">
+                            By submitting this form, you certify that the information provided is accurate and you are
+                            authorized to represent the specified investment entity. FundLink reserves the right to
+                            request proof of funds or regulatory registration.
+                        </p>
+                    </div>
+                    <button id="btn-submit-mandate"
+                        class="w-full md:w-auto px-12 h-14 bg-primary hover:bg-primary/90 text-white font-bold rounded-xl shadow-lg shadow-primary/30 transition-all flex items-center justify-center gap-3 mx-auto"
+                        type="button">
+                        <span>Submit Mandate &amp; Unlock Access</span>
+                        <span class="material-symbols-outlined text-xl">rocket_launch</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="mt-12 flex flex-col items-center gap-4 text-center">
+            <div class="flex items-center gap-6 opacity-60">
+                <div class="flex items-center gap-1.5 text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                    <span class="material-symbols-outlined text-sm">verified_user</span>
+                    Bank-Grade Security
+                </div>
+                <div class="w-1 h-1 bg-slate-300 rounded-full"></div>
+                <div class="flex items-center gap-1.5 text-[10px] text-slate-500 uppercase tracking-widest font-bold">
+                    <span class="material-symbols-outlined text-sm">vpn_lock</span>
+                    Asymmetric Privacy
+                </div>
+            </div>
+            <p class="text-xs text-slate-400 max-w-lg">
+                Once submitted, our curation team will review your mandate. Verification typically takes 24-48 business
+                hours for institutional accounts.
+            </p>
+        </div>
+    </main>
+    <footer
+        class="py-10 px-8 border-t border-slate-200 dark:border-slate-800 text-center bg-white dark:bg-background-dark">
+        <div class="max-w-5xl mx-auto">
+            <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4">
+                Official Venture Infrastructure for the Indian Ecosystem
+            </p>
+            <p class="text-xs text-slate-400 flex flex-wrap justify-center gap-x-4 gap-y-2">
+                <span>© 2024 FundLink Technologies</span>
+                <a class="underline hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+                <a class="underline hover:text-primary transition-colors" href="#">Investment Disclosure</a>
+                <a class="underline hover:text-primary transition-colors" href="#">User Rights</a>
+            </p>
+        </div>
+    </footer>
+
+    </footer>
+    <script type="module">
+        import { Auth } from '../js/modules/auth.js';
+
+        // Clear any existing session to allow fresh login for demo purposes if desired, 
+        // OR warn if strictly enforcing. For this demo, if they are here, we might want to allow re-login 
+        // or strictly warn. Let's warn if role mismatch.
+
+        document.getElementById('btn-submit-mandate').addEventListener('click', (e) => {
+            e.preventDefault();
+            console.log('Submitting mandate...');
+
+            const current = Auth.getRole();
+            if (current && current === 'FOUNDER') {
+                alert('Action Blocked: You are already committed as a FOUNDER. Please logout to switch roles for this demo.');
+                return;
+            }
+
+            // Attempt Login
+            if (Auth.login('INVESTOR')) {
+                // Success
+                console.log('Login successful, redirecting...');
+                // Use a relative path that works for both local and hosted if possible, or just the filename
+                window.location.href = 'investor_evaluation_dashboard_5.html';
+            } else {
+                // Failed (likely duplicate login of same role which is fine, or other error)
+                // If login returns true for same role, we are good. 
+                // Auth.login logic: returns false if mismatch.
+                if (Auth.getRole() === 'INVESTOR') {
+                    window.location.href = 'investor_evaluation_dashboard_5.html';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
