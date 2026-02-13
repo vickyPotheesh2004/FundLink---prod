@@ -144,42 +144,7 @@
                             Mode</span>
                     </div>
                     <div id="chat-container" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 custom-scrollbar">
-                        <!-- Message -->
-                        <div class="flex flex-col items-start max-w-[85%]">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
-                                <span class="text-[10px] text-[#4c669a]">10:24 AM</span>
-                            </div>
-                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
-                                <p class="text-sm leading-relaxed">Regarding the intellectual property clause in Section
-                                    4.2 of the term sheet—we noticed the carve-out for previous academic research isn't
-                                    fully defined. Can you clarify if the university retains any commercialization
-                                    rights?</p>
-                            </div>
-                        </div>
-                        <!-- Message -->
-                        <div class="flex flex-col items-end self-end max-w-[85%]">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[10px] text-[#4c669a]">10:28 AM</span>
-                                <span class="text-[11px] font-bold text-primary uppercase">Founder</span>
-                            </div>
-                            <div class="bg-primary p-4 rounded-xl rounded-tr-none text-white">
-                                <p class="text-sm leading-relaxed">The University of Aethelgard has signed a full
-                                    release for this specific technology stack. I've uploaded the supplemental IP
-                                    Disclosure (Exhibit C) for your review in the viewer to the right.</p>
-                            </div>
-                        </div>
-                        <!-- Message -->
-                        <div class="flex flex-col items-start max-w-[85%]">
-                            <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
-                                <span class="text-[10px] text-[#4c669a]">10:31 AM</span>
-                            </div>
-                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
-                                <p class="text-sm leading-relaxed">Thank you. Reviewing now. We are looking for specific
-                                    language regarding the sub-licensing rights for the Asian market subsidiaries.</p>
-                            </div>
-                        </div>
+                        <!-- Messages will be injected here -->
                     </div>
                     <!-- Text Only Input Area -->
                     <div class="p-4 border-t border-[#e7ebf3] dark:border-[#2a3347] bg-white dark:bg-[#1a2133]">
@@ -326,81 +291,118 @@
     </div>
     </footer>
     <script type="module" src="../js/main.js"></script>
-    <script>
-        // Inline Chat Controller for Demo
-        document.addEventListener('DOMContentLoaded', () => {
-            const chatContainer = document.getElementById('chat-container');
-            const chatInput = document.getElementById('chat-input');
-            const sendBtn = document.getElementById('btn-send-message');
-            const endBtn = document.getElementById('btn-end-conversation');
+    <script type="module">
+        import { Auth } from '../js/modules/auth.js';
 
-            // Scroll to bottom initially
+        // Auth Guard
+        if (!Auth.isLoggedIn()) {
+            alert("Access Denied: Please login.");
+            window.location.href = 'index.html';
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const dealId = urlParams.get('id') || 'demo-deal';
+        const partnerName = urlParams.get('partner') || 'Counterparty';
+
+        // Update Header Context
+        document.querySelector('h1').innerText = `Negotiation: ${partnerName}`;
+        document.title = `Secure Workspace: ${partnerName} | FundLink`;
+
+        const currentUserRole = Auth.getRole();
+        const currentUserName = currentUserRole === 'INVESTOR' ? 'Marcus Capital' : 'Alexander Wright';
+
+        // Chat Logic
+        const chatContainer = document.getElementById('chat-container');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('btn-send-message');
+        const endBtn = document.getElementById('btn-end-conversation');
+
+        function getChatHistory() {
+            const key = `fundlink_chat_${dealId}`;
+            return JSON.parse(localStorage.getItem(key) || '[]');
+        }
+
+        function saveMessage(msg) {
+            const history = getChatHistory();
+            history.push(msg);
+            localStorage.setItem(`fundlink_chat_${dealId}`, JSON.stringify(history));
+        }
+
+        function renderMessage(msg) {
+            const isMe = msg.role === currentUserRole;
+            const alignClass = isMe ? 'items-end self-end' : 'items-start';
+            const bgClass = isMe ? 'bg-primary text-white' : 'bg-background-light dark:bg-[#2a3347] text-[#0d121b] dark:text-white';
+            const roundedClass = isMe ? 'rounded-tr-none' : 'rounded-tl-none';
+
+            const senderLabel = isMe
+                ? `<span class="text-[10px] text-[#4c669a]">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span> <span class="text-[11px] font-bold text-primary uppercase">You</span>`
+                : `<span class="text-[11px] font-bold text-primary uppercase">${msg.senderName}</span> <span class="text-[10px] text-[#4c669a]">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
+
+            const html = `
+            <div class="flex flex-col ${alignClass} max-w-[85%] animate-fade-in-up">
+                <div class="flex items-center gap-2 mb-1">
+                    ${senderLabel}
+                </div>
+                <div class="${bgClass} p-4 rounded-xl ${roundedClass} shadow-sm">
+                    <p class="text-sm leading-relaxed">${msg.text}</p>
+                </div>
+            </div>`;
+
+            chatContainer.insertAdjacentHTML('beforeend', html);
             chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
 
-            function appendMessage(text, isFounder = true) {
-                const alignClass = isFounder ? 'items-end self-end' : 'items-start';
-                const bgClass = isFounder ? 'bg-primary text-white' : 'bg-background-light dark:bg-[#2a3347] text-[#0d121b] dark:text-white';
-                const roundedClass = isFounder ? 'rounded-tr-none' : 'rounded-tl-none';
-                const senderLabels = isFounder
-                    ? `<span class="text-[10px] text-[#4c669a]">Just now</span> <span class="text-[11px] font-bold text-primary uppercase">Founder</span>`
-                    : `<span class="text-[11px] font-bold text-primary uppercase">Investor</span> <span class="text-[10px] text-[#4c669a]">Just now</span>`;
-
-                // Flex direction for labels
-                const labelFlex = isFounder ? 'flex items-center gap-2 mb-1' : 'flex items-center gap-2 mb-1';
-
-                const html = `
-                <div class="flex flex-col ${alignClass} max-w-[85%] animate-fade-in-up">
-                    <div class="${labelFlex}">
-                        ${senderLabels}
-                    </div>
-                    <div class="${bgClass} p-4 rounded-xl ${roundedClass} shadow-sm">
-                        <p class="text-sm leading-relaxed">${text}</p>
-                    </div>
-                </div>`;
-
-                chatContainer.insertAdjacentHTML('beforeend', html);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
+        // Load History
+        const history = getChatHistory();
+        if (history.length === 0) {
+            // Seed initial message if empty
+            if (dealId === 'demo-deal') {
+                const seed = { role: 'INVESTOR', senderName: 'Marcus Capital', text: 'Regarding the IP clause...', timestamp: Date.now() };
+                saveMessage(seed);
+                renderMessage(seed);
             }
+        } else {
+            history.forEach(renderMessage);
+        }
 
-            function handleSend() {
-                const text = chatInput.value.trim();
-                if (!text) return;
+        function handleSend() {
+            const text = chatInput.value.trim();
+            if (!text) return;
 
-                appendMessage(text, true);
-                chatInput.value = '';
+            const msg = {
+                role: currentUserRole,
+                senderName: currentUserName,
+                text: text,
+                timestamp: Date.now()
+            };
 
-                // Simulate Investor Reply
+            saveMessage(msg);
+            renderMessage(msg);
+            chatInput.value = '';
+
+            // Auto-reply for demo if other side is silent
+            if (currentUserRole === 'FOUNDER') {
                 setTimeout(() => {
-                    const replies = [
-                        "That clarifies things significantly. Let me run this by our legal counsel.",
-                        "Understood. Could you also verify the cap table numbers in Exhibit B?",
-                        "Thanks. We are moving towards a preliminary term sheet loop next week.",
-                        "Noted. Please ensure the data privacy compliance doc is updated as well."
-                    ];
-                    const randomReply = replies[Math.floor(Math.random() * replies.length)];
-                    appendMessage(randomReply, false);
-                }, 2500);
+                    const reply = { role: 'INVESTOR', senderName: 'Marcus Capital', text: 'Received. We will review this shortly.', timestamp: Date.now() };
+                    saveMessage(reply);
+                    renderMessage(reply);
+                }, 3000);
             }
+        }
 
-            // Events
-            sendBtn.addEventListener('click', handleSend);
-            chatInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    handleSend();
-                }
-            });
-
-            // End Conversation
-            if (endBtn) {
-                endBtn.addEventListener('click', () => {
-                    if (confirm("Confirm: End Negotiation Session? \n\nAll documents will be locked.")) {
-                        // Redirect to dashboard
-                        window.location.href = 'founder_control_dashboard_2.html';
-                    }
-                });
+        sendBtn.addEventListener('click', handleSend);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleSend();
             }
         });
+
+        if (endBtn) {
+            endBtn.addEventListener('click', () => {
+                if (confirm("End Negotiation?")) window.history.back();
+            });
+        }
     </script>
 </body>
 
