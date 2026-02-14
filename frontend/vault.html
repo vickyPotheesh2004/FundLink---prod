@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Secure Vault | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .vault-item {
+            transition: all 0.2s ease;
+        }
+
+        .vault-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .dark .skeleton {
+            background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+            background-size: 200% 100%;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="fundlink_public_landing_page.html" class="flex items-center gap-2" tabindex="0">
+                <div class="bg-primary p-1.5 rounded-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">FundLink</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="messages.html">Messages</a>
+                <a class="text-sm font-medium text-primary font-semibold" href="vault.html">Vault</a>
+                <a href="fundlink_public_landing_page.html"
+                    class="bg-primary text-white text-sm font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Back
+                    to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+            <div>
+                <div
+                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-2">
+                    <span class="material-symbols-outlined text-sm">lock</span>
+                    Secure Storage
+                </div>
+                <h1 class="text-3xl font-black text-slate-900 dark:text-white">Document Vault</h1>
+                <p class="text-slate-600 dark:text-slate-400 mt-1">Securely store and manage your sensitive documents
+                </p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button id="btn-upload" tabindex="0"
+                    class="bg-primary text-white text-sm font-bold py-2.5 px-6 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    <span class="material-symbols-outlined text-sm">upload</span>
+                    Upload Document
+                </button>
+            </div>
+        </div>
+
+        <!-- Storage Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">folder</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white" id="total-docs">12</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Total Documents</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-green-600">verified</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white" id="verified-docs">8</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Verified</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-amber-600">pending</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white" id="pending-docs">4</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Pending Review</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-slate-600">cloud_upload</span>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900 dark:text-white">24.5 MB</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Storage Used</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 mb-6">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="flex-1 relative">
+                    <span
+                        class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input type="text" id="search-input" tabindex="0" placeholder="Search documents..."
+                        class="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                </div>
+                <div class="flex items-center gap-3">
+                    <select id="filter-type" tabindex="0"
+                        class="px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <option value="all">All Types</option>
+                        <option value="financial">Financial</option>
+                        <option value="legal">Legal</option>
+                        <option value="pitch">Pitch Materials</option>
+                        <option value="kyc">KYC Documents</option>
+                    </select>
+                    <select id="filter-status" tabindex="0"
+                        class="px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <option value="all">All Status</option>
+                        <option value="verified">Verified</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State (hidden by default) -->
+        <div id="loading-state" class="hidden">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                    <div class="skeleton h-4 w-3/4 rounded mb-3"></div>
+                    <div class="skeleton h-3 w-1/2 rounded mb-2"></div>
+                    <div class="skeleton h-3 w-1/3 rounded"></div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                    <div class="skeleton h-4 w-3/4 rounded mb-3"></div>
+                    <div class="skeleton h-3 w-1/2 rounded mb-2"></div>
+                    <div class="skeleton h-3 w-1/3 rounded"></div>
+                </div>
+                <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+                    <div class="skeleton h-4 w-3/4 rounded mb-3"></div>
+                    <div class="skeleton h-3 w-1/2 rounded mb-2"></div>
+                    <div class="skeleton h-3 w-1/3 rounded"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documents Grid -->
+        <div id="documents-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Document Card 1 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="1">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-red-600">picture_as_pdf</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">check_circle</span>
+                        Verified
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Pitch Deck - Series A</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Updated 2 days ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>2.4 MB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+
+            <!-- Document Card 2 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="2">
+                <div class="flex items-start justify-between mb-3">
+                    <div
+                        class="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-green-600">table_chart</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">check_circle</span>
+                        Verified
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Financial Statements 2023</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Updated 1 week ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>1.8 MB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+
+            <!-- Document Card 3 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="3">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-blue-600">description</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">pending</span>
+                        Pending
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Certificate of Incorporation</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Uploaded 3 days ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>856 KB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+
+            <!-- Document Card 4 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="4">
+                <div class="flex items-start justify-between mb-3">
+                    <div
+                        class="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-purple-600">account_balance</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">check_circle</span>
+                        Verified
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Bank Statement - Q4 2023</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Updated 2 weeks ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>1.2 MB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+
+            <!-- Document Card 5 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="5">
+                <div class="flex items-start justify-between mb-3">
+                    <div
+                        class="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-amber-600">badge</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">check_circle</span>
+                        Verified
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">PAN Card - Company</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Updated 1 month ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>245 KB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+
+            <!-- Document Card 6 -->
+            <div class="vault-item bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-4 cursor-pointer"
+                tabindex="0" data-doc-id="6">
+                <div class="flex items-start justify-between mb-3">
+                    <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900/30 rounded-lg flex items-center justify-center">
+                        <span class="material-symbols-outlined text-teal-600">gavel</span>
+                    </div>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-xs font-semibold">
+                        <span class="material-symbols-outlined text-xs">pending</span>
+                        Pending
+                    </span>
+                </div>
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-1">Shareholders Agreement</h3>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mb-3">Uploaded 5 days ago</p>
+                <div class="flex items-center justify-between text-xs text-slate-400">
+                    <span>3.2 MB</span>
+                    <span class="flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Encrypted
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Modal -->
+        <div id="upload-modal"
+            class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm">
+            <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 max-w-md w-full mx-4" role="dialog" aria-modal="true"
+                aria-labelledby="modal-title">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 id="modal-title" class="text-xl font-bold text-slate-900 dark:text-white">Upload Document</h2>
+                    <button id="close-modal" tabindex="0"
+                        class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+
+                <!-- Upload Area -->
+                <div id="drop-zone"
+                    class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-8 text-center mb-4">
+                    <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">cloud_upload</span>
+                    <p class="text-slate-600 dark:text-slate-400 mb-2">Drag and drop files here</p>
+                    <p class="text-sm text-slate-400">or</p>
+                    <input type="file" id="file-input" class="hidden" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg" />
+                    <button id="browse-btn" tabindex="0" class="mt-3 text-primary font-semibold hover:underline">Browse
+                        files</button>
+                </div>
+
+                <!-- Upload Progress (hidden by default) -->
+                <div id="upload-progress" class="hidden">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div
+                            class="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center">
+                            <span class="material-symbols-outlined text-red-600">picture_as_pdf</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-medium text-slate-900 dark:text-white text-sm" id="upload-filename">
+                                document.pdf</p>
+                            <p class="text-xs text-slate-500" id="upload-size">2.4 MB</p>
+                        </div>
+                    </div>
+                    <div class="bg-slate-100 dark:bg-slate-800 rounded-full h-2 mb-2">
+                        <div id="progress-bar" class="bg-primary h-2 rounded-full transition-all duration-300"
+                            style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-slate-500" id="progress-text">Uploading... 0%</p>
+                </div>
+
+                <!-- Document Type Selection -->
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">Document
+                        Type</label>
+                    <select id="doc-type" tabindex="0"
+                        class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        <option value="financial">Financial Document</option>
+                        <option value="legal">Legal Document</option>
+                        <option value="pitch">Pitch Materials</option>
+                        <option value="kyc">KYC Document</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="flex gap-3">
+                    <button id="cancel-upload" tabindex="0"
+                        class="flex-1 py-2.5 px-4 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">Cancel</button>
+                    <button id="confirm-upload" tabindex="0"
+                        class="flex-1 py-2.5 px-4 bg-primary text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors">Upload</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">
+                © 2024 FundLink Technologies. All documents are encrypted at rest.
+            </p>
+            <div class="flex gap-6">
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="terms.html">Terms of Service</a>
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="compliance.html">Compliance</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const uploadModal = document.getElementById('upload-modal');
+        const btnUpload = document.getElementById('btn-upload');
+        const closeModal = document.getElementById('close-modal');
+        const cancelUpload = document.getElementById('cancel-upload');
+        const confirmUpload = document.getElementById('confirm-upload');
+        const browseBtn = document.getElementById('browse-btn');
+        const fileInput = document.getElementById('file-input');
+        const dropZone = document.getElementById('drop-zone');
+        const uploadProgress = document.getElementById('upload-progress');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const searchInput = document.getElementById('search-input');
+        const filterType = document.getElementById('filter-type');
+        const filterStatus = document.getElementById('filter-status');
+        const documentsGrid = document.getElementById('documents-grid');
+        const loadingState = document.getElementById('loading-state');
+
+        // Modal functions
+        function openModal() {
+            uploadModal.classList.remove('hidden');
+            uploadModal.classList.add('flex');
+            closeModal.focus();
+        }
+
+        function closeModalFn() {
+            uploadModal.classList.add('hidden');
+            uploadModal.classList.remove('flex');
+            uploadProgress.classList.add('hidden');
+            dropZone.classList.remove('hidden');
+            btnUpload.focus();
+        }
+
+        // Event listeners
+        btnUpload.addEventListener('click', openModal);
+        closeModal.addEventListener('click', closeModalFn);
+        cancelUpload.addEventListener('click', closeModalFn);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !uploadModal.classList.contains('hidden')) {
+                closeModalFn();
+            }
+        });
+
+        // File upload handling
+        browseBtn.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        // Drag and drop
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('border-primary', 'bg-primary/5');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('border-primary', 'bg-primary/5');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('border-primary', 'bg-primary/5');
+            if (e.dataTransfer.files.length > 0) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            document.getElementById('upload-filename').textContent = file.name;
+            document.getElementById('upload-size').textContent = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
+            dropZone.classList.add('hidden');
+            uploadProgress.classList.remove('hidden');
+        }
+
+        // Simulate upload progress
+        confirmUpload.addEventListener('click', () => {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += 10;
+                progressBar.style.width = progress + '%';
+                progressText.textContent = `Uploading... ${progress}%`;
+
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressText.textContent = 'Upload complete!';
+                    setTimeout(() => {
+                        closeModalFn();
+                        // Show loading state for documents
+                        documentsGrid.classList.add('hidden');
+                        loadingState.classList.remove('hidden');
+
+                        // Simulate loading
+                        setTimeout(() => {
+                            loadingState.classList.add('hidden');
+                            documentsGrid.classList.remove('hidden');
+                        }, 1000);
+                    }, 500);
+                }
+            }, 100);
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const documents = documentsGrid.querySelectorAll('.vault-item');
+
+            documents.forEach(doc => {
+                const title = doc.querySelector('h3').textContent.toLowerCase();
+                if (title.includes(query)) {
+                    doc.style.display = '';
+                } else {
+                    doc.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        function applyFilters() {
+            const typeValue = filterType.value;
+            const statusValue = filterStatus.value;
+            // In a real app, this would filter based on document metadata
+            console.log('Filtering:', typeValue, statusValue);
+        }
+
+        filterType.addEventListener('change', applyFilters);
+        filterStatus.addEventListener('change', applyFilters);
+
+        // Document card keyboard navigation
+        documentsGrid.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const doc = e.target.closest('.vault-item');
+                if (doc) {
+                    e.preventDefault();
+                    console.log('Opening document:', doc.dataset.docId);
+                    // In a real app, this would open the document viewer
+                }
+            }
+        });
+
+        // Focus trap for modal
+        uploadModal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusableElements = uploadModal.querySelectorAll('button, select, input:not([type="file"])');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

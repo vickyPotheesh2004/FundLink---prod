@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Messages | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .message-item {
+            transition: all 0.2s ease;
+        }
+
+        .message-item:hover {
+            background-color: rgba(19, 91, 236, 0.05);
+        }
+
+        .dark .message-item:hover {
+            background-color: rgba(19, 91, 236, 0.1);
+        }
+
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #e2e8f0 25%, #f1f5f9 50%, #e2e8f0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .dark .skeleton {
+            background: linear-gradient(90deg, #334155 25%, #475569 50%, #334155 75%);
+            background-size: 200% 100%;
+        }
+
+        .typing-indicator span {
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .typing-indicator span:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .typing-indicator span:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="fundlink_public_landing_page.html" class="flex items-center gap-2" tabindex="0">
+                <div class="bg-primary p-1.5 rounded-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">FundLink</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a class="text-sm font-medium text-primary font-semibold" href="messages.html">Messages</a>
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="vault.html">Vault</a>
+                <a href="fundlink_public_landing_page.html"
+                    class="bg-primary text-white text-sm font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Back
+                    to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <div class="flex gap-6 h-[calc(100vh-180px)]">
+            <!-- Conversations List -->
+            <div
+                class="w-80 flex-shrink-0 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-col">
+                <!-- Header -->
+                <div class="p-4 border-b border-slate-200 dark:border-slate-800">
+                    <div class="flex items-center justify-between mb-3">
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Messages</h2>
+                        <span
+                            class="inline-flex items-center justify-center w-6 h-6 bg-primary text-white text-xs font-bold rounded-full"
+                            id="unread-count">3</span>
+                    </div>
+                    <div class="relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                        <input type="text" id="search-conversations" tabindex="0" placeholder="Search conversations..."
+                            class="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" />
+                    </div>
+                </div>
+
+                <!-- Conversations List -->
+                <div id="conversations-list" class="flex-1 overflow-y-auto">
+                    <!-- Loading State -->
+                    <div id="conversations-loading" class="hidden p-4 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="skeleton w-10 h-10 rounded-full"></div>
+                            <div class="flex-1">
+                                <div class="skeleton h-4 w-3/4 rounded mb-2"></div>
+                                <div class="skeleton h-3 w-1/2 rounded"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="skeleton w-10 h-10 rounded-full"></div>
+                            <div class="flex-1">
+                                <div class="skeleton h-4 w-3/4 rounded mb-2"></div>
+                                <div class="skeleton h-3 w-1/2 rounded"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Conversation Items -->
+                    <div id="conversations-content">
+                        <!-- Active Conversation -->
+                        <div class="message-item p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer bg-primary/5"
+                            tabindex="0" data-conversation-id="1">
+                            <div class="flex items-start gap-3">
+                                <div class="relative">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        RS</div>
+                                    <div
+                                        class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-900">
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white truncate">Rahul Sharma
+                                        </h3>
+                                        <span class="text-xs text-slate-500">2m ago</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 truncate">Looking forward to
+                                        discussing the Series A...</p>
+                                </div>
+                                <span
+                                    class="inline-flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full">2</span>
+                            </div>
+                        </div>
+
+                        <!-- Conversation 2 -->
+                        <div class="message-item p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer"
+                            tabindex="0" data-conversation-id="2">
+                            <div class="flex items-start gap-3">
+                                <div class="relative">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        PV</div>
+                                    <div
+                                        class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-900">
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white truncate">Priya
+                                            Venkatesh</h3>
+                                        <span class="text-xs text-slate-500">1h ago</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 truncate">The financial
+                                        projections look promising...</p>
+                                </div>
+                                <span
+                                    class="inline-flex items-center justify-center w-5 h-5 bg-primary text-white text-xs font-bold rounded-full">1</span>
+                            </div>
+                        </div>
+
+                        <!-- Conversation 3 -->
+                        <div class="message-item p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer"
+                            tabindex="0" data-conversation-id="3">
+                            <div class="flex items-start gap-3">
+                                <div class="relative">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-purple-500 to-violet-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        AK</div>
+                                    <div
+                                        class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-slate-400 rounded-full border-2 border-white dark:border-slate-900">
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white truncate">Amit Kumar
+                                        </h3>
+                                        <span class="text-xs text-slate-500">3h ago</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 truncate">Thanks for sharing
+                                        the pitch deck!</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation 4 -->
+                        <div class="message-item p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer"
+                            tabindex="0" data-conversation-id="4">
+                            <div class="flex items-start gap-3">
+                                <div class="relative">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        NM</div>
+                                    <div
+                                        class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-900">
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white truncate">Neha Malhotra
+                                        </h3>
+                                        <span class="text-xs text-slate-500">Yesterday</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 truncate">I've reviewed the
+                                        term sheet...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Conversation 5 -->
+                        <div class="message-item p-4 border-b border-slate-100 dark:border-slate-800 cursor-pointer"
+                            tabindex="0" data-conversation-id="5">
+                            <div class="flex items-start gap-3">
+                                <div class="relative">
+                                    <div
+                                        class="w-10 h-10 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center text-white font-bold">
+                                        SG</div>
+                                    <div
+                                        class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-slate-400 rounded-full border-2 border-white dark:border-slate-900">
+                                    </div>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between mb-1">
+                                        <h3 class="font-semibold text-slate-900 dark:text-white truncate">Sanjay Gupta
+                                        </h3>
+                                        <span class="text-xs text-slate-500">2 days ago</span>
+                                    </div>
+                                    <p class="text-sm text-slate-600 dark:text-slate-400 truncate">Let's schedule a call
+                                        next week...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Area -->
+            <div
+                class="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden flex flex-col">
+                <!-- Chat Header -->
+                <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="relative">
+                            <div
+                                class="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                                RS</div>
+                            <div
+                                class="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white dark:border-slate-900">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-900 dark:text-white">Rahul Sharma</h3>
+                            <p class="text-xs text-green-600">Online</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button tabindex="0"
+                            class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            title="Video Call">
+                            <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">videocam</span>
+                        </button>
+                        <button tabindex="0"
+                            class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            title="Voice Call">
+                            <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">call</span>
+                        </button>
+                        <button tabindex="0"
+                            class="w-9 h-9 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            title="More Options">
+                            <span class="material-symbols-outlined text-slate-600 dark:text-slate-400">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messages Area -->
+                <div id="messages-area" class="flex-1 overflow-y-auto p-4 space-y-4">
+                    <!-- Loading State -->
+                    <div id="messages-loading" class="hidden space-y-4">
+                        <div class="flex gap-3">
+                            <div class="skeleton w-8 h-8 rounded-full"></div>
+                            <div class="skeleton h-16 w-64 rounded-lg"></div>
+                        </div>
+                        <div class="flex gap-3 justify-end">
+                            <div class="skeleton h-12 w-48 rounded-lg"></div>
+                        </div>
+                    </div>
+
+                    <!-- Messages Content -->
+                    <div id="messages-content">
+                        <!-- Date Separator -->
+                        <div class="flex items-center justify-center my-4">
+                            <span
+                                class="text-xs text-slate-500 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-full">Today</span>
+                        </div>
+
+                        <!-- Received Message -->
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                                RS</div>
+                            <div class="max-w-md">
+                                <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3">
+                                    <p class="text-sm text-slate-700 dark:text-slate-300">Hi! I've reviewed your pitch
+                                        deck and I'm very interested in learning more about your startup. The market
+                                        opportunity seems significant.</p>
+                                </div>
+                                <span class="text-xs text-slate-500 mt-1 block">10:30 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- Sent Message -->
+                        <div class="flex items-start gap-3 justify-end">
+                            <div class="max-w-md">
+                                <div class="bg-primary text-white rounded-2xl rounded-tr-none p-3">
+                                    <p class="text-sm">Thank you for your interest! I'd be happy to schedule a call to
+                                        discuss the details. Would tomorrow at 3 PM work for you?</p>
+                                </div>
+                                <span class="text-xs text-slate-500 mt-1 block text-right">10:35 AM <span
+                                        class="material-symbols-outlined text-xs text-primary align-middle">done_all</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Received Message -->
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                                RS</div>
+                            <div class="max-w-md">
+                                <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3">
+                                    <p class="text-sm text-slate-700 dark:text-slate-300">Tomorrow at 3 PM sounds
+                                        perfect. I'll send a calendar invite. Looking forward to discussing the Series A
+                                        opportunity in detail.</p>
+                                </div>
+                                <span class="text-xs text-slate-500 mt-1 block">10:38 AM</span>
+                            </div>
+                        </div>
+
+                        <!-- Sent Message with Attachment -->
+                        <div class="flex items-start gap-3 justify-end">
+                            <div class="max-w-md">
+                                <div class="bg-primary text-white rounded-2xl rounded-tr-none p-3">
+                                    <p class="text-sm mb-2">Here's the detailed financial projection document for your
+                                        review before our call:</p>
+                                    <div class="bg-white/20 rounded-lg p-2 flex items-center gap-2">
+                                        <span class="material-symbols-outlined">picture_as_pdf</span>
+                                        <span class="text-sm">Financial_Projections_2024.pdf</span>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-slate-500 mt-1 block text-right">10:42 AM <span
+                                        class="material-symbols-outlined text-xs text-primary align-middle">done_all</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Typing Indicator -->
+                        <div id="typing-indicator" class="flex items-start gap-3">
+                            <div
+                                class="w-8 h-8 bg-gradient-to-br from-primary to-blue-600 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0">
+                                RS</div>
+                            <div class="bg-slate-100 dark:bg-slate-800 rounded-2xl rounded-tl-none p-3">
+                                <div class="typing-indicator flex gap-1">
+                                    <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                    <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                    <span class="w-2 h-2 bg-slate-400 rounded-full"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message Input -->
+                <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+                    <div class="flex items-end gap-3">
+                        <button tabindex="0"
+                            class="w-10 h-10 flex items-center justify-center rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            title="Attach File">
+                            <span
+                                class="material-symbols-outlined text-slate-600 dark:text-slate-400">attach_file</span>
+                        </button>
+                        <div class="flex-1 relative">
+                            <textarea id="message-input" tabindex="0" rows="1" placeholder="Type a message..."
+                                class="w-full px-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-primary/50 resize-none"></textarea>
+                        </div>
+                        <button id="send-btn" tabindex="0"
+                            class="w-10 h-10 bg-primary text-white flex items-center justify-center rounded-lg hover:bg-blue-700 transition-colors"
+                            title="Send Message">
+                            <span class="material-symbols-outlined">send</span>
+                        </button>
+                    </div>
+                    <p class="text-xs text-slate-500 mt-2 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">lock</span>
+                        Messages are end-to-end encrypted
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 mt-8">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">
+                © 2024 FundLink Technologies. All messages are encrypted.
+            </p>
+            <div class="flex gap-6">
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="terms.html">Terms of Service</a>
+                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="compliance.html">Compliance</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const conversationsList = document.getElementById('conversations-list');
+        const conversationsContent = document.getElementById('conversations-content');
+        const conversationsLoading = document.getElementById('conversations-loading');
+        const messagesArea = document.getElementById('messages-area');
+        const messagesContent = document.getElementById('messages-content');
+        const messagesLoading = document.getElementById('messages-loading');
+        const messageInput = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+        const searchInput = document.getElementById('search-conversations');
+        const typingIndicator = document.getElementById('typing-indicator');
+        const unreadCount = document.getElementById('unread-count');
+
+        // Simulate loading conversations
+        function loadConversations() {
+            conversationsContent.classList.add('hidden');
+            conversationsLoading.classList.remove('hidden');
+
+            setTimeout(() => {
+                conversationsLoading.classList.add('hidden');
+                conversationsContent.classList.remove('hidden');
+            }, 500);
+        }
+
+        // Simulate loading messages
+        function loadMessages(conversationId) {
+            messagesContent.classList.add('hidden');
+            messagesLoading.classList.remove('hidden');
+
+            setTimeout(() => {
+                messagesLoading.classList.add('hidden');
+                messagesContent.classList.remove('hidden');
+            }, 300);
+        }
+
+        // Send message
+        function sendMessage() {
+            const text = messageInput.value.trim();
+            if (!text) return;
+
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'flex items-start gap-3 justify-end';
+            messageDiv.innerHTML = `
+                <div class="max-w-md">
+                    <div class="bg-primary text-white rounded-2xl rounded-tr-none p-3">
+                        <p class="text-sm">${text}</p>
+                    </div>
+                    <span class="text-xs text-slate-500 mt-1 block text-right">Just now <span class="material-symbols-outlined text-xs text-primary align-middle">done_all</span></span>
+                </div>
+            `;
+
+            // Remove typing indicator temporarily
+            typingIndicator.classList.add('hidden');
+
+            // Add message to chat
+            messagesContent.insertBefore(messageDiv, typingIndicator);
+            messageInput.value = '';
+
+            // Show typing indicator after a delay
+            setTimeout(() => {
+                typingIndicator.classList.remove('hidden');
+                messagesArea.scrollTop = messagesArea.scrollHeight;
+            }, 1000);
+
+            // Scroll to bottom
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        }
+
+        // Event listeners
+        sendBtn.addEventListener('click', sendMessage);
+
+        messageInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Search conversations
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            const conversations = conversationsContent.querySelectorAll('.message-item');
+
+            conversations.forEach(conv => {
+                const name = conv.querySelector('h3').textContent.toLowerCase();
+                const preview = conv.querySelector('p').textContent.toLowerCase();
+                if (name.includes(query) || preview.includes(query)) {
+                    conv.style.display = '';
+                } else {
+                    conv.style.display = 'none';
+                }
+            });
+        });
+
+        // Conversation selection
+        conversationsContent.addEventListener('click', (e) => {
+            const conversation = e.target.closest('.message-item');
+            if (conversation) {
+                // Remove active state from all
+                conversationsContent.querySelectorAll('.message-item').forEach(c => {
+                    c.classList.remove('bg-primary/5');
+                });
+                // Add active state to selected
+                conversation.classList.add('bg-primary/5');
+
+                // Remove unread badge if present
+                const badge = conversation.querySelector('span.inline-flex.w-5');
+                if (badge) {
+                    badge.remove();
+                    updateUnreadCount();
+                }
+
+                // Load messages for this conversation
+                loadMessages(conversation.dataset.conversationId);
+            }
+        });
+
+        // Keyboard navigation for conversations
+        conversationsContent.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const conversation = e.target.closest('.message-item');
+                if (conversation) {
+                    e.preventDefault();
+                    conversation.click();
+                }
+            }
+        });
+
+        // Update unread count
+        function updateUnreadCount() {
+            const badges = conversationsContent.querySelectorAll('.message-item span.inline-flex.w-5');
+            const total = Array.from(badges).reduce((sum, badge) => {
+                const num = parseInt(badge.textContent) || 0;
+                return sum + num;
+            }, 0);
+            unreadCount.textContent = total;
+            if (total === 0) {
+                unreadCount.classList.add('hidden');
+            }
+        }
+
+        // Auto-resize textarea
+        messageInput.addEventListener('input', function () {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Escape to go back
+            if (e.key === 'Escape') {
+                window.location.href = 'fundlink_public_landing_page.html';
+            }
+            // Focus message input with /
+            if (e.key === '/' && document.activeElement !== messageInput && document.activeElement !== searchInput) {
+                e.preventDefault();
+                messageInput.focus();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Scroll to bottom of messages
+            messagesArea.scrollTop = messagesArea.scrollHeight;
+        });
+    </script>
+</body>
+
+</html>

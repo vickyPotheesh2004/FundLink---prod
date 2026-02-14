@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FundLink | Verification Audit</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FundLink | Verification Audit</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -29,7 +34,7 @@
             },
         }
     </script>
-<style type="text/tailwindcss">
+    <style type="text/tailwindcss">
         body {
             font-family: 'Inter', sans-serif;
         }
@@ -56,98 +61,115 @@
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
-<header class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
-<div class="flex items-center gap-3">
-<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
-<span class="material-symbols-outlined text-xl">security</span>
-</div>
-<h2 class="text-xl font-bold tracking-tight">FundLink</h2>
-</div>
-<div class="flex items-center gap-6">
-<nav class="hidden md:flex gap-8">
-<div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
-<span class="material-symbols-outlined text-sm">check_circle</span>
-                1. Mandate
-            </div>
-<div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
-<span class="material-symbols-outlined text-sm">check_circle</span>
-                2. Identity
-            </div>
-<div class="text-sm font-bold step-active pb-1">3. Verification</div>
-</nav>
-<button class="flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg">help_outline</span>
-<span>Help</span>
-</button>
-</div>
-</header>
-<main class="flex-grow flex flex-col items-center justify-center py-12 px-4 max-w-4xl mx-auto w-full">
-<div class="w-full max-w-xl bg-white dark:bg-gray-900 p-12 rounded-2xl border border-gray-200 dark:border-gray-800 z-depth-forward text-center">
-<div class="pulse-3d-container h-48 mb-8">
-<div class="pulse-layer size-40 bg-primary/5 border-primary/20"></div>
-<div class="pulse-layer size-32 bg-primary/10 border-primary/30 shadow-xl"></div>
-<div class="pulse-layer size-24 bg-primary/20 border-primary/40 shadow-inner flex items-center justify-center">
-<span class="material-symbols-outlined text-primary text-4xl">analytics</span>
-</div>
-<div class="absolute bottom-0 flex gap-1">
-<div class="size-1.5 rounded-full bg-primary"></div>
-<div class="size-1.5 rounded-full bg-primary/30"></div>
-<div class="size-1.5 rounded-full bg-primary/10"></div>
-</div>
-</div>
-<div class="mb-8">
-<h1 class="text-3xl font-extrabold tracking-tight mb-4">Verification Audit in Progress</h1>
-<p class="text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto leading-relaxed">
-                Our AI is performing a consistency and legitimacy audit. This ensures a high-signal environment for all participants.
-            </p>
-</div>
-<div class="space-y-4 text-left border-t border-gray-100 dark:border-gray-800 pt-8 max-w-sm mx-auto">
-<div class="flex items-center gap-4">
-<div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-primary text-sm font-bold">sync</span>
-</div>
-<div class="flex-grow">
-<p class="text-sm font-semibold">Analyzing Credibility &amp; Intent</p>
-<p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Processing...</p>
-</div>
-</div>
-<div class="flex items-center gap-4 opacity-50">
-<div class="size-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-gray-400 text-sm">schedule</span>
-</div>
-<div class="flex-grow">
-<p class="text-sm font-semibold">Evaluating Platform Commitment</p>
-<p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Queued</p>
-</div>
-</div>
-<div class="flex items-center gap-4 opacity-50">
-<div class="size-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined text-gray-400 text-sm">signal_cellular_alt</span>
-</div>
-<div class="flex-grow">
-<p class="text-sm font-semibold">Generating Readiness Signals</p>
-<p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Pending</p>
-</div>
-</div>
-</div>
-<div class="mt-12 p-4 bg-background-light dark:bg-background-dark/50 rounded-lg inline-flex items-center gap-3">
-<span class="material-symbols-outlined text-primary text-lg">shield</span>
-<span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Secured AI Audit Protocol Active</span>
-</div>
-</div>
-<div class="mt-8 flex items-center gap-6 text-xs text-gray-400 font-medium">
-<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">timer</span> Est. time: 45 seconds</span>
-<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">data_thresholding</span> Zero-Knowledge Verification</span>
-<span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">vpn_key</span> Node Authorization</span>
-</div>
-</main>
-<footer class="py-8 px-6 border-t border-gray-200 dark:border-gray-800 text-center">
-<p class="text-xs text-gray-400">
-        © 2024 FundLink Technologies. Protected by military-grade asymmetric encryption. 
-        <a class="underline hover:text-primary transition-colors ml-2" href="#">Privacy Protocol</a>
-<a class="underline hover:text-primary transition-colors ml-2" href="#">Terms of Mandate</a>
-</p>
-</footer>
 
-</body></html>
+<body
+    class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 min-h-screen flex flex-col transition-colors duration-300">
+    <header
+        class="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+                <span class="material-symbols-outlined text-xl">security</span>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">FundLink</h2>
+        </div>
+        <div class="flex items-center gap-6">
+            <nav class="hidden md:flex gap-8">
+                <div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
+                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                    1. Mandate
+                </div>
+                <div class="text-sm font-semibold step-completed flex items-center gap-1 pb-1">
+                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                    2. Identity
+                </div>
+                <div class="text-sm font-bold step-active pb-1">3. Verification</div>
+            </nav>
+            <button
+                class="flex items-center gap-2 text-sm font-semibold text-gray-600 dark:text-gray-400 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-lg">help_outline</span>
+                <span>Help</span>
+            </button>
+        </div>
+    </header>
+    <main class="flex-grow flex flex-col items-center justify-center py-12 px-4 max-w-4xl mx-auto w-full">
+        <div
+            class="w-full max-w-xl bg-white dark:bg-gray-900 p-12 rounded-2xl border border-gray-200 dark:border-gray-800 z-depth-forward text-center">
+            <div class="pulse-3d-container h-48 mb-8">
+                <div class="pulse-layer size-40 bg-primary/5 border-primary/20"></div>
+                <div class="pulse-layer size-32 bg-primary/10 border-primary/30 shadow-xl"></div>
+                <div
+                    class="pulse-layer size-24 bg-primary/20 border-primary/40 shadow-inner flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary text-4xl">analytics</span>
+                </div>
+                <div class="absolute bottom-0 flex gap-1">
+                    <div class="size-1.5 rounded-full bg-primary"></div>
+                    <div class="size-1.5 rounded-full bg-primary/30"></div>
+                    <div class="size-1.5 rounded-full bg-primary/10"></div>
+                </div>
+            </div>
+            <div class="mb-8">
+                <h1 class="text-3xl font-extrabold tracking-tight mb-4">Verification Audit in Progress</h1>
+                <p class="text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto leading-relaxed">
+                    Our AI is performing a consistency and legitimacy audit. This ensures a high-signal environment for
+                    all participants.
+                </p>
+            </div>
+            <div class="space-y-4 text-left border-t border-gray-100 dark:border-gray-800 pt-8 max-w-sm mx-auto">
+                <div class="flex items-center gap-4">
+                    <div class="size-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-sm font-bold">sync</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm font-semibold">Analyzing Credibility &amp; Intent</p>
+                        <p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Processing...</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 opacity-50">
+                    <div
+                        class="size-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-gray-400 text-sm">schedule</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm font-semibold">Evaluating Platform Commitment</p>
+                        <p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Queued</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4 opacity-50">
+                    <div
+                        class="size-6 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-gray-400 text-sm">signal_cellular_alt</span>
+                    </div>
+                    <div class="flex-grow">
+                        <p class="text-sm font-semibold">Generating Readiness Signals</p>
+                        <p class="text-[11px] text-gray-400 uppercase tracking-wider font-medium">Pending</p>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="mt-12 p-4 bg-background-light dark:bg-background-dark/50 rounded-lg inline-flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-lg">shield</span>
+                <span class="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-widest">Secured AI
+                    Audit Protocol Active</span>
+            </div>
+        </div>
+        <div class="mt-8 flex items-center gap-6 text-xs text-gray-400 font-medium">
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">timer</span> Est.
+                time: 45 seconds</span>
+            <span class="flex items-center gap-1.5"><span
+                    class="material-symbols-outlined text-sm">data_thresholding</span> Zero-Knowledge
+                Verification</span>
+            <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-sm">vpn_key</span> Node
+                Authorization</span>
+        </div>
+    </main>
+    <footer class="py-8 px-6 border-t border-gray-200 dark:border-gray-800 text-center">
+        <p class="text-xs text-gray-400">
+            © 2024 FundLink Technologies. Protected by military-grade asymmetric encryption.
+            <a class="underline hover:text-primary transition-colors ml-2" href="privacy.html">Privacy Protocol</a>
+            <a class="underline hover:text-primary transition-colors ml-2" href="terms.html">Terms of Mandate</a>
+        </p>
+    </footer>
+
+</body>
+
+</html>

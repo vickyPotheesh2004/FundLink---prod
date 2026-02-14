@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Compliance | FundLink</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#135bec",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#101622",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Navigation -->
+    <nav
+        class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="fundlink_public_landing_page.html" class="flex items-center gap-2" tabindex="0">
+                <div class="bg-primary p-1.5 rounded-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <path clip-rule="evenodd"
+                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">FundLink</span>
+            </a>
+            <div class="hidden md:flex items-center gap-6">
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="privacy.html">Privacy Policy</a>
+                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                    href="terms.html">Terms of Service</a>
+                <a href="fundlink_public_landing_page.html"
+                    class="bg-primary text-white text-sm font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Back
+                    to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <!-- Header -->
+        <div class="mb-12">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-4">
+                <span class="material-symbols-outlined text-sm">verified</span>
+                Trust & Safety
+            </div>
+            <h1 class="text-4xl font-black text-slate-900 dark:text-white mb-4">Compliance Standards</h1>
+            <p class="text-slate-600 dark:text-slate-400">Our commitment to regulatory compliance and platform integrity
+            </p>
+        </div>
+
+        <!-- Content -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 space-y-8">
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Regulatory Framework</h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                    FundLink operates in compliance with applicable Indian regulations governing investment platforms
+                    and data protection. Our compliance framework includes:
+                </p>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-primary mb-2">account_balance</span>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">SEBI Guidelines</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Compliance with Securities and Exchange
+                            Board of India regulations for investment platforms</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-primary mb-2">shield</span>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">IT Act Compliance</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Adherence to Information Technology Act,
+                            2000 and related data protection rules</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-primary mb-2">currency_rupee</span>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">FEMA Regulations</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Compliance with Foreign Exchange
+                            Management Act for cross-border investments</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-primary mb-2">policy</span>
+                        <h4 class="font-semibold text-slate-900 dark:text-white">DPDP Act</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Alignment with Digital Personal Data
+                            Protection Act requirements</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">User Verification</h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                    All users undergo a rigorous verification process to ensure platform integrity:
+                </p>
+                <div class="space-y-3">
+                    <div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Identity Verification</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Aadhaar-based eKYC verification for
+                                all users</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Founder Verification</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Company registration and director
+                                verification through MCA records</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Investor Accreditation</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Verification of investor credentials
+                                and net worth documentation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <span class="material-symbols-outlined text-green-500">check_circle</span>
+                        <div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Bank Account Verification</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">Penny drop verification for linked
+                                bank accounts</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Data Protection Standards</h2>
+                <div class="bg-primary/5 border border-primary/20 rounded-lg p-6">
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div
+                                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="material-symbols-outlined text-primary">lock</span>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Encryption</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">AES-256 encryption at rest, TLS
+                                1.3 in transit</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="material-symbols-outlined text-primary">key</span>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Key Management</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">Hardware Security Module (HSM)
+                                protected keys</p>
+                        </div>
+                        <div class="text-center">
+                            <div
+                                class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <span class="material-symbols-outlined text-primary">cloud_off</span>
+                            </div>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">Data Residency</h4>
+                            <p class="text-sm text-slate-600 dark:text-slate-400 mt-1">All data stored within India
+                                jurisdiction</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Anti-Money Laundering (AML)</h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+                    FundLink maintains robust AML/KYC procedures:
+                </p>
+                <ul class="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-2">
+                    <li>Customer Due Diligence (CDD) for all users</li>
+                    <li>Enhanced Due Diligence (EDD) for high-value transactions</li>
+                    <li>Transaction monitoring and suspicious activity reporting</li>
+                    <li>PEP (Politically Exposed Person) screening</li>
+                    <li>Sanctions screening against global watchlists</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Audit & Certification</h2>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-green-500">verified_user</span>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">SOC 2 Type II</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Annual third-party security audit
+                            certification</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-500 mt-2">Status: In Progress</p>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <span class="material-symbols-outlined text-green-500">verified_user</span>
+                            <h4 class="font-semibold text-slate-900 dark:text-white">ISO 27001</h4>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">Information Security Management System
+                            certification</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-500 mt-2">Status: Planned for 2024</p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Platform Integrity</h2>
+                <div class="space-y-4">
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <h3 class="font-semibold text-slate-900 dark:text-white mb-2">Fraud Prevention</h3>
+                        <ul class="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-1">
+                            <li>AI-powered fraud detection algorithms</li>
+                            <li>Real-time transaction monitoring</li>
+                            <li>Automated risk scoring for user activities</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                        <h3 class="font-semibold text-slate-900 dark:text-white mb-2">Dispute Resolution</h3>
+                        <ul class="list-disc list-inside text-slate-600 dark:text-slate-400 space-y-1">
+                            <li>Dedicated compliance team for user grievances</li>
+                            <li>Structured dispute resolution process</li>
+                            <li>Escalation mechanism for unresolved issues</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-4">Contact Compliance Team</h2>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                    For compliance-related queries or to report suspicious activity:
+                </p>
+                <div class="mt-4 bg-slate-50 dark:bg-slate-800 rounded-lg p-4">
+                    <p class="text-slate-900 dark:text-white font-semibold">FundLink Compliance Team</p>
+                    <p class="text-slate-600 dark:text-slate-400">Email: compliance@fundlink.in</p>
+                    <p class="text-slate-600 dark:text-slate-400">Grievance Officer: Available 24/7</p>
+                    <p class="text-slate-600 dark:text-slate-400">Address: Bangalore, Karnataka, India</p>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer Links -->
+        <div class="mt-8 flex justify-center gap-6">
+            <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                href="privacy.html">Privacy Policy</a>
+            <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                href="terms.html">Terms of Service</a>
+            <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
+                href="fundlink_public_landing_page.html">Home</a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-slate-500 dark:text-slate-400 text-sm">
+                © 2024 FundLink Technologies. Protected by military-grade asymmetric encryption.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Keyboard navigation support
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                window.location.href = 'fundlink_public_landing_page.html';
+            }
+        });
+    </script>
+</body>
+
+</html>
