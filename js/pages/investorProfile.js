@@ -1,48 +1,8 @@
-<!DOCTYPE html>
-<html class="light" lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Investor Institutional Profile | FundLink</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <style type="text/tailwindcss">
-        :root {
-            --primary: #135bec;
-            --background-light: #f6f6f8;
-            --background-dark: #101622;
-        }
-        body { font-family: 'Inter', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .high-contrast-text { color: #0d121b; }
-        .dark .high-contrast-text { color: #ffffff; }
-    </style>
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#135bec",
-                        "background-light": "#f6f6f8",
-                        "background-dark": "#101622",
-                    },
-                    fontFamily: {
-                        "display": ["Inter"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
-                },
-            },
-        }
-    </script>
-</head>
+import { Auth } from '../modules/auth.js';
 
-<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-slate-200">
+export function renderInvestorProfile(section, app) {
+    const html = `
     <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
         <div class="layout-container flex h-full grow flex-col">
             <header
@@ -76,15 +36,11 @@
                                 class="text-[10px] text-[#4c669a] dark:text-slate-400 uppercase tracking-widest font-bold">
                                 Verified Account</p>
                         </div>
-                        <div
-                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800">
+                        <div data-action="logout" title="Sign Out" onclick="Auth.logout()"
+                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800 cursor-pointer">
                             <img class="w-full h-full object-cover" data-alt="Investor profile avatar"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaVfnYb7X8Sy9sQLjhHbify2C4C83lW72rPan9AJZu2tMaW5U-8uqQO15s55hVBnmnEF2tzMITBkea_KON2CKcL7E8HGOFZfa3zUElWH-re94JKAWmGJRa2NIlESJnlVdYaGuUbbDdFjznSej0rEmBM2g6TY-y92SnaklY_nUzZC2u5P1KxTRHQk0ve1HZ9BOm_vjk3fKpJQslt3-rXtLbdZEele_6a5_WzoRBHKY7GZk9Ngjphl8DkVa6b_JFi0Gz8TbbQq92rU" />
                         </div>
-                        <button onclick="Auth.logout()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"
-                            title="Sign Out">
-                            <span class="material-symbols-outlined">logout</span>
-                        </button>
                     </div>
                 </div>
             </header>
@@ -155,7 +111,8 @@
                                 </h3>
                                 <div
                                     class="bg-white dark:bg-slate-900 p-8 rounded-xl border border-slate-200 dark:border-slate-800">
-                                    <p class="text-lg leading-relaxed text-[#0d121b] dark:text-slate-200 font-medium">
+                                    <p id="profile-bio" contenteditable="true"
+                                        class="text-lg leading-relaxed text-[#0d121b] dark:text-slate-200 font-medium border-l-4 border-transparent focus:border-primary focus:bg-slate-50 dark:focus:bg-slate-800 outline-none p-2 rounded transition-all">
                                         We operate on the principle of asymmetric discipline. We believe that the
                                         greatest value in the next decade will be captured by companies solving
                                         foundational infrastructure problems rather than application-layer convenience.
@@ -165,6 +122,12 @@
                                         technical moats. We are high-conviction, concentrated investors, typically
                                         leading rounds where we can take a meaningful ownership stake.
                                     </p>
+                                    <div class="mt-4 flex justify-end">
+                                        <button id="save-bio-btn"
+                                            class="text-xs font-bold text-primary hover:text-blue-700 uppercase tracking-wider hidden">
+                                            Save Changes
+                                        </button>
+                                    </div>
                                 </div>
                             </section>
                             <section>
@@ -288,7 +251,32 @@
             </footer>
         </div>
     </div>
+    `;
 
-</body>
+    section.innerHTML = html;
 
-</html>
+    // Logic
+    const bio = document.getElementById('profile-bio');
+    const saveBtn = document.getElementById('save-bio-btn');
+
+    // Load saved bio
+    const savedBio = localStorage.getItem('fundlink_investor_bio');
+    if (savedBio && bio) bio.innerHTML = savedBio;
+
+    if (bio) {
+        bio.addEventListener('input', () => {
+            if (saveBtn) saveBtn.classList.remove('hidden');
+        });
+    }
+
+    if (saveBtn) {
+        saveBtn.addEventListener('click', () => {
+            localStorage.setItem('fundlink_investor_bio', bio.innerHTML);
+            saveBtn.innerText = "Saved!";
+            setTimeout(() => {
+                saveBtn.classList.add('hidden');
+                saveBtn.innerText = "Save Changes";
+            }, 1500);
+        });
+    }
+}

@@ -79,29 +79,29 @@
             <aside class="w-64 shrink-0 hidden md:block">
                 <nav class="space-y-1">
                     <a class="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-slate-900 text-primary font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-800"
-                        href="founder_control_dashboard_2.html">
+                        href="#founder-profile">
                         <span class="material-symbols-outlined text-[20px]">person</span>
                         <span>Profile</span>
                     </a>
                     <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                        href="founder_control_dashboard_3.html">
-                        <span class="material-symbols-outlined text-[20px]">hub</span>
-                        <span>Find Investors</span>
+                        href="#founder-settings">
+                        <span class="material-symbols-outlined text-[20px]">settings</span>
+                        <span>Settings</span>
                     </a>
                     <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                        href="incoming_connection_requests.html">
-                        <span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
-                        <span>Inbox</span>
+                        href="#founder-settings">
+                        <span class="material-symbols-outlined text-[20px]">security</span>
+                        <span>Account Security</span>
                     </a>
                     <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                        href="founder_control_dashboard_1.html">
+                        href="#founder-sent">
                         <span class="material-symbols-outlined text-[20px]">send</span>
                         <span>Sent Requests</span>
                     </a>
                     <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                        href="founder_control_dashboard_4.html">
-                        <span class="material-symbols-outlined text-[20px]">settings</span>
-                        <span>Settings</span>
+                        href="#founder-received">
+                        <span class="material-symbols-outlined text-[20px]">inbox</span>
+                        <span>Received</span>
                     </a>
                 </nav>
                 <div
@@ -123,7 +123,8 @@
                     class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Company Details</h3>
-                        <button class="text-xs font-semibold text-primary hover:underline">Edit Info</button>
+                        <button onclick="window.location.hash='#founder-settings'"
+                            class="text-xs font-semibold text-primary hover:underline">Edit Info</button>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                         <div>
@@ -145,7 +146,8 @@
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Proposed Idea/Innovation
                         </h3>
-                        <button class="text-xs font-semibold text-primary hover:underline">Edit Details</button>
+                        <button onclick="window.location.hash='#founder-settings'"
+                            class="text-xs font-semibold text-primary hover:underline">Edit Details</button>
                     </div>
                     <div class="space-y-5">
                         <div class="grid grid-cols-1 gap-4">
@@ -173,7 +175,8 @@
                     class="bg-white border border-slate-200 shadow-soft-3d rounded-xl p-6 dark:bg-slate-900 dark:border-slate-800">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-sm font-bold uppercase tracking-widest text-slate-400">Founder Information</h3>
-                        <button class="text-xs font-semibold text-primary hover:underline">Edit Profile</button>
+                        <button onclick="window.location.hash='#founder-settings'"
+                            class="text-xs font-semibold text-primary hover:underline">Edit Profile</button>
                     </div>
                     <div class="space-y-4">
                         <div class="flex items-center gap-4">
@@ -247,13 +250,6 @@
                         </div>
                     </div>
                 </section>
-                <div class="flex justify-end pt-4 pb-8">
-                    <button id="calculate-readiness-btn"
-                        class="px-8 py-3 bg-primary text-white text-sm font-bold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20 flex items-center gap-2">
-                        <span class="material-symbols-outlined">insights</span>
-                        Analyze Profile for Match Readiness
-                    </button>
-                </div>
             </main>
         </div>
         <footer class="fixed bottom-0 w-full bg-slate-900 text-white py-2 px-6 z-[60]">
@@ -271,232 +267,6 @@
         </footer>
     </div>
 
-    </footer>
-    </div>
-    <!-- AI Readiness Modal -->
-    <div id="readiness-modal" class="hidden relative z-[100]" aria-labelledby="modal-title" role="dialog"
-        aria-modal="true">
-        <div id="readiness-backdrop"
-            class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0 ease-out duration-300">
-        </div>
-
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <div id="readiness-panel"
-                    class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl border border-slate-200 dark:border-slate-700 opacity-0 scale-95 duration-300 ease-out">
-
-                    <!-- Header -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-900/50 px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="bg-primary/10 p-2 rounded-lg">
-                                <span class="material-symbols-outlined text-primary">analytics</span>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="modal-title">Readiness
-                                    Assessment</h3>
-                                <p class="text-xs text-slate-500 uppercase tracking-wider font-semibold">AI Architect
-                                    Function</p>
-                            </div>
-                        </div>
-                        <button onclick="closeReadinessModal()"
-                            class="text-slate-400 hover:text-slate-600 transition-colors">
-                            <span class="material-symbols-outlined">close</span>
-                        </button>
-                    </div>
-
-                    <div class="p-8">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                            <!-- Left: Score -->
-                            <div
-                                class="md:col-span-1 flex flex-col items-center justify-center border-r border-slate-100 dark:border-slate-800 pr-8">
-                                <div class="relative w-48 h-48 flex items-center justify-center mb-6">
-                                    <!--- Background Ring -->
-                                    <svg class="w-full h-full transform -rotate-90">
-                                        <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12"
-                                            fill="transparent" class="text-slate-100 dark:text-slate-800" />
-                                        <!-- Progress Ring -->
-                                        <circle id="readiness-score-ring" cx="96" cy="96" r="88" stroke="currentColor"
-                                            stroke-width="12" fill="transparent"
-                                            class="text-primary transition-all duration-1000 ease-out"
-                                            stroke-dasharray="552.9" stroke-dashoffset="552.9" stroke-linecap="round" />
-                                    </svg>
-                                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                                        <span class="text-5xl font-bold text-slate-900 dark:text-white"
-                                            id="readiness-score-val">0</span>
-                                        <span class="text-sm font-medium text-slate-400 uppercase mt-1">Readiness
-                                            Score</span>
-                                    </div>
-                                </div>
-                                <div class="w-full space-y-3">
-                                    <div
-                                        class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
-                                        <span>Pitch Strength</span>
-                                        <span class="text-green-600">High</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                        <div class="h-full bg-green-500 w-[85%]"></div>
-                                    </div>
-                                    <div
-                                        class="flex justify-between text-xs font-semibold uppercase tracking-wider text-slate-500">
-                                        <span>Market Validation</span>
-                                        <span class="text-yellow-600">Medium</span>
-                                    </div>
-                                    <div class="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">
-                                        <div class="h-full bg-yellow-500 w-[60%]"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right: Analysis -->
-                            <div class="md:col-span-2 space-y-6">
-                                <div>
-                                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3">Gap
-                                        Analysis</h4>
-                                    <div
-                                        class="bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 rounded-xl p-4 flex gap-4">
-                                        <div
-                                            class="shrink-0 bg-red-100 dark:bg-red-900/30 p-2 rounded-lg h-fit text-red-600">
-                                            <span class="material-symbols-outlined">warning</span>
-                                        </div>
-                                        <div>
-                                            <h5 class="text-sm font-bold text-red-700 dark:text-red-400 mb-1">Critical
-                                                Missing Data</h5>
-                                            <p class="text-sm text-red-600 dark:text-red-300 leading-relaxed"
-                                                id="readiness-gap-text">
-                                                Your financial projections lack a detailed Unit Economics breakdown.
-                                                Investors at Series A require clear CAC/LTV visibility.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="grid grid-cols-2 gap-6">
-                                    <div>
-                                        <h4
-                                            class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3 text-green-600 flex items-center gap-2">
-                                            <span class="material-symbols-outlined text-sm">check_circle</span>
-                                            Strengths
-                                        </h4>
-                                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 marker:text-green-500 list-disc pl-4"
-                                            id="readiness-strengths">
-                                            <!-- Dynamic Load -->
-                                            <li>Strong Technical Founder Profile</li>
-                                            <li>Clear Proprietary IP (Patents)</li>
-                                        </ul>
-                                    </div>
-                                    <div>
-                                        <h4
-                                            class="text-sm font-bold uppercase tracking-widest text-slate-400 mb-3 text-orange-500 flex items-center gap-2">
-                                            <span class="material-symbols-outlined text-sm">build</span> To Improve
-                                        </h4>
-                                        <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-300 marker:text-orange-500 list-disc pl-4"
-                                            id="readiness-improvements">
-                                            <!-- Dynamic Load -->
-                                            <li>Define Go-To-Market Loop</li>
-                                            <li>Clarify Competitive Moat</li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div
-                                    class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-end gap-3">
-                                    <button onclick="closeReadinessModal()"
-                                        class="px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-700">Dismiss</button>
-                                    <button
-                                        class="px-6 py-2 bg-primary text-white text-sm font-bold rounded-lg shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
-                                        Update Pitch Deck
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script type="module">
-        import { Auth } from '../js/modules/auth.js';
-        import { AIClient } from '../js/modules/AIClient.js';
-
-        const aiClient = new AIClient();
-
-        // Check if readiness is already complete on load
-        if (Auth.isReadinessComplete()) {
-            document.getElementById('calculate-readiness-btn').innerText = "Readiness Assessment Complete";
-            document.getElementById('calculate-readiness-btn').classList.add('bg-green-600', 'hover:bg-green-700');
-            // Assuming there's a way to unlock navigation, we would do it here.
-            // For now, we rely on the visual indicator.
-        }
-
-        document.getElementById('calculate-readiness-btn').addEventListener('click', async () => {
-            if (Auth.isReadinessComplete()) {
-                alert("You have already completed the Readiness Assessment.");
-                return;
-            }
-
-            const btn = document.getElementById('calculate-readiness-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Analyzing...`;
-            btn.disabled = true;
-
-            try {
-                // Mock Data for the pitch
-                const pitchData = {
-                    description: "High quality pitch description with sufficient length to trigger a good score...",
-                    // ... other mock fields
-                };
-
-                const result = await aiClient.evaluateReadiness(pitchData);
-
-                // Show Modal
-                document.getElementById('readiness-modal').classList.remove('hidden');
-                setTimeout(() => {
-                    document.getElementById('readiness-backdrop').classList.remove('opacity-0');
-                    document.getElementById('readiness-panel').classList.remove('opacity-0', 'scale-95');
-                }, 10);
-
-                // Update UI with Result
-                document.getElementById('readiness-score-val').innerText = result.score;
-
-                // Animate Ring (Simplified logic for demo)
-                const circle = document.getElementById('readiness-score-ring');
-                const circumference = 2 * Math.PI * 88;
-                const offset = circumference - (result.score / 100) * circumference;
-                circle.style.strokeDashoffset = offset;
-
-                // Populate Analysis (Using the new detailed structure)
-                const strengthsList = document.getElementById('readiness-strengths');
-                strengthsList.innerHTML = result.analysis.strengths.map(s => `<li>${s}</li>`).join('');
-
-                const improvementList = document.getElementById('readiness-improvements');
-                // Use gap_analysis.critical for improvements
-                improvementList.innerHTML = result.analysis.gap_analysis.critical.map(s => `<li>${s}</li>`).join('');
-
-                // Mark as complete in Auth
-                Auth.setReadinessComplete();
-                btn.innerText = "Readiness Assessment Complete";
-                btn.classList.remove('bg-primary', 'hover:bg-blue-700');
-                btn.classList.add('bg-green-600', 'hover:bg-green-700');
-                alert("Readiness Assessment Complete. Investor discovery is now unlocked.");
-
-            } catch (error) {
-                console.error(error);
-                alert("Analysis failed. Please try again.");
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
-        });
-
-        // Modal Close Logic
-        window.closeReadinessModal = () => {
-            document.getElementById('readiness-backdrop').classList.add('opacity-0');
-            document.getElementById('readiness-panel').classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                document.getElementById('readiness-modal').classList.add('hidden');
-            }, 300);
-        };
-    </script>
 </body>
 
 </html>

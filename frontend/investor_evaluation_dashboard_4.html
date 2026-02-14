@@ -69,13 +69,13 @@
                     </div>
                     <nav class="hidden md:flex items-center gap-6">
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="investor_evaluation_dashboard_5.html">Evaluation Feed</a>
+                            href="#investor-feed">Evaluation Feed</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="investor_evaluation_dashboard_3.html">My Requests</a>
+                            href="#investor-requests">My Requests</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="investor_evaluation_dashboard_2.html">Portfolio</a>
+                            href="#investor-portfolio">Portfolio</a>
                         <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
-                            href="investor_evaluation_dashboard_4.html">Investment Thesis</a>
+                            href="#investor-thesis">Investment Thesis</a>
                     </nav>
                 </div>
                 <div class="flex flex-1 justify-end gap-6 items-center">
@@ -104,8 +104,7 @@
                     </div>
                     <div
                         class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 form-3d-shadow">
-                        <form class="space-y-10" id="thesis-form">
-                            <!-- ... existing sections ... -->
+                        <form class="space-y-10">
                             <section>
                                 <div class="flex items-center gap-2 mb-4">
                                     <span class="material-symbols-outlined text-primary">category</span>
@@ -113,31 +112,121 @@
                                         class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
                                         Sectors of Interest</h3>
                                 </div>
-                                <div class="flex flex-wrap gap-2" id="sectors-container">
+                                <div class="flex flex-wrap gap-2">
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
-                                        type="button" data-selected="true">B2B SaaS</button>
+                                        class="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
+                                        type="button">B2B SaaS</button>
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
-                                        type="button" data-selected="false">Fintech</button>
+                                        class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
+                                        type="button">Fintech</button>
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
-                                        type="button" data-selected="true">DeepTech</button>
+                                        class="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
+                                        type="button">DeepTech</button>
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
-                                        type="button" data-selected="false">HealthTech</button>
+                                        class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
+                                        type="button">HealthTech</button>
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
-                                        type="button" data-selected="false">Consumer Internet</button>
+                                        class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all"
+                                        type="button">Consumer Internet</button>
                                     <button
-                                        class="sector-btn px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
-                                        type="button" data-selected="true">Clean Energy</button>
+                                        class="px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all"
+                                        type="button">Clean Energy</button>
+                                    <button
+                                        class="px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 border-dashed hover:border-primary hover:text-primary text-slate-400 text-sm font-medium flex items-center gap-1"
+                                        type="button">
+                                        <span class="material-symbols-outlined text-sm">add</span> Add Sector
+                                    </button>
                                 </div>
                             </section>
-
-                            <!-- ... (Keeping simplified structure for brevity in edit, but normally would preserve all) ... -->
-                            <!-- To ensure I don't delete the other sections, I will targeting specific blocks if possible or just inject the script at the end -->
-
+                            <section>
+                                <div class="flex items-center gap-2 mb-4">
+                                    <span class="material-symbols-outlined text-primary">stairs</span>
+                                    <h3
+                                        class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                                        Investment Stage</h3>
+                                </div>
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                    <label class="cursor-pointer">
+                                        <input checked="" class="peer sr-only" type="checkbox" />
+                                        <div
+                                            class="p-3 text-center border border-slate-200 dark:border-slate-700 rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary text-sm font-semibold transition-all">
+                                            Pre-Seed</div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input checked="" class="peer sr-only" type="checkbox" />
+                                        <div
+                                            class="p-3 text-center border border-slate-200 dark:border-slate-700 rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary text-sm font-semibold transition-all">
+                                            Seed</div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input class="peer sr-only" type="checkbox" />
+                                        <div
+                                            class="p-3 text-center border border-slate-200 dark:border-slate-700 rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary text-sm font-semibold transition-all text-slate-500">
+                                            Series A</div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input class="peer sr-only" type="checkbox" />
+                                        <div
+                                            class="p-3 text-center border border-slate-200 dark:border-slate-700 rounded-xl peer-checked:border-primary peer-checked:bg-primary/5 peer-checked:text-primary text-sm font-semibold transition-all text-slate-500">
+                                            Series B</div>
+                                    </label>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="flex items-center justify-between mb-4">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-primary">payments</span>
+                                        <h3
+                                            class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                                            Target Ticket Size</h3>
+                                    </div>
+                                    <span class="text-primary font-bold text-sm bg-primary/5 px-3 py-1 rounded-lg">$250k
+                                        — $1.5M</span>
+                                </div>
+                                <div class="px-2">
+                                    <input
+                                        class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
+                                        max="5000000" min="50000" step="50000" type="range" value="1500000" />
+                                    <div
+                                        class="flex justify-between mt-3 text-[10px] font-bold text-slate-400 uppercase tracking-tighter">
+                                        <span>$50k</span>
+                                        <span>$1M</span>
+                                        <span>$2.5M</span>
+                                        <span>$5M+</span>
+                                    </div>
+                                </div>
+                            </section>
+                            <section>
+                                <div class="flex items-center gap-2 mb-4">
+                                    <span class="material-symbols-outlined text-primary">public</span>
+                                    <h3
+                                        class="text-sm font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider">
+                                        Geographic Focus</h3>
+                                </div>
+                                <div class="relative group">
+                                    <select
+                                        class="w-full bg-slate-50 dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-xl py-3 px-4 text-sm font-medium focus:ring-primary focus:border-primary appearance-none">
+                                        <option>India &amp; Southeast Asia</option>
+                                        <option>North America</option>
+                                        <option>Europe (EMEA)</option>
+                                        <option>Global / No Preference</option>
+                                    </select>
+                                    <div
+                                        class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                        <span class="material-symbols-outlined">expand_more</span>
+                                    </div>
+                                </div>
+                                <div class="mt-3 flex flex-wrap gap-2">
+                                    <span
+                                        class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">
+                                        India <button class="material-symbols-outlined text-[14px]">close</button>
+                                    </span>
+                                    <span
+                                        class="flex items-center gap-1 bg-slate-100 dark:bg-slate-800 px-3 py-1 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-300">
+                                        Singapore <button class="material-symbols-outlined text-[14px]">close</button>
+                                    </span>
+                                </div>
+                            </section>
                             <div
                                 class="pt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
                                 <button class="text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors"
@@ -151,101 +240,43 @@
                             </div>
                         </form>
                     </div>
+                    <div class="mt-8 flex items-center justify-center gap-4 text-center">
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                            <span class="material-symbols-outlined text-sm text-green-500">verified_user</span>
+                            Encrypted Storage
+                        </div>
+                        <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                            <span class="material-symbols-outlined text-sm text-green-500">lock</span>
+                            Founder Privacy Shield
+                        </div>
+                        <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+                            <span class="material-symbols-outlined text-sm text-green-500">visibility_off</span>
+                            Asymmetric Blind Match
+                        </div>
+                    </div>
                 </div>
             </main>
-
-            <script>
-                document.addEventListener('DOMContentLoaded', () => {
-                    const form = document.getElementById('thesis-form');
-                    const sectorBtns = document.querySelectorAll('.sector-btn');
-
-                    // Toggle Sector Buttons
-                    sectorBtns.forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const isSelected = btn.getAttribute('data-selected') === 'true';
-                            btn.setAttribute('data-selected', !isSelected);
-                            if (!isSelected) {
-                                btn.className = "sector-btn px-4 py-2 rounded-full border border-primary bg-primary/10 text-primary text-sm font-semibold transition-all";
-                            } else {
-                                btn.className = "sector-btn px-4 py-2 rounded-full border border-slate-200 dark:border-slate-700 hover:border-primary hover:text-primary text-slate-600 dark:text-slate-400 text-sm font-medium transition-all";
-                            }
-                        });
-                    });
-
-                    form.addEventListener('submit', (e) => {
-                        e.preventDefault();
-
-                        // Collect Data
-                        const selectedSectors = Array.from(sectorBtns)
-                            .filter(btn => btn.getAttribute('data-selected') === 'true')
-                            .map(btn => btn.innerText);
-
-                        // Save to localStorage
-                        localStorage.setItem('fundlink_investor_thesis', JSON.stringify({
-                            sectors: selectedSectors,
-                            timestamp: new Date().toISOString()
-                        }));
-
-                        // Feedback
-                        const btn = form.querySelector('button[type="submit"]');
-                        const originalText = btn.innerHTML;
-                        btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Thesis Saved';
-                        btn.classList.add('bg-green-600');
-                        btn.classList.remove('bg-primary');
-
-                        setTimeout(() => {
-                            btn.innerHTML = originalText;
-                            btn.classList.add('bg-primary');
-                            btn.classList.remove('bg-green-600');
-                        }, 2000);
-                    });
-                });
-            </script>
-        </div>
-        <div class="mt-8 flex items-center justify-center gap-4 text-center">
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                <span class="material-symbols-outlined text-sm text-green-500">verified_user</span>
-                Encrypted Storage
-            </div>
-            <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                <span class="material-symbols-outlined text-sm text-green-500">lock</span>
-                Founder Privacy Shield
-            </div>
-            <div class="h-1 w-1 bg-slate-300 rounded-full"></div>
-            <div class="flex items-center gap-1.5 text-xs text-slate-500 font-medium">
-                <span class="material-symbols-outlined text-sm text-green-500">visibility_off</span>
-                Asymmetric Blind Match
-            </div>
+            <footer
+                class="bg-slate-900 text-white px-8 py-2.5 flex items-center justify-between text-[11px] font-medium tracking-wide">
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-1.5 text-green-400">
+                        <span class="material-symbols-outlined text-sm">lock</span>
+                        <span>Privacy-First Mode Active</span>
+                    </div>
+                    <div class="flex items-center gap-1.5 opacity-60">
+                        <span class="material-symbols-outlined text-sm">visibility_off</span>
+                        <span>Zero Peer Visibility</span>
+                    </div>
+                </div>
+                <div class="opacity-60">
+                    Configuration safe-save: Active
+                </div>
+            </footer>
         </div>
     </div>
-    </main>
-    <footer
-        class="bg-slate-900 text-white px-8 py-2.5 flex items-center justify-between text-[11px] font-medium tracking-wide">
-        <div class="flex items-center gap-6">
-            <div class="flex items-center gap-1.5 text-green-400">
-                <span class="material-symbols-outlined text-sm">lock</span>
-                <span>Privacy-First Mode Active</span>
-            </div>
-            <div class="flex items-center gap-1.5 opacity-60">
-                <span class="material-symbols-outlined text-sm">visibility_off</span>
-                <span>Zero Peer Visibility</span>
-            </div>
-        </div>
-        <div class="opacity-60">
-            Configuration safe-save: Active
-        </div>
-    </footer>
-    </div>
-    </div>
 
-    <script type="module">
-        import { Auth } from '../../js/modules/auth.js';
-        if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
-            alert('Access Restricted: Investor Account Required');
-            window.location.href = 'role_commitment_&_authentication_1.html';
-        }
-    </script>
 </body>
 
 </html>

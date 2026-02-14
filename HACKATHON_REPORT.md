@@ -143,19 +143,17 @@ graph LR
 fundlink/
 ├── backend/
 │   ├── server.js            # Node.js Express Server
-│   └── routes/              # API Routes (AI, Auth)
+│   └── controllers/         # API Logic (AI, Auth)
 ├── frontend/
-│   ├── fundlink_public_landing_page.html    # Entry Point
-│   ├── investor_evaluation_dashboard_5.html # Main Investor UI
-│   ├── founder_control_dashboard_2.html     # Founder Profile UI
-│   ├── secure_workspace_negotiation.html    # Deal Room UI
-│   └── assets/              # Images, Icons
+│   ├── assets/              # Images, Icons
+│   └── *.html               # Dynamic HTML Templates (loaded by JS)
 ├── js/
 │   ├── main.js              # Application Bootstrap & Routing
 │   ├── modules/
-│   │   ├── AIClient.js      # AI Simulation Logic
+│   │   ├── AIClient.js      # AI Simulation & API Client
 │   │   └── Auth.js          # Authentication & RBAC
-│   └── controllers/         # Page-specific Logic
+│   └── pages/               # Page Renderers (SPA Logic)
+├── index.html               # Single Page Application Entry Point
 └── README.md                # This file
 ```
 

@@ -93,11 +93,11 @@
                     <button class="p-2 text-primary">
                         <span class="material-symbols-outlined">settings</span>
                     </button>
-                    <a href="founder_control_dashboard_2.html"
-                        class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600 block">
+                    <div
+                        class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600">
                         <img alt="Founder avatar"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXgOihvjY0lBpfDaezPh12J9-Ux67PCt5hLJhC_yKxIvkLdLjOxlYLePZ_Z5qawV-lcHdBVrBcDiSDi9tqIMMPqYZ9ejkmQmDmg5X9sTLA3z6D55O5ocB0P85Vtoj0Dfyx8mA68zlXCeX_ZaZZ_z-zTjldnb4VVLufS36KW0WfLcKR6xO3-Dte7q-aKjjA87UwOw-gVlrjc8IYM1cJCIWifcb6Fi0LJQuLcl4-l9ik_hKs7g-rak7Q_-YQOwQJgUMplXgfhRIlzzs" />
-                    </a>
+                    </div>
                 </div>
             </div>
         </header>
@@ -116,20 +116,25 @@
                     <button
                         class="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-lg">
                         <span class="material-symbols-outlined text-[20px]">notifications</span>
-                        Notifications
+                        <span>Notifications</span>
                     </button>
-                    <button
-                        class="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-lg">
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="#founder-profile">
+                        <span class="material-symbols-outlined text-[20px]">person</span>
+                        <span>Profile</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-slate-900 text-primary font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-800"
+                        href="#founder-settings">
+                        <span class="material-symbols-outlined text-[20px]">settings</span>
+                        <span>Settings</span>
+                    </a>
+                    <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
+                        href="#founder-settings">
                         <span class="material-symbols-outlined text-[20px]">security</span>
-                        Security
-                    </button>
-                    <button
-                        class="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-slate-500 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors rounded-lg">
-                        <span class="material-symbols-outlined text-[20px]">account_balance_wallet</span>
-                        Billing &amp; Subscription
-                    </button>
+                        <span>Account Security</span>
+                    </a>
                     <div class="pt-4 mt-4 border-t border-slate-200 dark:border-slate-800">
-                        <button
+                        <button id="btn-logout"
                             class="w-full flex items-center gap-3 px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors rounded-lg">
                             <span class="material-symbols-outlined text-[20px]">logout</span>
                             Sign Out

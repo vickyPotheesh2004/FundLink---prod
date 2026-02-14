@@ -58,13 +58,13 @@
                 </div>
                 <nav class="hidden md:flex items-center gap-6">
                     <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                        href="investor_evaluation_dashboard_5.html">Evaluation Feed</a>
+                        href="#investor-feed">Evaluation Feed</a>
                     <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                        href="investor_evaluation_dashboard_3.html">My Requests</a>
+                        href="#investor-requests">My Requests</a>
                     <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
-                        href="investor_evaluation_dashboard_2.html">Portfolio</a>
+                        href="#investor-portfolio">Portfolio</a>
                     <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                        href="investor_evaluation_dashboard_4.html">Investment Thesis</a>
+                        href="#investor-thesis">Investment Thesis</a>
                 </nav>
             </div>
             <div class="flex items-center gap-4">
@@ -138,11 +138,11 @@
                         </div>
                         <div
                             class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            <a href="secure_workspace_negotiation.html?id=project-delta&partner=Project Delta"
+                            <button
                                 class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
                                 <span class="material-symbols-outlined text-lg">space_dashboard</span>
                                 Open Workspace
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -180,11 +180,11 @@
                         </div>
                         <div
                             class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            <a href="secure_workspace_negotiation.html?id=project-sigma&partner=Project Sigma"
+                            <button
                                 class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
                                 <span class="material-symbols-outlined text-lg">space_dashboard</span>
                                 Open Workspace
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -222,11 +222,11 @@
                         </div>
                         <div
                             class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            <a href="secure_workspace_negotiation.html?id=project-alpha&partner=Project Alpha"
+                            <button
                                 class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
                                 <span class="material-symbols-outlined text-lg">space_dashboard</span>
                                 Open Workspace
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -264,11 +264,11 @@
                         </div>
                         <div
                             class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            <a href="secure_workspace_negotiation.html?id=project-gamma&partner=Project Gamma"
+                            <button
                                 class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
                                 <span class="material-symbols-outlined text-lg">space_dashboard</span>
                                 Open Workspace
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -306,11 +306,11 @@
                         </div>
                         <div
                             class="p-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
-                            <a href="secure_workspace_negotiation.html?id=project-epsilon&partner=Project Epsilon"
+                            <button
                                 class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold hover:bg-blue-700 transition-colors">
                                 <span class="material-symbols-outlined text-lg">space_dashboard</span>
                                 Open Workspace
-                            </a>
+                            </button>
                         </div>
                     </div>
                     <div
@@ -345,13 +345,6 @@
         </footer>
     </div>
 
-    <script type="module">
-        import { Auth } from '../../js/modules/auth.js';
-        if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
-            alert('Access Restricted: Investor Account Required');
-            window.location.href = 'role_commitment_&_authentication_1.html';
-        }
-    </script>
 </body>
 
 </html>

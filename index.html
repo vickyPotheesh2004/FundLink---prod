@@ -1,19 +1,14 @@
 <!DOCTYPE html>
-
 <html class="light" lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>FundLink | Secure Matchmaking for India's Growth</title>
+    <title>FundLink | Secure Venture Network</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
         rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         rel="stylesheet" />
     <script id="tailwind-config">
         tailwind.config = {
@@ -28,12 +23,6 @@
                     fontFamily: {
                         "display": ["Inter", "sans-serif"]
                     },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
                 },
             },
         }
@@ -43,231 +32,165 @@
             font-family: 'Inter', sans-serif;
         }
 
-        .soft-depth {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-            transition: box-shadow 0.2s ease;
+        .page-section {
+            min-height: 100vh;
+            width: 100%;
         }
 
-        .soft-depth:hover {
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        /* Deal Closure Modal Styles */
+        .modal-blur-backdrop {
+            backdrop-filter: blur(8px);
+        }
+
+        .legal-gradient {
+            background: linear-gradient(180deg, rgba(19, 91, 236, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .dark .legal-gradient {
+            background: linear-gradient(180deg, rgba(19, 91, 236, 0.1) 0%, rgba(16, 22, 34, 0) 100%);
         }
     </style>
 </head>
 
 <body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
-    <!-- Navigation -->
-    <nav
-        class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <div class="bg-primary p-1.5 rounded-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd"
-                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
-                            fill="currentColor" fill-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <span class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">FundLink</span>
-            </div>
-            <div class="hidden md:flex items-center gap-10">
-                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#how-it-works">How it works</a>
-                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#">Privacy</a>
-                <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#">Security</a>
-                <button
-                    class="bg-primary text-white text-sm font-bold py-2 px-6 rounded-lg hover:bg-blue-700 transition-colors">Login</button>
-            </div>
+
+    <!-- SPA Container -->
+    <div id="app">
+        <!-- Toast Container -->
+        <div id="toast-container" class="fixed top-24 right-6 z-[100] flex flex-col gap-3"></div>
+
+        <!-- Sections -->
+        <div id="page-landing" class="page-section"></div>
+        <div id="page-role-select" class="page-section hidden"></div>
+
+        <!-- Investor Auth Flow -->
+        <div id="page-investor-auth" class="page-section hidden"></div>
+        <div id="page-investor-verify" class="page-section hidden"></div>
+        <div id="page-investor-audit" class="page-section hidden"></div>
+
+        <!-- Founder Auth Flow -->
+        <div id="page-founder-auth" class="page-section hidden"></div>
+        <div id="page-founder-verify" class="page-section hidden"></div>
+        <div id="page-founder-audit" class="page-section hidden"></div>
+
+        <!-- Founder Dashboard Pages -->
+        <div id="page-founder-dashboard" class="page-section hidden"></div>
+        <div id="page-founder-profile" class="page-section hidden"></div>
+        <div id="page-founder-sent" class="page-section hidden"></div>
+        <div id="page-founder-inbox" class="page-section hidden"></div>
+        <div id="page-founder-received" class="page-section hidden"></div>
+        <div id="page-founder-settings" class="page-section hidden"></div>
+
+        <!-- Investor Dashboard Pages -->
+        <div id="page-investor-feed" class="page-section hidden"></div>
+        <div id="page-investor-requests" class="page-section hidden"></div>
+        <div id="page-investor-portfolio" class="page-section hidden"></div>
+        <div id="page-investor-thesis" class="page-section hidden"></div>
+        <div id="page-investor-profile" class="page-section hidden"></div>
+        <div id="page-investor-incoming" class="page-section hidden"></div>
+
+        <!-- Shared Pages -->
+        <div id="page-workspace" class="page-section hidden"></div>
+        <div id="page-deal-closure" class="page-section hidden"></div>
+    </div>
+
+    <!-- Modals (Global) -->
+    <div id="ai-report-modal" class="relative z-[60] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div id="ai-modal-backdrop"
+            class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity opacity-0 duration-300 ease-out">
         </div>
-    </nav>
-    <main>
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-40">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider mb-8">
-                    <span class="material-symbols-outlined text-sm">verified_user</span>
-                    India's Privacy-First Venture Network
-                </div>
-                <h1
-                    class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white leading-[1.1] mb-8 tracking-tight">
-                    Secure Matchmaking for India’s Next Tier of Growth
-                </h1>
-                <p
-                    class="text-lg md:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-12 max-w-2xl mx-auto">
-                    A privacy-first platform where Founders and Investors connect through asymmetric visibility. Your
-                    data stays yours until you decide otherwise.
-                </p>
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button id="btn-role-founder"
-                        class="w-full sm:w-auto min-w-[240px] bg-primary text-white text-base font-bold py-4 px-8 rounded-lg shadow-lg hover:bg-blue-700 transition-all flex items-center justify-center gap-2">
-                        I am a Startup Founder
-                        <span class="material-symbols-outlined">rocket_launch</span>
-                    </button>
-                    <button id="btn-role-investor"
-                        class="w-full sm:w-auto min-w-[240px] bg-white dark:bg-slate-800 text-slate-900 dark:text-white border border-slate-200 dark:border-slate-700 text-base font-bold py-4 px-8 rounded-lg shadow-sm hover:bg-slate-50 dark:hover:bg-slate-750 transition-all flex items-center justify-center gap-2">
-                        I am an Investor
-                        <span class="material-symbols-outlined">payments</span>
-                    </button>
-                </div>
-            </div>
-            <!-- Abstract background pattern -->
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 -z-10 w-full h-full opacity-30 pointer-events-none">
-                <div
-                    class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]">
-                </div>
-            </div>
-        </section>
-        <!-- How It Works Section -->
-        <section class="py-24 bg-white dark:bg-slate-900/50" id="how-it-works">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="mb-16">
-                    <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">How it Works</h2>
-                    <div class="w-12 h-1 bg-primary rounded-full"></div>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Step 1 -->
-                    <div
-                        class="flex flex-col p-8 bg-background-light dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 soft-depth">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6">
-                            <span class="material-symbols-outlined">person_pin</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">1. Role Selection</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Identify as a Founder or Investor to tailor your experience through our secure portal. Every
-                            profile is verified to ensure ecosystem integrity.
-                        </p>
-                    </div>
-                    <!-- Step 2 -->
-                    <div
-                        class="flex flex-col p-8 bg-background-light dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 soft-depth">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6">
-                            <span class="material-symbols-outlined">insights</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">2. AI Analysis</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Our engine assesses compatibility and investment readiness without ever exposing your
-                            sensitive raw data to the public or peers.
-                        </p>
-                    </div>
-                    <!-- Step 3 -->
-                    <div
-                        class="flex flex-col p-8 bg-background-light dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 soft-depth">
-                        <div
-                            class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-6">
-                            <span class="material-symbols-outlined">encrypted</span>
-                        </div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">3. Secure Workspace</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                            Move to a protected environment for encrypted document sharing, video calls, and final due
-                            diligence under NDA-level security.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Privacy Pillar Section -->
-        <section class="py-24">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="bg-primary/5 dark:bg-primary/10 rounded-2xl border border-primary/20 p-8 md:p-12">
-                    <div class="grid lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <div class="flex items-center gap-3 text-primary mb-6">
-                                <span class="material-symbols-outlined text-3xl">shield_lock</span>
-                                <h2 class="text-2xl font-bold">Privacy-First Asymmetric Visibility</h2>
-                            </div>
-                            <p class="text-lg text-slate-700 dark:text-slate-300 leading-relaxed mb-8">
-                                We ensure total privacy: Founders cannot see other Founders, and Investors cannot see
-                                other Investors. Your strategic positioning and pitch decks are protected by our
-                                proprietary view-only document protocol.
-                            </p>
-                            <ul class="space-y-4 mb-8">
-                                <li class="flex items-start gap-3">
-                                    <span class="material-symbols-outlined text-primary">check_circle</span>
-                                    <span class="text-slate-600 dark:text-slate-400 font-medium">No peer-to-peer
-                                        discovery enabled</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="material-symbols-outlined text-primary">check_circle</span>
-                                    <span class="text-slate-600 dark:text-slate-400 font-medium">Screenshots and
-                                        downloads disabled by default</span>
-                                </li>
-                                <li class="flex items-start gap-3">
-                                    <span class="material-symbols-outlined text-primary">check_circle</span>
-                                    <span class="text-slate-600 dark:text-slate-400 font-medium">Watermarked document
-                                        viewing experience</span>
-                                </li>
-                            </ul>
-                            <button
-                                class="bg-primary text-white text-sm font-bold py-3 px-8 rounded-lg hover:bg-blue-700 transition-colors">
-                                View Security Whitepaper
-                            </button>
-                        </div>
-                        <div class="relative">
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="ai-modal-panel"
+                    class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-3xl opacity-0 scale-95 duration-300 ease-out border border-slate-200 dark:border-slate-800">
+                    <div class="bg-white dark:bg-slate-900 px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                        <div class="sm:flex sm:items-start gap-4">
                             <div
-                                class="aspect-video bg-white dark:bg-slate-800 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-2xl p-4 flex flex-col gap-4">
-                                <div class="h-6 bg-slate-100 dark:bg-slate-700 rounded w-1/3"></div>
-                                <div class="flex-1 grid grid-cols-3 gap-4">
-                                    <div class="bg-slate-50 dark:bg-slate-700/50 rounded-lg"></div>
-                                    <div class="bg-slate-50 dark:bg-slate-700/50 rounded-lg"></div>
-                                    <div class="bg-slate-50 dark:bg-slate-700/50 rounded-lg"></div>
-                                </div>
-                                <div class="h-12 bg-primary/20 dark:bg-primary/30 rounded-lg flex items-center px-4">
-                                    <span class="material-symbols-outlined text-primary mr-2">visibility</span>
-                                    <div class="h-2 bg-primary/40 rounded w-full"></div>
+                                class="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 sm:mx-0 sm:h-10 sm:w-10">
+                                <span class="material-symbols-outlined text-primary">analytics</span>
+                            </div>
+                            <div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
+                                <h3 class="text-lg font-bold leading-6 text-slate-900 dark:text-white"
+                                    id="ai-report-title">AI Analysis</h3>
+                                <div class="mt-4">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <div class="flex flex-col">
+                                            <span class="text-xs text-slate-500 uppercase font-bold">Readiness
+                                                Score</span>
+                                            <span class="text-3xl font-black text-primary" id="ai-score-val">--</span>
+                                        </div>
+                                        <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-700"></div>
+                                        <div class="flex flex-col">
+                                            <span class="text-xs text-slate-500 uppercase font-bold">Thesis</span>
+                                            <p class="text-sm italic text-slate-600 dark:text-slate-300" id="ai-thesis">
+                                                Pending analysis...</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <!-- Background accent -->
-                            <div class="absolute -bottom-4 -right-4 w-full h-full bg-primary/10 -z-10 rounded-xl"></div>
                         </div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                        <button id="close-ai-report-modal" type="button"
+                            class="mt-3 inline-flex w-full justify-center rounded-md bg-white dark:bg-slate-800 px-3 py-2 text-sm font-semibold text-slate-900 dark:text-white shadow-sm ring-1 ring-inset ring-slate-300 dark:ring-slate-700 hover:bg-slate-50 sm:mt-0 sm:w-auto">Close</button>
                     </div>
                 </div>
             </div>
-        </section>
-        <!-- Final CTA -->
-        <section class="py-24 bg-slate-900 text-white text-center">
-            <div class="max-w-3xl mx-auto px-6">
-                <h2 class="text-3xl font-bold mb-6">Ready to scale India's growth?</h2>
-                <p class="text-slate-400 mb-10 text-lg">Join a disciplined network of verified founders and serious
-                    investors today.</p>
-                <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <button
-                        class="bg-primary hover:bg-blue-700 text-white px-10 py-4 rounded-lg font-bold transition-all">Get
-                        Started</button>
-                    <button
-                        class="bg-white/10 hover:bg-white/20 text-white px-10 py-4 rounded-lg font-bold transition-all">Contact
-                        Partnerships</button>
-                </div>
-            </div>
-        </section>
-    </main>
-    <footer class="py-12 bg-background-light dark:bg-background-dark border-t border-slate-200 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex items-center gap-2">
-                <div class="bg-slate-400 p-1 rounded-md">
-                    <svg class="w-4 h-4 text-white" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-                        <path clip-rule="evenodd"
-                            d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
-                            fill="currentColor" fill-rule="evenodd"></path>
-                    </svg>
-                </div>
-                <span class="font-bold text-slate-900 dark:text-white">FundLink</span>
-            </div>
-            <div class="flex items-center gap-8">
-                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#">Privacy Policy</a>
-                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#">Terms of Service</a>
-                <a class="text-xs text-slate-500 dark:text-slate-400 hover:text-primary transition-colors"
-                    href="#">Compliance</a>
-            </div>
-            <p class="text-xs text-slate-500 dark:text-slate-400">© 2024 FundLink India. All rights reserved.</p>
         </div>
-    </footer>
-    </footer>
+    </div>
+
+    <!-- Readiness Modal (Founder) -->
+    <div id="readiness-modal" class="relative z-[60] hidden" aria-labelledby="modal-title" role="dialog"
+        aria-modal="true">
+        <div id="readiness-backdrop"
+            class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity opacity-0 duration-300 ease-out">
+        </div>
+        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+                <div id="readiness-panel"
+                    class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-slate-900 text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-2xl opacity-0 scale-95 duration-300 ease-out border border-slate-200 dark:border-slate-800">
+                    <div class="p-6">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="size-12 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-green-600 dark:text-green-400">
+                                <span class="material-symbols-outlined text-2xl">check_circle</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold">Readiness Assessment Complete</h3>
+                                <p class="text-sm text-slate-500">AI Analyst has verified your pitch assets.</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 dark:bg-slate-800 rounded-xl p-5 mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="text-sm font-bold uppercase text-slate-400">FundLink Score</span>
+                                <span class="text-3xl font-black text-primary" id="readiness-score-val">--</span>
+                            </div>
+                            <div class="space-y-4">
+                                <div>
+                                    <p class="text-xs font-bold text-green-600 uppercase mb-1">Key Strengths</p>
+                                    <ul id="readiness-strengths"
+                                        class="text-sm list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300">
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="text-xs font-bold text-amber-600 uppercase mb-1">Critical Improvements</p>
+                                    <ul id="readiness-improvements"
+                                        class="text-sm list-disc pl-4 space-y-1 text-slate-600 dark:text-slate-300">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="close-readiness-modal"
+                            class="w-full py-3 bg-primary text-white font-bold rounded-lg hover:bg-blue-700 transition-colors">
+                            Access Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module" src="js/main.js"></script>
 </body>
 

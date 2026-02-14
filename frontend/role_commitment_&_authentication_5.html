@@ -1,12 +1,17 @@
 <!DOCTYPE html>
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>FundLink | Initial Mandate Selection Gate</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FundLink | Initial Mandate Selection Gate</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -29,7 +34,7 @@
             },
         }
     </script>
-<style type="text/tailwindcss">
+    <style type="text/tailwindcss">
         @layer utilities {
             .card-elevation {
                 box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
@@ -52,104 +57,130 @@
         }
     </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 min-h-screen flex flex-col">
-<header class="flex items-center justify-between px-8 py-5 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/80 backdrop-blur-xl sticky top-0 z-50">
-<div class="flex items-center gap-3">
-<div class="size-9 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
-<span class="material-symbols-outlined text-2xl">security</span>
-</div>
-<h2 class="text-xl font-bold tracking-tight uppercase letter-spacing-widest">FundLink</h2>
-</div>
-<div class="flex items-center gap-8">
-<nav class="hidden md:flex gap-10">
-<div class="text-xs font-bold tracking-widest text-primary border-b-2 border-primary pb-1 uppercase">1. Mandate Selection</div>
-<div class="text-xs font-bold tracking-widest text-gray-400 pb-1 uppercase">2. Identity Access</div>
-<div class="text-xs font-bold tracking-widest text-gray-400 pb-1 uppercase">3. Cryptographic Proof</div>
-</nav>
-<button class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg">terminal</span>
-<span>Support</span>
-</button>
-</div>
-</header>
-<main class="flex-grow flex flex-col items-center justify-center py-16 px-6 max-w-6xl mx-auto w-full">
-<div class="text-center mb-16 space-y-4">
-<div class="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">
-            Gateway Authorization Required
-        </div>
-<h1 class="text-5xl font-black tracking-tight mb-6">Define Your Professional Mandate</h1>
-<p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
-            FundLink operates as an asymmetric protocol. Your choice today is foundational, determining your encrypted network permissions and matching logic.
-        </p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mb-16">
-<a class="group relative card-elevation bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden p-10 flex flex-col items-center text-center cursor-pointer" href="/founder-auth">
-<div class="mandate-glow"></div>
-<div class="size-20 mb-8 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 ring-1 ring-primary/20">
-<span class="material-symbols-outlined text-5xl">rocket_launch</span>
-</div>
-<h3 class="text-2xl font-extrabold mb-4">Startup Founder</h3>
-<p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed mb-8">
-                Requesting institutional capital for high-growth ventures. Access the global network of verified LPs, VCs, and Strategic Angels.
-            </p>
-<div class="mt-auto w-full">
-<div class="py-2 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-6 group-hover:text-primary group-hover:bg-primary/5 transition-colors">
-                    Mandate: Capital Inbound
-                </div>
-<div class="flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    Initialize Protocol <span class="material-symbols-outlined text-lg">arrow_forward</span>
-</div>
-</div>
-</a>
-<a class="group relative card-elevation bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden p-10 flex flex-col items-center text-center cursor-pointer" href="/investor-auth">
-<div class="mandate-glow"></div>
-<div class="size-20 mb-8 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 ring-1 ring-primary/20">
-<span class="material-symbols-outlined text-5xl">account_balance</span>
-</div>
-<h3 class="text-2xl font-extrabold mb-4">Professional Investor</h3>
-<p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed mb-8">
-                Deploying strategic capital into pre-vetted opportunities. Access proprietary deal flow and cryptographic founder verification.
-            </p>
-<div class="mt-auto w-full">
-<div class="py-2 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-6 group-hover:text-primary group-hover:bg-primary/5 transition-colors">
-                    Mandate: Capital Deployment
-                </div>
-<div class="flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    Initialize Protocol <span class="material-symbols-outlined text-lg">arrow_forward</span>
-</div>
-</div>
-</a>
-</div>
-<div class="w-full max-w-2xl flex flex-col items-center gap-8">
-<div class="bg-red-50/50 dark:bg-red-950/10 border border-red-100 dark:border-red-900/20 p-6 rounded-xl flex items-start gap-4">
-<span class="material-symbols-outlined text-red-600 dark:text-red-500 mt-0.5">verified_user</span>
-<div>
-<p class="text-sm font-black text-red-800 dark:text-red-400 uppercase tracking-widest mb-2">Permanent Mandate Lock</p>
-<p class="text-sm text-red-700/80 dark:text-red-400/70 leading-relaxed">
-                    This selection is <strong>cryptographically irreversible</strong>. To maintain the integrity of our asymmetric environment, accounts cannot pivot between mandates. Ensure your selection matches your professional legal standing.
-                </p>
-</div>
-</div>
-<div class="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">
-<span>Secure Handshake</span>
-<span class="size-1 bg-gray-300 dark:bg-gray-700 rounded-full"></span>
-<span>Zero-Knowledge Proofs</span>
-<span class="size-1 bg-gray-300 dark:bg-gray-700 rounded-full"></span>
-<span>No Public Access</span>
-</div>
-</div>
-</main>
-<footer class="py-10 px-8 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50">
-<div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-<p class="text-[11px] font-medium text-gray-500 uppercase tracking-wider">
-            © 2024 FundLink Technologies. Protected by AES-256 Asymmetric Encryption Protocols.
-        </p>
-<div class="flex gap-8">
-<a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">Privacy Protocol</a>
-<a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">Legal Mandate</a>
-<a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors" href="#">System Status</a>
-</div>
-</div>
-</footer>
 
-</body></html>
+<body class="bg-background-light dark:bg-background-dark text-[#0d121b] dark:text-gray-100 min-h-screen flex flex-col">
+    <header
+        class="flex items-center justify-between px-8 py-5 border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <div
+                class="size-9 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-2xl">security</span>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight uppercase letter-spacing-widest">FundLink</h2>
+        </div>
+        <div class="flex items-center gap-8">
+            <nav class="hidden md:flex gap-10">
+                <div class="text-xs font-bold tracking-widest text-primary border-b-2 border-primary pb-1 uppercase">1.
+                    Mandate Selection</div>
+                <div class="text-xs font-bold tracking-widest text-gray-400 pb-1 uppercase">2. Identity Access</div>
+                <div class="text-xs font-bold tracking-widest text-gray-400 pb-1 uppercase">3. Cryptographic Proof</div>
+            </nav>
+            <button
+                class="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-gray-500 hover:text-primary transition-colors">
+                <span class="material-symbols-outlined text-lg">terminal</span>
+                <span>Support</span>
+            </button>
+        </div>
+    </header>
+    <main class="flex-grow flex flex-col items-center justify-center py-16 px-6 max-w-6xl mx-auto w-full">
+        <div class="text-center mb-16 space-y-4">
+            <div
+                class="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-4">
+                Gateway Authorization Required
+            </div>
+            <h1 class="text-5xl font-black tracking-tight mb-6">Define Your Professional Mandate</h1>
+            <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed font-light">
+                FundLink operates as an asymmetric protocol. Your choice today is foundational, determining your
+                encrypted network permissions and matching logic.
+            </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-5xl mb-16">
+            <button onclick="window.location.hash='#founder-auth'"
+                class="group relative card-elevation bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden p-10 flex flex-col items-center text-center cursor-pointer w-full text-left">
+                <div class="mandate-glow"></div>
+                <div
+                    class="size-20 mb-8 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 ring-1 ring-primary/20">
+                    <span class="material-symbols-outlined text-5xl">rocket_launch</span>
+                </div>
+                <h3 class="text-2xl font-extrabold mb-4">Startup Founder</h3>
+                <p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed mb-8">
+                    Requesting institutional capital for high-growth ventures. Access the global network of verified
+                    LPs, VCs, and Strategic Angels.
+                </p>
+                <div class="mt-auto w-full">
+                    <div
+                        class="py-2 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-6 group-hover:text-primary group-hover:bg-primary/5 transition-colors">
+                        Mandate: Capital Inbound
+                    </div>
+                    <div
+                        class="flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        Initialize Protocol <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </div>
+                </div>
+            </button>
+            <button onclick="window.location.hash='#investor-auth'"
+                class="group relative card-elevation bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden p-10 flex flex-col items-center text-center cursor-pointer w-full text-left">
+                <div class="mandate-glow"></div>
+                <div
+                    class="size-20 mb-8 rounded-2xl bg-primary/5 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500 ring-1 ring-primary/20">
+                    <span class="material-symbols-outlined text-5xl">account_balance</span>
+                </div>
+                <h3 class="text-2xl font-extrabold mb-4">Professional Investor</h3>
+                <p class="text-gray-500 dark:text-gray-400 text-base leading-relaxed mb-8">
+                    Deploying strategic capital into pre-vetted opportunities. Access proprietary deal flow and
+                    cryptographic founder verification.
+                </p>
+                <div class="mt-auto w-full">
+                    <div
+                        class="py-2 px-4 bg-gray-50 dark:bg-gray-800/50 rounded-lg text-[11px] font-bold uppercase tracking-[0.15em] text-gray-400 mb-6 group-hover:text-primary group-hover:bg-primary/5 transition-colors">
+                        Mandate: Capital Deployment
+                    </div>
+                    <div
+                        class="flex items-center justify-center gap-2 text-primary font-bold text-sm uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        Initialize Protocol <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </div>
+                </div>
+            </button>
+        </div>
+        <div class="w-full max-w-2xl flex flex-col items-center gap-8">
+            <div
+                class="bg-red-50/50 dark:bg-red-950/10 border border-red-100 dark:border-red-900/20 p-6 rounded-xl flex items-start gap-4">
+                <span class="material-symbols-outlined text-red-600 dark:text-red-500 mt-0.5">verified_user</span>
+                <div>
+                    <p class="text-sm font-black text-red-800 dark:text-red-400 uppercase tracking-widest mb-2">
+                        Permanent Mandate Lock</p>
+                    <p class="text-sm text-red-700/80 dark:text-red-400/70 leading-relaxed">
+                        This selection is <strong>cryptographically irreversible</strong>. To maintain the integrity of
+                        our asymmetric environment, accounts cannot pivot between mandates. Ensure your selection
+                        matches your professional legal standing.
+                    </p>
+                </div>
+            </div>
+            <div class="flex items-center gap-4 text-[10px] font-bold text-gray-400 uppercase tracking-[0.3em]">
+                <span>Secure Handshake</span>
+                <span class="size-1 bg-gray-300 dark:bg-gray-700 rounded-full"></span>
+                <span>Zero-Knowledge Proofs</span>
+                <span class="size-1 bg-gray-300 dark:bg-gray-700 rounded-full"></span>
+                <span>No Public Access</span>
+            </div>
+        </div>
+    </main>
+    <footer class="py-10 px-8 border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-background-dark/50">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-[11px] font-medium text-gray-500 uppercase tracking-wider">
+                © 2024 FundLink Technologies. Protected by AES-256 Asymmetric Encryption Protocols.
+            </p>
+            <div class="flex gap-8">
+                <a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors"
+                    href="#">Privacy Protocol</a>
+                <a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors"
+                    href="#">Legal Mandate</a>
+                <a class="text-[11px] font-bold uppercase tracking-widest text-gray-400 hover:text-primary transition-colors"
+                    href="#">System Status</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

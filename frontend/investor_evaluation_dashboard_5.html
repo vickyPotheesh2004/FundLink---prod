@@ -64,13 +64,15 @@
                     </div>
                     <nav class="hidden md:flex items-center gap-6">
                         <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
-                            href="#">Evaluation Feed</a>
+                            href="#investor-feed">Evaluation Feed</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="#">My Requests</a>
+                            href="#investor-requests">My Requests</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="#">Portfolio</a>
+                            href="#investor-portfolio">Portfolio</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
-                            href="#">Investment Thesis</a>
+                            href="#investor-thesis">Investment Thesis</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="#investor-profile">Profile</a>
                     </nav>
                 </div>
                 <div class="flex flex-1 justify-end gap-6 items-center">
@@ -86,12 +88,15 @@
                             <p class="text-[10px] text-[#4c669a] dark:text-slate-400 uppercase tracking-widest">LP Tier
                                 1</p>
                         </div>
-                        <div data-action="logout"
-                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800 cursor-pointer transition-transform hover:scale-105"
-                            title="Sign Out">
+                        <div
+                            class="bg-slate-200 dark:bg-slate-700 rounded-full size-10 overflow-hidden border-2 border-white dark:border-slate-800">
                             <img class="w-full h-full object-cover" data-alt="Investor profile avatar"
                                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoaVfnYb7X8Sy9sQLjhHbify2C4C83lW72rPan9AJZu2tMaW5U-8uqQO15s55hVBnmnEF2tzMITBkea_KON2CKcL7E8HGOFZfa3zUElWH-re94JKAWmGJRa2NIlESJnlVdYaGuUbbDdFjznSej0rEmBM2g6TY-y92SnaklY_nUzZC2u5P1KxTRHQk0ve1HZ9BOm_vjk3fKpJQslt3-rXtLbdZEele_6a5_WzoRBHKY7GZk9Ngjphl8DkVa6b_JFi0Gz8TbbQq92rU" />
                         </div>
+                        <button onclick="Auth.logout()" class="p-2 text-slate-400 hover:text-red-500 transition-colors"
+                            title="Sign Out">
+                            <span class="material-symbols-outlined">logout</span>
+                        </button>
                     </div>
                 </div>
             </header>
@@ -99,64 +104,265 @@
                 <!-- Left Sidebar: Filters -->
                 <aside
                     class="w-72 bg-white dark:bg-slate-900 border-r border-[#e7ebf3] dark:border-slate-800 p-6 hidden xl:block overflow-y-auto">
-                    <div class="space-y-8">
+                    <!-- Filter Header with Active Count -->
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">Filters
+                        </h2>
+                        <span id="active-filter-count"
+                            class="hidden px-2 py-0.5 bg-primary text-white text-[10px] font-bold rounded-full">0</span>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- AI Match Score Sort -->
                         <div>
                             <h3
                                 class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4">
-                                Investment Thesis</h3>
-                            <div class="space-y-2">
+                                AI Match Scoring</h3>
+                            <button id="btn-sort-match" onclick="window.sortCardsByMatchScore()"
+                                class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary/10 border border-primary/30 rounded-lg text-sm font-bold text-primary hover:bg-primary hover:text-white transition-all">
+                                <span class="material-symbols-outlined text-lg">sort</span>
+                                Sort by Match Score
+                            </button>
+                            <p class="text-[10px] text-slate-400 mt-2 text-center">Arranges deals from highest to lowest
+                                match</p>
+                        </div>
+
+                        <!-- Investment Thesis - Multi-select Checkboxes -->
+                        <div>
+                            <h3
+                                class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4 flex items-center justify-between">
+                                Investment Thesis
+                                <span id="thesis-count" class="text-[10px] text-primary font-normal">0 selected</span>
+                            </h3>
+                            <div class="space-y-2" id="thesis-checkboxes">
                                 <label
-                                    class="flex items-center gap-3 p-2 rounded-lg bg-primary/5 border border-primary/20 cursor-pointer">
-                                    <span class="material-symbols-outlined text-primary">target</span>
+                                    class="thesis-option flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border border-transparent"
+                                    data-thesis="b2b-saas">
+                                    <input type="checkbox" class="thesis-checkbox sr-only" value="b2b-saas"
+                                        onchange="window.updateThesisSelection(this)">
+                                    <span
+                                        class="checkbox-indicator w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                        <span class="material-symbols-outlined text-white text-sm hidden">check</span>
+                                    </span>
+                                    <span class="material-symbols-outlined text-slate-400 text-lg">cloud</span>
                                     <span class="text-sm font-medium">B2B SaaS</span>
                                 </label>
                                 <label
-                                    class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
-                                    <span class="material-symbols-outlined text-slate-400">payments</span>
+                                    class="thesis-option flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border border-transparent"
+                                    data-thesis="payments">
+                                    <input type="checkbox" class="thesis-checkbox sr-only" value="payments"
+                                        onchange="window.updateThesisSelection(this)">
+                                    <span
+                                        class="checkbox-indicator w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                        <span class="material-symbols-outlined text-white text-sm hidden">check</span>
+                                    </span>
+                                    <span class="material-symbols-outlined text-slate-400 text-lg">payments</span>
+                                    <span class="text-sm font-medium">Payments</span>
+                                </label>
+                                <label
+                                    class="thesis-option flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border border-transparent"
+                                    data-thesis="fintech">
+                                    <input type="checkbox" class="thesis-checkbox sr-only" value="fintech"
+                                        onchange="window.updateThesisSelection(this)">
+                                    <span
+                                        class="checkbox-indicator w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                        <span class="material-symbols-outlined text-white text-sm hidden">check</span>
+                                    </span>
+                                    <span
+                                        class="material-symbols-outlined text-slate-400 text-lg">account_balance</span>
                                     <span class="text-sm font-medium">Fintech</span>
                                 </label>
                                 <label
-                                    class="flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
-                                    <span class="material-symbols-outlined text-slate-400">eco</span>
+                                    class="thesis-option flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border border-transparent"
+                                    data-thesis="eco">
+                                    <input type="checkbox" class="thesis-checkbox sr-only" value="eco"
+                                        onchange="window.updateThesisSelection(this)">
+                                    <span
+                                        class="checkbox-indicator w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                        <span class="material-symbols-outlined text-white text-sm hidden">check</span>
+                                    </span>
+                                    <span class="material-symbols-outlined text-slate-400 text-lg">eco</span>
+                                    <span class="text-sm font-medium">Eco</span>
+                                </label>
+                                <label
+                                    class="thesis-option flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors border border-transparent"
+                                    data-thesis="sustainability">
+                                    <input type="checkbox" class="thesis-checkbox sr-only" value="sustainability"
+                                        onchange="window.updateThesisSelection(this)">
+                                    <span
+                                        class="checkbox-indicator w-5 h-5 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                        <span class="material-symbols-outlined text-white text-sm hidden">check</span>
+                                    </span>
+                                    <span class="material-symbols-outlined text-slate-400 text-lg">forest</span>
                                     <span class="text-sm font-medium">Sustainability</span>
                                 </label>
                             </div>
                         </div>
+
+                        <!-- Minimum AI Score - Preset Buttons with Slider -->
                         <div>
                             <h3
                                 class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4">
                                 Minimum AI Score</h3>
-                            <input
-                                class="w-full h-1.5 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
-                                type="range" value="80" />
-                            <div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400">
-                                <span>50%</span>
-                                <span class="text-primary">80%</span>
-                                <span>100%</span>
+                            <!-- Preset Buttons -->
+                            <div class="flex gap-2 mb-3">
+                                <button onclick="window.setMinScore(50)"
+                                    class="score-preset flex-1 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary transition-all"
+                                    data-score="50">50%</button>
+                                <button onclick="window.setMinScore(80)"
+                                    class="score-preset flex-1 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary transition-all"
+                                    data-score="80">80%</button>
+                                <button onclick="window.setMinScore(100)"
+                                    class="score-preset flex-1 py-2 text-xs font-bold rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white hover:border-primary transition-all"
+                                    data-score="100">100%</button>
+                            </div>
+                            <!-- Slider with Gradient -->
+                            <div class="px-2">
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-0 h-2 rounded-lg bg-gradient-to-r from-red-400 via-yellow-400 to-green-400 opacity-30">
+                                    </div>
+                                    <input id="filter-min-score" type="range" min="50" max="100" value="50"
+                                        oninput="window.handleScoreSlider(this.value)"
+                                        class="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary relative z-10" />
+                                </div>
+                                <div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400">
+                                    <span>50%</span>
+                                    <span id="min-score-display" class="text-primary text-sm">50%</span>
+                                    <span>100%</span>
+                                </div>
                             </div>
                         </div>
+
+                        <!-- Stage Select - Multi-select Dropdown -->
+                        <div>
+                            <h3
+                                class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4 flex items-center justify-between">
+                                Investment Stage
+                                <span id="stage-count" class="text-[10px] text-primary font-normal">All</span>
+                            </h3>
+                            <div class="relative">
+                                <button id="stage-dropdown-btn" onclick="window.toggleStageDropdown()"
+                                    class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium text-left flex items-center justify-between focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer">
+                                    <span id="stage-display">All Stages</span>
+                                    <span class="material-symbols-outlined text-lg transition-transform"
+                                        id="stage-dropdown-icon">expand_more</span>
+                                </button>
+                                <!-- Dropdown Panel -->
+                                <div id="stage-dropdown-panel"
+                                    class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg shadow-xl z-20 p-2">
+                                    <div class="flex gap-2 mb-2 pb-2 border-b border-slate-100 dark:border-slate-700">
+                                        <button onclick="window.selectAllStages()"
+                                            class="flex-1 py-1.5 text-[10px] font-bold text-primary hover:bg-primary/10 rounded transition-colors">Select
+                                            All</button>
+                                        <button onclick="window.clearAllStages()"
+                                            class="flex-1 py-1.5 text-[10px] font-bold text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 rounded transition-colors">Clear
+                                            All</button>
+                                    </div>
+                                    <div class="space-y-1" id="stage-checkboxes">
+                                        <label
+                                            class="stage-option flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                            <input type="checkbox" class="stage-checkbox sr-only" value="pre-seed"
+                                                onchange="window.updateStageSelection()">
+                                            <span
+                                                class="checkbox-indicator w-4 h-4 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                                <span
+                                                    class="material-symbols-outlined text-white text-xs hidden">check</span>
+                                            </span>
+                                            <span class="text-sm">Pre-Seed</span>
+                                        </label>
+                                        <label
+                                            class="stage-option flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                            <input type="checkbox" class="stage-checkbox sr-only" value="seed"
+                                                onchange="window.updateStageSelection()">
+                                            <span
+                                                class="checkbox-indicator w-4 h-4 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                                <span
+                                                    class="material-symbols-outlined text-white text-xs hidden">check</span>
+                                            </span>
+                                            <span class="text-sm">Seed</span>
+                                        </label>
+                                        <label
+                                            class="stage-option flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                            <input type="checkbox" class="stage-checkbox sr-only" value="series-a"
+                                                onchange="window.updateStageSelection()">
+                                            <span
+                                                class="checkbox-indicator w-4 h-4 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                                <span
+                                                    class="material-symbols-outlined text-white text-xs hidden">check</span>
+                                            </span>
+                                            <span class="text-sm">Series A</span>
+                                        </label>
+                                        <label
+                                            class="stage-option flex items-center gap-2 p-2 rounded cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
+                                            <input type="checkbox" class="stage-checkbox sr-only" value="series-b"
+                                                onchange="window.updateStageSelection()">
+                                            <span
+                                                class="checkbox-indicator w-4 h-4 rounded border-2 border-slate-300 dark:border-slate-600 flex items-center justify-center transition-all">
+                                                <span
+                                                    class="material-symbols-outlined text-white text-xs hidden">check</span>
+                                            </span>
+                                            <span class="text-sm">Series B</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Selected Stage Tags -->
+                            <div id="stage-tags" class="flex flex-wrap gap-1 mt-2"></div>
+                        </div>
+
+                        <!-- Location Filter -->
                         <div>
                             <h3
                                 class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4">
-                                Stage Select</h3>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button
-                                    class="px-3 py-2 text-xs font-semibold rounded border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white transition-colors">Pre-Seed</button>
-                                <button
-                                    class="px-3 py-2 text-xs font-semibold rounded bg-primary text-white">Seed</button>
-                                <button
-                                    class="px-3 py-2 text-xs font-semibold rounded border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white transition-colors">Series
-                                    A</button>
-                                <button
-                                    class="px-3 py-2 text-xs font-semibold rounded border border-slate-200 dark:border-slate-700 hover:bg-primary hover:text-white transition-colors">Series
-                                    B</button>
-                            </div>
+                                Location</h3>
+                            <select id="filter-location" onchange="window.applyFilters()"
+                                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer">
+                                <option value="all">All Regions</option>
+                                <option value="north-am">North America</option>
+                                <option value="emea">Europe (EMEA)</option>
+                                <option value="dach">DACH Region</option>
+                                <option value="nordics">Nordics</option>
+                                <option value="apac">Asia Pacific</option>
+                                <option value="latam">Latin America</option>
+                            </select>
                         </div>
-                        <div class="pt-6 border-t border-slate-100 dark:border-slate-800">
+
+                        <!-- Ticket Size Filter -->
+                        <div>
+                            <h3
+                                class="text-xs font-bold text-[#4c669a] dark:text-slate-500 uppercase tracking-wider mb-4">
+                                Ticket Size</h3>
+                            <select id="filter-ticket" onchange="window.applyFilters()"
+                                class="w-full px-4 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-medium focus:ring-2 focus:ring-primary focus:border-primary cursor-pointer">
+                                <option value="all">All Sizes</option>
+                                <option value="micro">Under $500K</option>
+                                <option value="seed-range">$500K - $2M</option>
+                                <option value="series-a-range">$2M - $10M</option>
+                                <option value="growth">$10M+</option>
+                            </select>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 space-y-2">
+                            <button onclick="window.applyFilters()"
+                                class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-lg text-sm font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-primary/20">
+                                <span class="material-symbols-outlined text-lg">filter_alt</span>
+                                Apply Filters
+                            </button>
+                            <button onclick="window.resetFilters()"
+                                class="w-full flex items-center justify-center gap-2 px-4 py-2.5 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-sm font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors">
+                                <span class="material-symbols-outlined text-lg">refresh</span>
+                                Clear All Filters
+                            </button>
+                        </div>
+
+                        <!-- Info Box -->
+                        <div class="pt-2">
                             <div
                                 class="bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
                                 <span class="material-symbols-outlined text-primary mb-2">info</span>
-                                <p class="text-xs leading-relaxed text-[#4c669a] dark:text-slate-400"> Identities are
+                                <p class="text-xs leading-relaxed text-[#4c669a] dark:text-slate-400">Identities are
                                     100% anonymous until mutual interest is confirmed. Founder names and logos are
                                     hidden.</p>
                             </div>
@@ -174,8 +380,8 @@
                                     active investment criteria.</p>
                             </div>
                             <div class="flex gap-2">
-                                <button id="btn-sort-match" onclick="window.sortCardsByMatchScore()"
-                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm hover:bg-slate-50 transition-colors">
+                                <button
+                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm">
                                     <span class="material-symbols-outlined text-sm">sort</span>
                                     Sort: Highest Match
                                 </button>
@@ -187,10 +393,10 @@
                             </div>
                         </div>
                         <!-- Grid of Cards -->
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div id="deals-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- Card 1 -->
-                            <div
-                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+                            <div class="deal-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group"
+                                data-domain="fintech" data-stage="seed" data-location="emea" data-ticket="seed-range">
                                 <div class="p-6 flex-1">
                                     <div class="flex justify-between items-start mb-6">
                                         <div>
@@ -243,108 +449,23 @@
                                 </div>
                                 <div
                                     class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
-                                    <button onclick="openAIReport('Project Delta')"
+                                    <button onclick="window.openAIReport('Project Delta')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-bold text-[#0d121b] dark:text-white hover:bg-white dark:hover:bg-slate-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">analytics</span>
                                         Analyze AI
                                     </button>
                                     <button id="btn-connect-delta"
-                                        onclick="connectWithStartup('btn-connect-delta', 'Project Delta')"
+                                        onclick="window.connectWithStartup('btn-connect-delta', 'Project Delta')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">handshake</span>
                                         Connect
                                     </button>
-                                    <script type="module">
-                                        import { AIClient } from '../../js/modules/AIClient.js';
-                                        import { Auth } from '../../js/modules/auth.js';
-
-                                        if (!Auth.isLoggedIn() || Auth.getRole() !== 'INVESTOR') {
-                                            alert('Access Restricted: Investor Account Required');
-                                            window.location.href = 'role_commitment_&_authentication_1.html';
-                                        }
-
-                                        window.openAIReport = async (startupName) => {
-                                            const modal = document.getElementById('ai-report-modal');
-                                            const backdrop = document.getElementById('ai-modal-backdrop');
-                                            const panel = document.getElementById('ai-modal-panel');
-                                            const title = document.getElementById('ai-report-title');
-                                            const scoreVal = document.getElementById('ai-score-val');
-                                            const thesis = document.getElementById('ai-thesis');
-
-                                            // Show Modal (Loading State)
-                                            modal.classList.remove('hidden');
-                                            setTimeout(() => {
-                                                backdrop.classList.remove('opacity-0');
-                                                panel.classList.remove('opacity-0', 'scale-95');
-                                            }, 10);
-
-                                            title.innerText = `Analyzing ${startupName}...`;
-
-                                            // Call AI
-                                            const report = await AIClient.generateSeniorAnalystReport(startupName);
-
-                                            // Update UI with Report Data
-                                            title.innerText = `AI Due Diligence: ${startupName}`;
-                                            scoreVal.innerText = Math.floor(Math.random() * (98 - 75) + 75); // Dynamic mock score
-                                            thesis.innerText = `"${report.executive_framing.solution_thesis}"`;
-
-                                            // PESTEL / SWOT would be populated here dynamically in a real app
-                                            // For demo, we leave the static placeholders or update simple text
-                                        };
-
-                                        window.closeAIReport = () => {
-                                            const modal = document.getElementById('ai-report-modal');
-                                            const backdrop = document.getElementById('ai-modal-backdrop');
-                                            const panel = document.getElementById('ai-modal-panel');
-
-                                            backdrop.classList.add('opacity-0');
-                                            panel.classList.add('opacity-0', 'scale-95');
-                                            setTimeout(() => {
-                                                modal.classList.add('hidden');
-                                            }, 300);
-                                        };
-
-                                        window.connectWithStartup = (btnId, startupName) => {
-                                            const btn = document.getElementById(btnId);
-                                            btn.innerText = "Request Sent";
-                                            btn.classList.remove('bg-primary', 'hover:bg-blue-700');
-                                            btn.classList.add('bg-slate-400', 'cursor-not-allowed');
-                                            btn.disabled = true;
-
-                                            // Use Auth module to send request
-                                            Auth.sendConnectionRequest('INVESTOR', 'FOUNDER'); // Target 'FOUNDER' generic for demo
-                                            alert(`Connection request sending to ${startupName}...`);
-                                        };
-
-                                        // Sorting Logic (Global)
-                                        window.sortCardsByMatchScore = () => {
-                                            const container = document.querySelector('.grid.grid-cols-1.lg\\:grid-cols-2');
-                                            if (!container) return;
-                                            const cards = Array.from(container.children);
-
-                                            cards.sort((a, b) => {
-                                                const scoreAEl = a.querySelector('.match-score-radial span.text-primary');
-                                                const scoreBEl = b.querySelector('.match-score-radial span.text-primary');
-                                                if (!scoreAEl || !scoreBEl) return 0;
-
-                                                const scoreA = parseInt(scoreAEl.innerText.replace('%', ''));
-                                                const scoreB = parseInt(scoreBEl.innerText.replace('%', ''));
-                                                return scoreB - scoreA; // Descending
-                                            });
-
-                                            container.innerHTML = '';
-                                            cards.forEach(card => container.appendChild(card));
-
-                                            // Visual Feedback
-                                            const sortBtn = document.getElementById('btn-sort-match');
-                                            if (sortBtn) sortBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Sorted: Highest Match';
-                                        };
-                                    </script>
                                 </div>
                             </div>
                             <!-- Card 2 -->
-                            <div
-                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+                            <div class="deal-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group"
+                                data-domain="industry-ai" data-stage="series-a" data-location="dach"
+                                data-ticket="series-a-range">
                                 <div class="p-6 flex-1">
                                     <div class="flex justify-between items-start mb-6">
                                         <div>
@@ -399,12 +520,13 @@
                                 </div>
                                 <div
                                     class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
-                                    <button onclick="openAIReport('Project Sigma')"
+                                    <button onclick="window.openAIReport('Project Sigma')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-bold text-[#0d121b] dark:text-white hover:bg-white dark:hover:bg-slate-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">analytics</span>
                                         Analyze AI
                                     </button>
-                                    <button
+                                    <button id="btn-connect-sigma"
+                                        onclick="window.connectWithStartup('btn-connect-sigma', 'Project Sigma')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">handshake</span>
                                         Connect
@@ -412,8 +534,9 @@
                                 </div>
                             </div>
                             <!-- Card 3 -->
-                            <div
-                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+                            <div class="deal-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group"
+                                data-domain="healthcare" data-stage="pre-seed" data-location="north-am"
+                                data-ticket="micro">
                                 <div class="p-6 flex-1">
                                     <div class="flex justify-between items-start mb-6">
                                         <div>
@@ -466,12 +589,13 @@
                                 </div>
                                 <div
                                     class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
-                                    <button onclick="openAIReport('Project Alpha')"
+                                    <button onclick="window.openAIReport('Project Alpha')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-bold text-[#0d121b] dark:text-white hover:bg-white dark:hover:bg-slate-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">analytics</span>
                                         Analyze AI
                                     </button>
-                                    <button
+                                    <button id="btn-connect-alpha"
+                                        onclick="window.connectWithStartup('btn-connect-alpha', 'Project Alpha')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">handshake</span>
                                         Connect
@@ -479,8 +603,9 @@
                                 </div>
                             </div>
                             <!-- Card 4 -->
-                            <div
-                                class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group">
+                            <div class="deal-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group"
+                                data-domain="sustainability" data-stage="seed" data-location="nordics"
+                                data-ticket="seed-range">
                                 <div class="p-6 flex-1">
                                     <div class="flex justify-between items-start mb-6">
                                         <div>
@@ -533,12 +658,13 @@
                                 </div>
                                 <div
                                     class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
-                                    <button onclick="openAIReport('Project Gamma')"
+                                    <button onclick="window.openAIReport('Project Gamma')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-bold text-[#0d121b] dark:text-white hover:bg-white dark:hover:bg-slate-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">analytics</span>
                                         Analyze AI
                                     </button>
-                                    <button
+                                    <button id="btn-connect-gamma"
+                                        onclick="window.connectWithStartup('btn-connect-gamma', 'Project Gamma')"
                                         class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
                                         <span class="material-symbols-outlined text-lg">handshake</span>
                                         Connect
@@ -624,295 +750,6 @@
             </footer>
         </div>
     </div>
-    </footer>
-
-    <!-- AI Senior Analyst Modal -->
-    <div id="ai-report-modal" class="fixed inset-0 z-50 hidden" aria-labelledby="modal-title" role="dialog"
-        aria-modal="true">
-        <!-- Backdrop -->
-        <div class="fixed inset-0 bg-slate-900/80 backdrop-blur-sm transition-opacity opacity-0" id="ai-modal-backdrop">
-        </div>
-
-        <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
-            <div class="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-                <!-- Modal Panel -->
-                <div class="relative transform overflow-hidden rounded-2xl bg-white dark:bg-[#0f172a] text-left shadow-2xl transition-all sm:my-8 sm:w-full sm:max-w-4xl opacity-0 scale-95"
-                    id="ai-modal-panel">
-
-                    <!-- Header -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-between items-center">
-                        <div class="flex items-center gap-3">
-                            <div class="p-2 bg-primary/10 rounded-lg">
-                                <span class="material-symbols-outlined text-primary">psychology</span>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-slate-900 dark:text-white" id="ai-report-title">AI Due
-                                    Diligence Report</h3>
-                                <p class="text-xs text-slate-500 uppercase tracking-widest font-semibold">Senior Analyst
-                                    Tier • <span class="text-green-600">Verified Data</span></p>
-                            </div>
-                        </div>
-                        <button onclick="closeAIReport()" class="text-slate-400 hover:text-slate-500 transition-colors">
-                            <span class="material-symbols-outlined">close</span>
-                        </button>
-                    </div>
-
-                    <!-- Content Grid -->
-                    <div class="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
-
-                        <!-- Left Col: Metrics -->
-                        <div class="space-y-8">
-                            <!-- Overall Score -->
-                            <div class="text-center">
-                                <div class="relative inline-flex items-center justify-center">
-                                    <svg class="w-32 h-32 transform -rotate-90">
-                                        <circle cx="64" cy="64" r="56" stroke="currentColor" stroke-width="8"
-                                            fill="transparent" class="text-slate-100 dark:text-slate-800" />
-                                        <circle id="ai-score-ring" cx="64" cy="64" r="56" stroke="currentColor"
-                                            stroke-width="8" fill="transparent" class="text-primary"
-                                            stroke-dasharray="351.86" stroke-dashoffset="35.18"
-                                            stroke-linecap="round" />
-                                    </svg>
-                                    <div class="absolute flex flex-col items-center">
-                                        <span class="text-3xl font-black text-slate-900 dark:text-white"
-                                            id="ai-score-val">94</span>
-                                        <span class="text-[10px] uppercase font-bold text-slate-400">Confidence</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Key Metrics Bars -->
-                            <div class="space-y-4">
-                                <div>
-                                    <div
-                                        class="flex justify-between text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">
-                                        <span>Market Validation</span>
-                                        <span class="text-green-500">Strong</span>
-                                    </div>
-                                    <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-green-500 w-[85%]"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        class="flex justify-between text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">
-                                        <span>Tech Moat</span>
-                                        <span class="text-amber-500">Moderate</span>
-                                    </div>
-                                    <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-amber-500 w-[60%]"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        class="flex justify-between text-xs font-semibold mb-1 text-slate-600 dark:text-slate-300">
-                                        <span>Team Velocity</span>
-                                        <span class="text-blue-500">Exceptional</span>
-                                    </div>
-                                    <div class="h-2 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                                        <div class="h-full bg-blue-500 w-[95%]"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Risk Status -->
-                            <div
-                                class="bg-slate-50 dark:bg-slate-800/50 rounded-xl p-4 border border-slate-100 dark:border-slate-800">
-                                <h4 class="text-xs font-bold text-slate-400 uppercase mb-3">Risk Assessment</h4>
-                                <div class="flex flex-wrap gap-2">
-                                    <span
-                                        class="px-2 py-1 rounded bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-[10px] font-bold border border-green-200 dark:border-green-800">Regulatory:
-                                        Low</span>
-                                    <span
-                                        class="px-2 py-1 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 text-[10px] font-bold border border-amber-200 dark:border-amber-800">Execution:
-                                        Med</span>
-                                    <span
-                                        class="px-2 py-1 rounded bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-[10px] font-bold border border-red-200 dark:border-red-800">Dependencies:
-                                        High</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right Col: Analysis Text -->
-                        <div class="lg:col-span-2 space-y-6">
-                            <!-- Thesis -->
-                            <div>
-                                <h4
-                                    class="flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-white uppercase mb-2">
-                                    <span class="material-symbols-outlined text-purple-500">auto_awesome</span>
-                                    Investment Thesis
-                                </h4>
-                                <p class="text-sm leading-relaxed text-slate-600 dark:text-slate-300 bg-purple-50 dark:bg-purple-900/10 p-4 rounded-xl border border-purple-100 dark:border-purple-900/50 italic"
-                                    id="ai-thesis">
-                                    "Project Delta represents a high-conviction bet on the inevitable fragmentation of
-                                    cross-border payment rails. While early, the team's velocity suggests they can
-                                    outpace incumbents before regulatory moats harden."
-                                </p>
-                            </div>
-
-                            <!-- SWOT Matrix -->
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-900 dark:text-white uppercase mb-3">SWOT
-                                    Analysis</h4>
-                                <div class="grid grid-cols-2 gap-4">
-                                    <!-- S -->
-                                    <div
-                                        class="p-4 bg-green-50 dark:bg-slate-800/50 rounded-lg border-l-4 border-green-500">
-                                        <h5 class="text-xs font-bold text-green-700 dark:text-green-400 mb-1">STRENGTHS
-                                        </h5>
-                                        <ul class="text-xs text-slate-600 dark:text-slate-400 list-disc pl-4 space-y-1"
-                                            id="ai-swot-s">
-                                            <li>Proprietary liquidity pooling algo</li>
-                                            <li>2 former PayPal engineers</li>
-                                        </ul>
-                                    </div>
-                                    <!-- W -->
-                                    <div
-                                        class="p-4 bg-amber-50 dark:bg-slate-800/50 rounded-lg border-l-4 border-amber-500">
-                                        <h5 class="text-xs font-bold text-amber-700 dark:text-amber-400 mb-1">WEAKNESSES
-                                        </h5>
-                                        <ul class="text-xs text-slate-600 dark:text-slate-400 list-disc pl-4 space-y-1"
-                                            id="ai-swot-w">
-                                            <li>High dependency on partner banks</li>
-                                            <li>Short runway (<6 months)</li>
-                                        </ul>
-                                    </div>
-                                    <!-- O -->
-                                    <div
-                                        class="p-4 bg-blue-50 dark:bg-slate-800/50 rounded-lg border-l-4 border-blue-500">
-                                        <h5 class="text-xs font-bold text-blue-700 dark:text-blue-400 mb-1">
-                                            OPPORTUNITIES</h5>
-                                        <ul class="text-xs text-slate-600 dark:text-slate-400 list-disc pl-4 space-y-1"
-                                            id="ai-swot-o">
-                                            <li>Expansion to SE Asia markets</li>
-                                            <li>White-label API licensing</li>
-                                        </ul>
-                                    </div>
-                                    <!-- T -->
-                                    <div
-                                        class="p-4 bg-red-50 dark:bg-slate-800/50 rounded-lg border-l-4 border-red-500">
-                                        <h5 class="text-xs font-bold text-red-700 dark:text-red-400 mb-1">THREATS</h5>
-                                        <ul class="text-xs text-slate-600 dark:text-slate-400 list-disc pl-4 space-y-1"
-                                            id="ai-swot-t">
-                                            <li>Regulatory crackdown on crypto rails</li>
-                                            <li>Stripe entering niche</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Footer / Actions -->
-                    <div
-                        class="bg-slate-50 dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-6 py-4 flex justify-end gap-3">
-                        <button onclick="closeAIReport()"
-                            class="px-4 py-2 text-sm font-semibold text-slate-600 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 transition-colors">Close</button>
-                        <button
-                            class="px-4 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-sm font-bold rounded-lg shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
-                            <span class="material-symbols-outlined text-lg">download</span>
-                            Download Full PDF
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Modal Logic
-        const modal = document.getElementById('ai-report-modal');
-        const backdrop = document.getElementById('ai-modal-backdrop');
-        const panel = document.getElementById('ai-modal-panel');
-
-        const projectData = {
-            'Project Delta': {
-                thesis: "Project Delta represents a high-conviction bet on the inevitable fragmentation of cross-border payment rails. While early, the team's velocity suggests they can outpace incumbents before regulatory moats harden.",
-                swot: {
-                    s: ["Proprietary liquidity pooling algo", "2 former PayPal engineers"],
-                    w: ["High dependency on partner banks", "Short runway (<6 months)"],
-                    o: ["Expansion to SE Asia markets", "White-label API licensing"],
-                    t: ["Regulatory crackdown on crypto rails", "Stripe entering niche"]
-                }
-            },
-            'Project Sigma': {
-                thesis: "Sigma's edge computing model for predictive maintenance is fundamentally disruptive. The hardware-agnostic approach removes the biggest friction point for adoption in legacy manufacturing plants.",
-                swot: {
-                    s: ["99.9% prediction accuracy", "Zero-latency edge processing"],
-                    w: ["Long sales cycles (12-18mo)", "Hardware integration complexity"],
-                    o: ["SaaS pivot for SME manufacturers", "Government grants for Industry 4.0"],
-                    t: ["Siemens launching competitor", "Chip shortage impacting sensors"]
-                }
-            },
-            'Project Alpha': {
-                thesis: "Alpha solves the 'Patient Data' sovereignty issue with elegant cryptography. If they can secure the initial hospital partnerships, the network effect will be defensible.",
-                swot: {
-                    s: ["HIPAA/GDPR compliant by design", "University Hospital pilot live"],
-                    w: ["Two-sided marketplace problem", "Unproven monetization model"],
-                    o: ["Clinical trial recruitment", "Insurance provider partnerships"],
-                    t: ["Epic Systems blocking integration", "Patient adoption inertia"]
-                }
-            },
-            'Project Gamma': {
-                thesis: "High-resolution satellite tracking is commoditized, but Gamma's biomass estimation ML is genuinely novel. The carbon credit market desperately needs this level of auditability.",
-                swot: {
-                    s: ["Exclusive ESA satellite partnership", "Auditable carbon ledger"],
-                    w: ["Weather dependency for optics", "High compute costs"],
-                    o: ["Voluntary Carbon Market explosion", "Forest fire prevention monitoring"],
-                    t: ["LiDAR drone competitors", "Carbon market regulation flux"]
-                }
-            }
-        };
-
-        function openAIReport(projectName) {
-            // Populate Data
-            document.getElementById('ai-report-title').innerText = `AI Due Diligence: ${projectName}`;
-
-            const data = projectData[projectName] || projectData['Project Delta']; // Fallback
-            document.getElementById('ai-thesis').innerText = `"${data.thesis}"`;
-
-            // Render SWOT
-            const renderList = (id, items) => {
-                const ul = document.getElementById(id);
-                ul.innerHTML = items.map(item => `<li>${item}</li>`).join('');
-            };
-
-            renderList('ai-swot-s', data.swot.s);
-            renderList('ai-swot-w', data.swot.w);
-            renderList('ai-swot-o', data.swot.o);
-            renderList('ai-swot-t', data.swot.t);
-
-            // Randomize Score slightly
-            const score = Math.floor(Math.random() * (98 - 75) + 75);
-            document.getElementById('ai-score-val').innerText = score;
-
-            // Update Ring (Dash array = 351.86)
-            const offset = 351.86 - (351.86 * score / 100);
-            document.getElementById('ai-score-ring').style.strokeDashoffset = offset;
-
-            // Show Modal
-            modal.classList.remove('hidden');
-            // Animation Delay
-            setTimeout(() => {
-                backdrop.classList.remove('opacity-0');
-                panel.classList.remove('opacity-0', 'scale-95');
-            }, 10);
-        }
-
-        function closeAIReport() {
-            backdrop.classList.add('opacity-0');
-            panel.classList.add('opacity-0', 'scale-95');
-            setTimeout(() => {
-                modal.classList.add('hidden');
-            }, 300);
-        }
-
-        // Close on backdrop click
-        backdrop.addEventListener('click', closeAIReport);
-    </script>
-    </footer>
-    <script type="module" src="../js/main.js"></script>
 </body>
 
 </html>

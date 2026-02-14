@@ -71,9 +71,10 @@
             </div>
             <div class="flex items-center gap-6">
                 <nav class="hidden md:flex items-center gap-8">
-                    <a class="text-sm font-medium hover:text-primary transition-colors"
-                        href="founder_control_dashboard_2.html">Dashboard</a>
-                    <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Matches</a>
+                    <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                        href="#founder-dashboard">Dashboard</a>
+                    <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                        href="#founder-received">Matches</a>
                     <a class="text-sm font-medium hover:text-primary transition-colors" href="#">Vault</a>
                 </nav>
                 <div class="h-8 w-px bg-[#e7ebf3] dark:bg-[#2a3347]"></div>
@@ -105,7 +106,7 @@
                         <span class="text-sm text-[#4c669a] font-medium">Status: Active Negotiation</span>
                     </div>
                 </div>
-                <button id="btn-end-conversation"
+                <button
                     class="flex items-center gap-2 px-5 py-2.5 rounded-lg border border-red-200 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-bold transition-all shadow-sm">
                     <span class="material-symbols-outlined text-[18px]">cancel</span>
                     <span>End Conversation</span>
@@ -143,16 +144,51 @@
                         <span class="text-[10px] font-medium text-[#4c669a] uppercase tracking-tighter italic">Text Only
                             Mode</span>
                     </div>
-                    <div id="chat-container" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 custom-scrollbar">
-                        <!-- Messages will be injected here -->
+                    <div class="flex-1 overflow-y-auto p-6 flex flex-col gap-6 custom-scrollbar">
+                        <!-- Message -->
+                        <div class="flex flex-col items-start max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
+                                <span class="text-[10px] text-[#4c669a]">10:24 AM</span>
+                            </div>
+                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
+                                <p class="text-sm leading-relaxed">Regarding the intellectual property clause in Section
+                                    4.2 of the term sheet—we noticed the carve-out for previous academic research isn't
+                                    fully defined. Can you clarify if the university retains any commercialization
+                                    rights?</p>
+                            </div>
+                        </div>
+                        <!-- Message -->
+                        <div class="flex flex-col items-end self-end max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] text-[#4c669a]">10:28 AM</span>
+                                <span class="text-[11px] font-bold text-primary uppercase">Founder</span>
+                            </div>
+                            <div class="bg-primary p-4 rounded-xl rounded-tr-none text-white">
+                                <p class="text-sm leading-relaxed">The University of Aethelgard has signed a full
+                                    release for this specific technology stack. I've uploaded the supplemental IP
+                                    Disclosure (Exhibit C) for your review in the viewer to the right.</p>
+                            </div>
+                        </div>
+                        <!-- Message -->
+                        <div class="flex flex-col items-start max-w-[85%]">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[11px] font-bold text-primary uppercase">Investor</span>
+                                <span class="text-[10px] text-[#4c669a]">10:31 AM</span>
+                            </div>
+                            <div class="bg-background-light dark:bg-[#2a3347] p-4 rounded-xl rounded-tl-none">
+                                <p class="text-sm leading-relaxed">Thank you. Reviewing now. We are looking for specific
+                                    language regarding the sub-licensing rights for the Asian market subsidiaries.</p>
+                            </div>
+                        </div>
                     </div>
                     <!-- Text Only Input Area -->
                     <div class="p-4 border-t border-[#e7ebf3] dark:border-[#2a3347] bg-white dark:bg-[#1a2133]">
                         <div class="relative">
-                            <textarea id="chat-input"
+                            <textarea
                                 class="w-full rounded-lg border-[#cfd7e7] dark:border-[#2a3347] bg-background-light dark:bg-[#101622] text-sm focus:ring-primary focus:border-primary p-3 min-h-[100px] resize-none pr-12"
                                 placeholder="Type a secure message... (File attachments disabled for security)"></textarea>
-                            <button id="btn-send-message"
+                            <button
                                 class="absolute bottom-3 right-3 p-2 text-primary hover:bg-primary/10 rounded-full transition-colors">
                                 <span class="material-symbols-outlined">send</span>
                             </button>
@@ -289,121 +325,6 @@
             </div>
         </footer>
     </div>
-    </footer>
-    <script type="module" src="../js/main.js"></script>
-    <script type="module">
-        import { Auth } from '../js/modules/auth.js';
-
-        // Auth Guard
-        if (!Auth.isLoggedIn()) {
-            alert("Access Denied: Please login.");
-            window.location.href = 'index.html';
-        }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        const dealId = urlParams.get('id') || 'demo-deal';
-        const partnerName = urlParams.get('partner') || 'Counterparty';
-
-        // Update Header Context
-        document.querySelector('h1').innerText = `Negotiation: ${partnerName}`;
-        document.title = `Secure Workspace: ${partnerName} | FundLink`;
-
-        const currentUserRole = Auth.getRole();
-        const currentUserName = currentUserRole === 'INVESTOR' ? 'Marcus Capital' : 'Alexander Wright';
-
-        // Chat Logic
-        const chatContainer = document.getElementById('chat-container');
-        const chatInput = document.getElementById('chat-input');
-        const sendBtn = document.getElementById('btn-send-message');
-        const endBtn = document.getElementById('btn-end-conversation');
-
-        function getChatHistory() {
-            const key = `fundlink_chat_${dealId}`;
-            return JSON.parse(localStorage.getItem(key) || '[]');
-        }
-
-        function saveMessage(msg) {
-            const history = getChatHistory();
-            history.push(msg);
-            localStorage.setItem(`fundlink_chat_${dealId}`, JSON.stringify(history));
-        }
-
-        function renderMessage(msg) {
-            const isMe = msg.role === currentUserRole;
-            const alignClass = isMe ? 'items-end self-end' : 'items-start';
-            const bgClass = isMe ? 'bg-primary text-white' : 'bg-background-light dark:bg-[#2a3347] text-[#0d121b] dark:text-white';
-            const roundedClass = isMe ? 'rounded-tr-none' : 'rounded-tl-none';
-
-            const senderLabel = isMe
-                ? `<span class="text-[10px] text-[#4c669a]">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span> <span class="text-[11px] font-bold text-primary uppercase">You</span>`
-                : `<span class="text-[11px] font-bold text-primary uppercase">${msg.senderName}</span> <span class="text-[10px] text-[#4c669a]">${new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>`;
-
-            const html = `
-            <div class="flex flex-col ${alignClass} max-w-[85%] animate-fade-in-up">
-                <div class="flex items-center gap-2 mb-1">
-                    ${senderLabel}
-                </div>
-                <div class="${bgClass} p-4 rounded-xl ${roundedClass} shadow-sm">
-                    <p class="text-sm leading-relaxed">${msg.text}</p>
-                </div>
-            </div>`;
-
-            chatContainer.insertAdjacentHTML('beforeend', html);
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        // Load History
-        const history = getChatHistory();
-        if (history.length === 0) {
-            // Seed initial message if empty
-            if (dealId === 'demo-deal') {
-                const seed = { role: 'INVESTOR', senderName: 'Marcus Capital', text: 'Regarding the IP clause...', timestamp: Date.now() };
-                saveMessage(seed);
-                renderMessage(seed);
-            }
-        } else {
-            history.forEach(renderMessage);
-        }
-
-        function handleSend() {
-            const text = chatInput.value.trim();
-            if (!text) return;
-
-            const msg = {
-                role: currentUserRole,
-                senderName: currentUserName,
-                text: text,
-                timestamp: Date.now()
-            };
-
-            saveMessage(msg);
-            renderMessage(msg);
-            chatInput.value = '';
-
-            // Auto-reply for demo if other side is silent
-            if (currentUserRole === 'FOUNDER') {
-                setTimeout(() => {
-                    const reply = { role: 'INVESTOR', senderName: 'Marcus Capital', text: 'Received. We will review this shortly.', timestamp: Date.now() };
-                    saveMessage(reply);
-                    renderMessage(reply);
-                }, 3000);
-            }
-        }
-
-        sendBtn.addEventListener('click', handleSend);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                handleSend();
-            }
-        });
-
-        if (endBtn) {
-            endBtn.addEventListener('click', () => {
-                if (confirm("End Negotiation?")) window.history.back();
-            });
-        }
-    </script>
 </body>
 
 </html>

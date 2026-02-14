@@ -57,362 +57,278 @@
     <!-- Top Navigation Bar -->
     <header
         class="sticky top-0 z-50 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-6">
-                <div class="flex items-center gap-2.5">
-                    <div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
-                        <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 48 48"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path clip-rule="evenodd"
-                                d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
-                                fill="currentColor" fill-rule="evenodd"></path>
-                        </svg>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-8">
+                    <div class="flex items-center gap-2 text-primary">
+                        <span class="material-symbols-outlined text-3xl font-bold">shield_with_heart</span>
+                        <span
+                            class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">FundLink</span>
                     </div>
-                    <h1 class="text-lg font-bold tracking-tight">FundLink</h1>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                            href="#investor-feed">Dashboard</a>
+                        <a class="text-sm font-semibold text-primary border-b-2 border-primary py-5"
+                            href="#investor-incoming">Marketplace</a>
+                        <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                            href="#investor-portfolio">Workspaces</a>
+                        <a class="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors"
+                            href="#">Messages</a>
+                    </nav>
                 </div>
-                <div
-                    class="hidden md:flex items-center gap-2 px-3 py-1 bg-primary/10 rounded-full border border-primary/20">
-                    <span class="material-symbols-outlined text-[16px] text-primary">shield_person</span>
-                    <span class="text-xs font-semibold text-primary uppercase tracking-wider">Stealth Mode
-                        Active</span>
+                <div class="flex items-center gap-4">
+                    <div class="relative hidden lg:block">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+                        <input
+                            class="bg-slate-100 dark:bg-slate-800 border-none rounded-lg py-2 pl-10 pr-4 text-sm w-64 focus:ring-2 focus:ring-primary/20 transition-all"
+                            placeholder="Search startups..." type="text" />
+                    </div>
+                    <button class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative">
+                        <span class="material-symbols-outlined">notifications</span>
+                        <span
+                            class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+                    </button>
+                    <div
+                        class="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden border border-primary/20">
+                        <img alt="Investor Profile" class="h-full w-full object-cover"
+                            data-alt="Portrait of a professional investor"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZ9EaV1ikm_9ErNB_oRg7C_bEqBL2VlYoxnS5wDFVyWeL8irGYwy_IFF-IINYO2mAiC-B9zRMt33UOWyf8XnJT6xDrgmYl6JmGzZ0wotV3Rud6i_rP2XhA3O0qxzktUL-UKgD2nH9z_Qv8VV4dgb97c9tV8-6hmmPoQDd9SXAUJpZd7-i_ck_fQE3ufk6pIrtUGyuMqjhxYBm7ep0M7lpDlTx-Wx1_UhowhKHQax_o-9gMc70CtbK58V057F3UXV9DXfNoutH8Gac" />
+                    </div>
                 </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <button class="p-2 text-slate-500 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">notifications</span>
-                </button>
-                <a href="founder_control_dashboard_4.html"
-                    class="p-2 text-slate-500 hover:text-primary transition-colors">
-                    <span class="material-symbols-outlined">settings</span>
-                </a>
-                <a href="#" data-action="logout"
-                    class="h-8 w-8 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden border border-slate-300 dark:border-slate-600 block transition-transform hover:scale-105">
-                    <img alt="Founder avatar" data-alt="Minimalist abstract profile avatar"
-                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXgOihvjY0lBpfDaezPh12J9-Ux67PCt5hLJhC_yKxIvkLdLjOxlYLePZ_Z5qawV-lcHdBVrBcDiSDi9tqIMMPqYZ9ejkmQmDmg5X9sTLA3z6D55O5ocB0P85Vtoj0Dfyx8mA68zlXCeX_ZaZZ_z-zTjldnb4VVLufS36KW0WfLcKR6xO3-Dte7q-aKjjA87UwOw-gVlrjc8IYM1cJCIWifcb6Fi0LJQuLcl4-l9ik_hKs7g-rak7Q_-YQOwQJgUMplXgfhRIlzzs" />
-                </a>
             </div>
         </div>
     </header>
-    <div class="flex-1 max-w-[1200px] mx-auto w-full px-6 py-8 flex gap-8">
-        <aside class="w-64 shrink-0 hidden md:block">
-            <nav class="space-y-1">
-                <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="founder_control_dashboard_2.html">
-                    <span class="material-symbols-outlined text-[20px]">person</span>
-                    <span>Profile</span>
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="founder_control_dashboard_3.html">
-                    <span class="material-symbols-outlined text-[20px]">hub</span>
-                    <span>Find Investors</span>
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 bg-white dark:bg-slate-900 text-primary font-semibold rounded-lg shadow-sm border border-slate-200 dark:border-slate-800"
-                    href="incoming_connection_requests.html">
-                    <span class="material-symbols-outlined text-[20px]">mark_email_unread</span>
-                    <span>Inbox</span>
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="founder_control_dashboard_1.html">
-                    <span class="material-symbols-outlined text-[20px]">send</span>
-                    <span>Sent Requests</span>
-                </a>
-                <a class="flex items-center gap-3 px-4 py-2.5 text-slate-500 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors"
-                    href="founder_control_dashboard_4.html">
-                    <span class="material-symbols-outlined text-[20px]">settings</span>
-                    <span>Settings</span>
-                </a>
-            </nav>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Page Header & Summary Section -->
+        <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <nav class="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">
+                    <a class="hover:text-primary" href="#">Marketplace</a>
+                    <span class="material-symbols-outlined text-xs">chevron_right</span>
+                    <span class="text-slate-600 dark:text-slate-300">Incoming Requests</span>
+                </nav>
+                <h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Incoming Connection
+                    Requests
+                </h1>
+                <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl">Manage privacy-first inbound interest.
+                    Review
+                    vetted startup codenames and initiate secure workspaces with high-match founders.</p>
+            </div>
+            <div class="flex gap-3">
+                <button
+                    class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
+                    <span class="material-symbols-outlined text-lg">archive</span>
+                    Archive All
+                </button>
+                <button
+                    class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
+                    <span class="material-symbols-outlined text-lg">tune</span>
+                    Filter Criteria
+                </button>
+            </div>
+        </div>
+        <!-- Analytics Quick View -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             <div
-                class="mt-10 p-4 bg-slate-50 dark:bg-slate-900/50 rounded-xl border border-dashed border-slate-200 dark:border-slate-800">
-                <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Match Status</p>
-                <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
-                    <span class="text-xs font-medium text-slate-600 dark:text-slate-300">Active in Pool</span>
+                class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pending Requests</p>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">14</h3>
+                    <span class="text-xs font-bold text-emerald-500 flex items-center">+3 today</span>
                 </div>
             </div>
-        </aside>
-        <main class="flex-1 w-full">
-            <!-- Page Header & Summary Section -->
-            <div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
-                <div>
-                    <nav
-                        class="flex items-center gap-2 text-xs font-medium text-slate-400 uppercase tracking-widest mb-2">
-                        <a class="hover:text-primary" href="#">Marketplace</a>
-                        <span class="material-symbols-outlined text-xs">chevron_right</span>
-                        <span class="text-slate-600 dark:text-slate-300">Incoming Requests</span>
-                    </nav>
-                    <h1 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">Incoming Connection
-                        Requests</h1>
-                    <p class="text-slate-500 dark:text-slate-400 mt-2 max-w-2xl">Manage privacy-first inbound interest.
-                        Review vetted startup codenames and initiate secure workspaces with high-match founders.</p>
+            <div
+                class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Average Match</p>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">88%</h3>
+                    <span class="text-xs font-bold text-primary flex items-center">Top 10%</span>
                 </div>
-                <div class="flex gap-3">
-                    <button id="btn-archive-all"
-                        class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">
-                        <span class="material-symbols-outlined text-lg">archive</span>
-                        Archive All
-                    </button>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">New Since Login</p>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">5</h3>
+                    <span class="text-xs font-bold text-amber-500 flex items-center">Action Required</span>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Avg. Response Time</p>
+                <div class="flex items-baseline gap-2">
+                    <h3 class="text-3xl font-black text-slate-900 dark:text-white">4.2h</h3>
+                    <span class="text-xs font-bold text-slate-400 flex items-center">Target &lt; 6h</span>
+                </div>
+            </div>
+        </div>
+        <!-- Requests Feed -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between px-2 mb-4">
+                <div class="flex items-center gap-6">
+                    <button class="text-sm font-bold text-primary pb-1 border-b-2 border-primary">All Requests
+                        (14)</button>
                     <button
-                        class="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-primary rounded-lg shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all">
-                        <span class="material-symbols-outlined text-lg">tune</span>
-                        Filter Criteria
-                    </button>
+                        class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">High
+                        Match (90%+)</button>
+                    <button
+                        class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Recent</button>
+                </div>
+                <div class="flex items-center gap-2 text-slate-400">
+                    <span class="text-xs font-medium uppercase">Sort by:</span>
+                    <select
+                        class="bg-transparent border-none text-xs font-bold text-slate-600 dark:text-slate-300 focus:ring-0 cursor-pointer">
+                        <option>Match Score</option>
+                        <option>Recency</option>
+                        <option>Stage</option>
+                    </select>
                 </div>
             </div>
-            <!-- Analytics Quick View -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-                <div
-                    class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Pending Requests</p>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="text-3xl font-black text-slate-900 dark:text-white">14</h3>
-                        <span class="text-xs font-bold text-emerald-500 flex items-center">+3 today</span>
+            <!-- Request Card 1 -->
+            <div
+                class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch">
+                <div class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800">
+                    <img alt="Project Orion" class="w-full h-full object-cover mix-blend-overlay opacity-50"
+                        data-alt="Abstract futuristic blue tech pattern"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYGEI4_YCQV629g_q4PSiqaZN9NtHFH3eOHDqvhTrBTXaTupSjzmPNfJVWsflnneneFtYLGE8dRUX_h4NAUTmOZd5LmVxr0Pv2VVep6JQ_3CJMbb8npYEMykqC2AWZnJjI3q3HS-RLr6cm5SvdOt0g0jSvpNEmiz7qegXALBWgaHQLEQ0iyD36SyEA8rtt2hwkHSAbGMb7iAHNY3b37pqCKaNu6r0cmJ5T_INX8sdlhg8FcSkb2_6P9rmOEZ2MDpYXKVaBRjoPmxQ" />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-primary/40">rocket_launch</span>
                     </div>
                 </div>
-                <div
-                    class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Average Match</p>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="text-3xl font-black text-slate-900 dark:text-white">88%</h3>
-                        <span class="text-xs font-bold text-primary flex items-center">Top 10%</span>
-                    </div>
-                </div>
-                <div
-                    class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">New Since Login</p>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="text-3xl font-black text-slate-900 dark:text-white">5</h3>
-                        <span class="text-xs font-bold text-amber-500 flex items-center">Action Required</span>
-                    </div>
-                </div>
-                <div
-                    class="bg-white dark:bg-slate-900 p-5 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
-                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Avg. Response Time</p>
-                    <div class="flex items-baseline gap-2">
-                        <h3 class="text-3xl font-black text-slate-900 dark:text-white">4.2h</h3>
-                        <span class="text-xs font-bold text-slate-400 flex items-center">Target &lt; 6h</span>
-                    </div>
-                </div>
-            </div>
-            <!-- Requests Feed -->
-            <div class="space-y-4">
-                <div class="flex items-center justify-between px-2 mb-4">
-                    <div class="flex items-center gap-6">
-                        <button class="text-sm font-bold text-primary pb-1 border-b-2 border-primary">All Requests
-                            (14)</button>
-                        <button
-                            class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">High
-                            Match (90%+)</button>
-                        <button
-                            class="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-200">Recent</button>
-                    </div>
-                    <div class="flex items-center gap-2 text-slate-400">
-                        <span class="text-xs font-medium uppercase">Sort by:</span>
-                        <select
-                            class="bg-transparent border-none text-xs font-bold text-slate-600 dark:text-slate-300 focus:ring-0 cursor-pointer">
-                            <option>Match Score</option>
-                            <option>Recency</option>
-                            <option>Stage</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Request Card 1 -->
-                <!-- Request Card 1 (Marcus Capital - Demo) -->
-                <div id="card-marcus-request"
-                    class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch hidden">
-                    <div
-                        class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800 flex items-center justify-center border-r border-slate-200 dark:border-slate-700">
-                        <span class="material-symbols-outlined text-5xl text-primary">account_balance</span>
-                    </div>
-                    <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-3">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white">Marcus Capital</h4>
-                                <span
-                                    class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">Institutional</span>
-                            </div>
-                            <div
-                                class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">domain</span> VC Firm</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">location_on</span> Zurich, CH</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">schedule</span> Just now</span>
-                            </div>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Interested in your
-                                infrastructure layer solution..."</p>
-                        </div>
-                        <div class="flex items-center gap-3 shrink-0">
-                            <button
-                                class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
-                                Ignore
-                            </button>
-                            <button onclick="acceptRequest('card-marcus-request', 'Marcus Capital')"
-                                class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-lg">handshake</span>
-                                Accept & Connect
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <script type="module">
-                    import { Auth } from '../../js/modules/auth.js';
-
-                    document.addEventListener('DOMContentLoaded', () => {
-                        const requests = Auth.getIncomingRequests('FOUNDER');
-
-                        // Check specifically for 'Marcus Capital' request for Demo
-                        const marcusRequest = requests.find(r => r.from === 'INVESTOR');
-
-                        if (marcusRequest && marcusRequest.status === 'pending') {
-                            document.getElementById('card-marcus-request').classList.remove('hidden');
-                        }
-
-                        // Accept Logic
-                        window.acceptRequest = (cardId, fromName) => {
-                            // ideally we use request ID, but for demo we just find the first pending request from 'INVESTOR'
-                            const req = requests.find(r => r.from === 'INVESTOR' && r.status === 'pending');
-                            if (req) {
-                                Auth.acceptConnectionRequest(req.id);
-                                // Visual update - Transform to Open Workspace button
-                                const btn = document.querySelector(`#${cardId} button:last-child`);
-                                btn.outerHTML = `
-                                    <a href="secure_workspace_negotiation.html?id=${req.id}&partner=${fromName}" 
-                                       class="flex-1 md:flex-none px-8 py-2.5 bg-green-600 hover:bg-green-700 text-white text-sm font-bold rounded-lg shadow-md shadow-green-600/20 transition-all flex items-center justify-center gap-2">
-                                        <span class="material-symbols-outlined text-lg">space_dashboard</span>
-                                        Open Workspace
-                                    </a>`;
-
-                                // Hide Ignore button
-                                const ignoreBtn = document.querySelector(`#${cardId} button:first-child`);
-                                if (ignoreBtn) ignoreBtn.style.display = 'none';
-
-                                alert(`You are now connected with ${fromName}. Private workspace unlocked.`);
-                            }
-                        };
-
-                        // Archive All Logic
-                        const btnArchive = document.getElementById('btn-archive-all');
-                        if (btnArchive) {
-                            btnArchive.addEventListener('click', () => {
-                                if (confirm('Are you sure you want to archive all requests? This action cannot be undone.')) {
-                                    // Visual removal
-                                    const cards = document.querySelectorAll('.request-card');
-                                    cards.forEach(card => card.style.display = 'none');
-
-                                    // Show Toast
-                                    const event = new CustomEvent('fundlink:toast', {
-                                        detail: { message: 'All connection requests archived.', type: 'info' }
-                                    });
-                                    document.dispatchEvent(event);
-                                }
-                            });
-                        }
-                    });
-                </script>
-                <!-- Request Card 2 -->
-                <div
-                    class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch">
-                    <div class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800">
-                        <img alt="Stealth AI" class="w-full h-full object-cover mix-blend-overlay opacity-50"
-                            data-alt="Dark abstract neural network background"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOSXdeJWuAQAhmMisk7llm4HWc3PK959k4yp1yh24sRoma3oJZ3uZJVANvDToXAxmS8GmMOhTgFqg_7FWJth9_Jxg_QBLMQvfoM0INqZo8P2hgD0CDydVH_Yw-kk1USu4hyOGuVKc0tMnW7mG3AU3gKt1IinKNqjOcqBhdTyxrViN5iRUEEYbUAytdTwFBfZd_dfsiJHur7TZYWUEV1PfqCbj9BQ8uhqzXdNaInSR1QHxr91f4aSrwK1Fz3lK8PSjzAqY4sBzsSM" />
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="material-symbols-outlined text-4xl text-slate-400">psychology</span>
-                        </div>
-                    </div>
-                    <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-3">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white">Stealth AI Lab</h4>
-                                <span
-                                    class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">86%
-                                    Match</span>
-                            </div>
-                            <div
-                                class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">category</span> Artificial
-                                    Intelligence</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">bar_chart</span> Pre-Seed</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">schedule</span> 5h ago</span>
-                            </div>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Foundation model for
-                                specialized legal discovery and automation..."</p>
-                        </div>
-                        <div class="flex items-center gap-3 shrink-0">
-                            <button
-                                class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
-                                Reject
-                            </button>
-                            <a href="secure_workspace_negotiation.html?id=stealth-ai-deal&partner=Stealth AI Lab"
-                                class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
-                                Open Workspace
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <!-- Request Card 3 -->
-                <div
-                    class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch">
-                    <div class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800">
-                        <img alt="Cipher Health" class="w-full h-full object-cover mix-blend-overlay opacity-50"
-                            data-alt="Green and blue digital health pattern"
-                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI6xThlfk_0w7ObJdOBo0BYECBc3RvBS6EjxFYQRrnGEmuWJGemjw9CiOr2pvo1KAln6GpZJi7bQu5N3wUX4KSdtY9BlYAoBGYzoeFeXJBZK68ukt6po6Q3GW4YoWX4KR4CTXtPcj35Cg7d12rcja0NRloV591scO0TAv5iwbGtnLuvhQQpbvYkZ_O5zduGWTEHuyWxTPhxkMR2kAWNXp2sZcu_k0wVrAuFaUBqr2j_Lfp0rakwVyLgr4BYGHqi9ODSlVsW4JEdGI" />
-                        <div class="absolute inset-0 flex items-center justify-center">
+                <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Project Orion</h4>
                             <span
-                                class="material-symbols-outlined text-4xl text-emerald-500/40">health_and_safety</span>
+                                class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">92%
+                                Match</span>
                         </div>
+                        <div
+                            class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">category</span> FinTech /
+                                Payments</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">bar_chart</span> Series A</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">schedule</span> 2h ago</span>
+                        </div>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Scaling cross-border settlements
+                            with proprietary liquidity layer..."</p>
                     </div>
-                    <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
-                        <div class="space-y-2">
-                            <div class="flex items-center gap-3">
-                                <h4 class="text-xl font-bold text-slate-900 dark:text-white">Cipher Health</h4>
-                                <span
-                                    class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">79%
-                                    Match</span>
-                            </div>
-                            <div
-                                class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">category</span> HealthTech /
-                                    Data</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">bar_chart</span> Seed</span>
-                                <span class="flex items-center gap-1.5"><span
-                                        class="material-symbols-outlined text-base">schedule</span> 12h ago</span>
-                            </div>
-                            <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Encrypted patient data
-                                marketplace for clinical trials..."</p>
-                        </div>
-                        <div class="flex items-center gap-3 shrink-0">
-                            <button
-                                class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
-                                Reject
-                            </button>
-                            <a href="secure_workspace_negotiation.html?id=cipher-health-deal&partner=Cipher Health"
-                                class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
-                                <span class="material-symbols-outlined text-lg">space_dashboard</span>
-                                Open Workspace
-                            </a>
-                        </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <button onclick="handleIncomingRequest('reject', 'Project Orion')"
+                            class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
+                            Reject
+                        </button>
+                        <button onclick="handleIncomingRequest('accept', 'Project Orion')"
+                            class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">handshake</span>
+                            Accept
+                        </button>
                     </div>
-                </div>
-                <!-- Load More -->
-                <div class="flex justify-center pt-8">
-                    <button
-                        class="text-sm font-bold text-slate-500 hover:text-primary flex items-center gap-2 transition-colors">
-                        Load More Requests
-                        <span class="material-symbols-outlined text-sm">expand_more</span>
-                    </button>
                 </div>
             </div>
-        </main>
-    </div>
+            <!-- Request Card 2 -->
+            <div
+                class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch">
+                <div class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800">
+                    <img alt="Stealth AI" class="w-full h-full object-cover mix-blend-overlay opacity-50"
+                        data-alt="Dark abstract neural network background"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuCKOSXdeJWuAQAhmMisk7llm4HWc3PK959k4yp1yh24sRoma3oJZ3uZJVANvDToXAxmS8GmMOhTgFqg_7FWJth9_Jxg_QBLMQvfoM0INqZo8P2hgD0CDydVH_Yw-kk1USu4hyOGuVKc0tMnW7mG3AU3gKt1IinKNqjOcqBhdTyxrViN5iRUEEYbUAytdTwFBfZd_dfsiJHur7TZYWUEV1PfqCbj9BQ8uhqzXdNaInSR1QHxr91f4aSrwK1Fz3lK8PSjzAqY4sBzsSM" />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-slate-400">psychology</span>
+                    </div>
+                </div>
+                <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Stealth AI Lab</h4>
+                            <span
+                                class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">86%
+                                Match</span>
+                        </div>
+                        <div
+                            class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">category</span> Artificial
+                                Intelligence</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">bar_chart</span> Pre-Seed</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">schedule</span> 5h ago</span>
+                        </div>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Foundation model for specialized
+                            legal discovery and automation..."</p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <button onclick="handleIncomingRequest('reject', 'Stealth AI')"
+                            class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
+                            Reject
+                        </button>
+                        <button onclick="handleIncomingRequest('accept', 'Stealth AI')"
+                            class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">handshake</span>
+                            Accept
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Request Card 3 -->
+            <div
+                class="request-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden flex flex-col md:flex-row items-stretch">
+                <div class="w-full md:w-48 h-32 md:h-auto relative bg-slate-100 dark:bg-slate-800">
+                    <img alt="Cipher Health" class="w-full h-full object-cover mix-blend-overlay opacity-50"
+                        data-alt="Green and blue digital health pattern"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuAI6xThlfk_0w7ObJdOBo0BYECBc3RvBS6EjxFYQRrnGEmuWJGemjw9CiOr2pvo1KAln6GpZJi7bQu5N3wUX4KSdtY9BlYAoBGYzoeFeXJBZK68ukt6po6Q3GW4YoWX4KR4CTXtPcj35Cg7d12rcja0NRloV591scO0TAv5iwbGtnLuvhQQpbvYkZ_O5zduGWTEHuyWxTPhxkMR2kAWNXp2sZcu_k0wVrAuFaUBqr2j_Lfp0rakwVyLgr4BYGHqi9ODSlVsW4JEdGI" />
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-4xl text-emerald-500/40">health_and_safety</span>
+                    </div>
+                </div>
+                <div class="flex-1 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div class="space-y-2">
+                        <div class="flex items-center gap-3">
+                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Cipher Health</h4>
+                            <span
+                                class="px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[10px] font-extrabold uppercase tracking-widest border border-primary/20">79%
+                                Match</span>
+                        </div>
+                        <div
+                            class="flex flex-wrap items-center gap-y-1 gap-x-4 text-sm text-slate-500 dark:text-slate-400">
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">category</span> HealthTech / Data</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">bar_chart</span> Seed</span>
+                            <span class="flex items-center gap-1.5"><span
+                                    class="material-symbols-outlined text-base">schedule</span> 12h ago</span>
+                        </div>
+                        <p class="text-xs text-slate-400 dark:text-slate-500 italic">"Encrypted patient data marketplace
+                            for clinical trials..."</p>
+                    </div>
+                    <div class="flex items-center gap-3 shrink-0">
+                        <button onclick="handleIncomingRequest('reject', 'Cipher Health')"
+                            class="flex-1 md:flex-none px-6 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/30 text-slate-600 dark:text-slate-300 hover:text-red-600 dark:hover:text-red-400 text-sm font-bold rounded-lg transition-all border border-transparent hover:border-red-200 dark:hover:border-red-900">
+                            Reject
+                        </button>
+                        <button onclick="handleIncomingRequest('accept', 'Cipher Health')"
+                            class="flex-1 md:flex-none px-8 py-2.5 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg shadow-md shadow-primary/20 transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-lg">handshake</span>
+                            Accept
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Load More -->
+            <div class="flex justify-center pt-8">
+                <button
+                    class="text-sm font-bold text-slate-500 hover:text-primary flex items-center gap-2 transition-colors">
+                    Load More Requests
+                    <span class="material-symbols-outlined text-sm">expand_more</span>
+                </button>
+            </div>
+        </div>
+    </main>
     <!-- Context Footer Info -->
     <footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-200 dark:border-slate-800 mt-12">
         <div class="flex flex-col md:flex-row justify-between gap-8">
@@ -455,5 +371,24 @@
         </div>
     </footer>
 </body>
+<script>
+    window.handleIncomingRequest = (action, startupName) => {
+        if (confirm(`Are you sure you want to ${action} connection with ${startupName}?`)) {
+            // Visual feedback
+            const btn = event.target.closest('button');
+            if (btn) {
+                const originalText = btn.innerHTML;
+                btn.innerText = action === 'accept' ? 'Accepted' : 'Rejected';
+                btn.disabled = true;
+                btn.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+            // Toast
+            if (window.FundLinkApp) window.FundLinkApp.showToast(`Request ${action}ed for ${startupName}`, 'success');
+
+            // Logic (Simulated)
+            console.log(`[Incoming] ${action} request from ${startupName}`);
+        }
+    }
+</script>
 
 </html>
