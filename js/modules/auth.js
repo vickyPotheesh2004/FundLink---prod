@@ -1,7 +1,7 @@
 /**
  * Authentication Module
  * Manages role persistence, user profiles, and access control.
- * Enforces role immutability per session.
+ * Supports demo mode with dual-role switching for testing purposes.
  */
 export const Auth = {
     /**
@@ -13,12 +13,76 @@ export const Auth = {
     },
 
     /**
+     * Check if demo mode is enabled (allows role switching)
+     * @returns {boolean}
+     */
+    isDemoMode() {
+        return localStorage.getItem('fundlink_demo_mode') === 'true';
+    },
+
+    /**
+     * Enable demo mode for testing purposes
+     */
+    enableDemoMode() {
+        localStorage.setItem('fundlink_demo_mode', 'true');
+        console.log('[Auth] Demo mode enabled - role switching is now allowed');
+        window.dispatchEvent(new CustomEvent('fundlink:demoModeChanged', { detail: { enabled: true } }));
+    },
+
+    /**
+     * Disable demo mode
+     */
+    disableDemoMode() {
+        localStorage.removeItem('fundlink_demo_mode');
+        console.log('[Auth] Demo mode disabled');
+        window.dispatchEvent(new CustomEvent('fundlink:demoModeChanged', { detail: { enabled: false } }));
+    },
+
+    /**
+     * Switch role in demo mode (only allowed when demo mode is enabled)
+     * @param {string} newRole - 'FOUNDER' or 'INVESTOR'
+     * @returns {boolean} - Success status
+     */
+    switchRole(newRole) {
+        if (!this.isDemoMode()) {
+            console.warn('[Auth] Role switching requires demo mode to be enabled');
+            return false;
+        }
+
+        if (!Object.values(this.ROLES).includes(newRole)) {
+            console.error(`[Auth] Invalid role: ${newRole}`);
+            return false;
+        }
+
+        const previousRole = this.getRole();
+        localStorage.setItem('fundlink_role', newRole);
+        console.log(`[Auth] Role switched from ${previousRole} to ${newRole} (Demo Mode)`);
+
+        // Dispatch event for UI updates
+        window.dispatchEvent(new CustomEvent('fundlink:roleSwitched', {
+            detail: { previousRole, newRole, demoMode: true }
+        }));
+
+        return true;
+    },
+
+    /**
      * Attempts to log in a user with a specific role.
-     * If a role is already set and different, it throws an error (Immutability Check).
+     * In demo mode, role switching is allowed. Otherwise, enforces immutability.
      * @param {string} role - 'FOUNDER' or 'INVESTOR'
      */
     login(role) {
         const currentRole = this.getRole();
+
+        // In demo mode, allow role switching
+        if (this.isDemoMode() && currentRole && currentRole !== role) {
+            console.log(`[Auth] Demo mode: Allowing role switch from ${currentRole} to ${role}`);
+            localStorage.setItem('fundlink_role', role);
+            console.log(`[Auth] User logged in as ${role}`);
+            return true;
+        }
+
+        // Normal mode: enforce role immutability
         if (currentRole && currentRole !== role) {
             console.warn(`[Auth] Attempted role switch from ${currentRole} to ${role}. Action blocked.`);
             alert(`Access Denied: You are permanently registered as a ${currentRole}.`);

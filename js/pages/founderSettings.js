@@ -85,4 +85,25 @@ export async function renderFounderSettings(section, app) {
             }
         });
     }
+
+    // Demo Mode Toggle Handler
+    const demoModeToggle = section.querySelector('#demo-mode-toggle');
+    if (demoModeToggle) {
+        // Initialize toggle state
+        demoModeToggle.checked = Auth.isDemoMode();
+
+        demoModeToggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                Auth.enableDemoMode();
+                if (app && app.showToast) {
+                    app.showToast('Demo Mode enabled - Role switching is now available', 'success');
+                }
+            } else {
+                Auth.disableDemoMode();
+                if (app && app.showToast) {
+                    app.showToast('Demo Mode disabled', 'info');
+                }
+            }
+        });
+    }
 }

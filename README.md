@@ -234,16 +234,15 @@ Building a fintech platform in India requires navigating a complex regulatory la
 **Closed Ecosystem**: The platform is **NOT** a public equity crowdfunding site. Startups are visible only to KYC-verified, Accredited Investors. The "Shadow Profile" ensures no sensitive offer details are broadcast publicly. |
 | **KYC/AML Guidelines**<br>*(PMLA Compliance)* | **Integrated Verification**: Mandatory Aadhaar/PAN verification for all Investors before granting access to the "Deal Room". |
 
-### Deployment (Firebase)
-To deploy the project live:
-1.  Run the automated script:
-    ```powershell
-    .\deploy.ps1
-    ```
-2.  Follow the interactive login prompts.
-3.  Once complete, the terminal will show your **Hosting URL** (e.g., `https://fundlink-prod.web.app`).
+### Deployment
+The application is designed to be deployment-agnostic. It can be deployed to any Node.js supported environment (e.g., Vercel, Heroku, AWS).
 
-    > **Note**: The free Firebase Spark plan supports static hosting only. To enable the AI backend (Cloud Functions), the project must be upgraded to the Blaze plan. Until then, the live link will serve the frontend UI, but API calls may not function without a backend.
+1.  **Build the application** (if necessary)
+2.  **Start the server**
+    ```bash
+    npm start
+    ```
+
 
 ---
 

@@ -151,4 +151,60 @@ export async function renderFounderDashboard(section, app) {
     window.addEventListener('storage', () => {
         window.updateNotificationCount();
     });
+
+    // 6. Demo Mode Initialization
+    // Initialize demo mode UI elements
+    window.initDemoModeUI = () => {
+        const demoLabel = document.getElementById('demo-mode-label');
+        const roleSwitcherContainer = document.getElementById('role-switcher-container');
+        const roleSwitcher = document.getElementById('role-switcher');
+
+        if (Auth.isDemoMode()) {
+            // Show demo mode UI
+            if (demoLabel) demoLabel.classList.remove('hidden');
+            if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
+
+            // Set current role in switcher
+            if (roleSwitcher) {
+                roleSwitcher.value = Auth.getRole() || 'FOUNDER';
+            }
+        } else {
+            // Hide demo mode UI
+            if (demoLabel) demoLabel.classList.add('hidden');
+            if (roleSwitcherContainer) roleSwitcherContainer.classList.add('hidden');
+        }
+    };
+
+    // Handle role switching from UI
+    window.handleRoleSwitch = (newRole) => {
+        if (!Auth.isDemoMode()) {
+            // Enable demo mode first
+            Auth.enableDemoMode();
+        }
+
+        if (Auth.switchRole(newRole)) {
+            // Navigate to appropriate dashboard
+            const targetRoute = newRole === 'FOUNDER' ? '#founder-dashboard' : '#investor-feed';
+            if (app && app.showToast) {
+                app.showToast(`Switched to ${newRole} view`, 'success');
+            }
+            window.location.hash = targetRoute;
+        }
+    };
+
+    // Initialize demo mode UI on load
+    window.initDemoModeUI();
+
+    // Listen for demo mode changes
+    window.addEventListener('fundlink:demoModeChanged', () => {
+        window.initDemoModeUI();
+    });
+
+    // Listen for role switches
+    window.addEventListener('fundlink:roleSwitched', (e) => {
+        const roleSwitcher = document.getElementById('role-switcher');
+        if (roleSwitcher && e.detail.newRole) {
+            roleSwitcher.value = e.detail.newRole;
+        }
+    });
 }
