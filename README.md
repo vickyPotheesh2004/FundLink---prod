@@ -271,10 +271,10 @@ The application follows a strictly defined navigation path based on User Roles.
 
 ```mermaid
 graph TD
-    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px;
-    classDef founder fill:#e1f5fe,stroke:#0277bd,stroke-width:2px;
-    classDef investor fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-    classDef secure fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
+    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px,color:#000;
+    classDef founder fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,color:#000;
+    classDef investor fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000;
+    classDef secure fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#000;
 
     %% Public
     Landing([Landing Page]) -->|Select Role| Role{Role Selection}
@@ -358,16 +358,16 @@ graph LR
     R5 --> C5 --> V5
     R6 --> C6 --> V6
 
-    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px;
-    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px;
-    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#000;
+    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px,color:#000;
+    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px,color:#000;
 
     class R1,R2,R3,R4,R5,R6 route;
     class C1,C2,C3,C4,C5,C6 ctrl;
     class V1,V2,V3,V4,V5,V6 view;
 ```
 
-## 8. Estimated Implementation Cost (Suture/Scale)
+## 13. Estimated Implementation Cost (Suture/Scale)
 
 ### 1. Infrastructure (Monthly)
 *   **Compute (Cloud Run / Vercel)**: $50 - $150 (Auto-scaling)

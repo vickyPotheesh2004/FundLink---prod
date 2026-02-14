@@ -187,7 +187,59 @@ fundlink/
 └── README.md                # This file
 ---
 
-## 11. Technical Wiring (SPA Routing)
+## 11. User Interface Flow (Wireframes)
+The application follows a strictly defined navigation path based on User Roles.
+
+```mermaid
+graph TD
+    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px,color:#000;
+    classDef founder fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,color:#000;
+    classDef investor fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px,color:#000;
+    classDef secure fill:#fff3e0,stroke:#ef6c00,stroke-width:2px,color:#000;
+
+    %% Public
+    Landing([Landing Page]) -->|Select Role| Role{Role Selection}
+    Role -->|Founder| F_Auth[Founder Auth & Verify]
+    Role -->|Investor| I_Auth[Investor Auth & Verify]
+    
+    %% Founder Flow
+    F_Auth -->|Success| F_Dash[Founder Dashboard]
+    
+    subgraph "Founder Portal"
+        direction TB
+        F_Dash --> F_Profile[Profile Editor]
+        F_Dash --> F_Sent[Sent Requests]
+        F_Dash --> F_Inbox[Inbox / Received]
+    end
+    
+    %% Investor Flow
+    I_Auth -->|Success| I_Feed[Investor Feed]
+    
+    subgraph "Investor Portal"
+        direction TB
+        I_Feed -->|Analyze| I_Modal[AI Report Modal]
+        I_Feed -->|Connect| I_Req[Connection Request]
+        I_Feed --> I_Port[Portfolio]
+    end
+    
+    %% Interactions
+    I_Req -.->|Notification| F_Inbox
+    F_Inbox -->|Accept| Workspace
+    
+    subgraph "Secure Enclave"
+        Workspace[Shared Negotiation Workspace]
+        Workspace --> Chat[Encrypted Chat]
+        Workspace --> Docs[Data Room]
+        Workspace --> Deal[Deal Closure]
+    end
+    
+    class Landing,Role public;
+    class F_Auth,F_Dash,F_Profile,F_Sent,F_Inbox founder;
+    class I_Auth,I_Feed,I_Modal,I_Req,I_Port investor;
+    class Workspace,Chat,Docs,Deal secure;
+```
+
+## 12. Technical Wiring (SPA Routing)
 This diagram maps how the **Route** triggers a **Controller**, which then renders a specific **HTML Template**.
 
 ```mermaid
@@ -227,9 +279,9 @@ graph LR
     R5 --> C5 --> V5
     R6 --> C6 --> V6
 
-    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px;
-    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px;
-    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px,color:#000;
+    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px,color:#000;
+    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px,color:#000;
 
     class R1,R2,R3,R4,R5,R6 route;
     class C1,C2,C3,C4,C5,C6 ctrl;
@@ -238,7 +290,7 @@ graph LR
 
 ---
 
-## 8. Estimated Implementation Cost (Suture/Scale)
+## 13. Estimated Implementation Cost (Suture/Scale)
 
 ### 1. Infrastructure (Monthly)
 *   **Compute (Cloud Run / Vercel)**: $50 - $150 (Auto-scaling)
