@@ -85,34 +85,64 @@ Early-stage fundraising is broken.
 ## 5. Process Flow
 ```mermaid
 graph TD
-    A[Founder Uploads Deck] -->|AI Encryption| B[Secure Vault]
-    B -->|AI Analysis| C[Shadow Profile Created]
-    D[Investor Thesis] -->|Matching Engine| C
-    C -->|High Match Score| E[Investor Feed]
-    E -->|Investor Clicks 'Connect'| F[Connection Request]
-    F -->|Founder Approves| G[Identity Revealed]
-    G -->|Unlock| H[Secure Workspace]
-    H -->|Negotiation| I[Term Sheet / Deal]
+    %% Nodes
+    A([Founder Uploads Pitch Deck]) -->|Encrypt & Store| B[Secure Vault]
+    B -->|AI Extraction| C[/Shadow Profile Created/]
+    
+    D([Investor Defines Thesis]) -->|Query| E{Matching Engine}
+    C --> E
+    
+    E -->|Score > 80%| F[Investor Feed]
+    E -->|Score < 80%| X[Archive / Nurture]
+    
+    F -->|View Profile| G[AI Due Diligence Report]
+    G -->|Request Access| H{Connection Request}
+    
+    H -->|Founder Approves| I[Identity Revealed]
+    H -->|Founder Rejects| J[Anonymity Preserved]
+    
+    I -->|Mutual Unlock| K[Secure Negotiation Workspace]
+    K -->|Chat & Docs| L[Term Sheet]
+    L -->|Sign| M([Deal Closed])
 ```
 
 ## 6. Architecture Diagram
 ```mermaid
 graph LR
-    Client(Web Client) -->|HTTPS| CDN(Cloudflare CDN)
-    CDN -->|Load Balance| API(Node.js API Gateway)
-    
-    subgraph "Secure Enclave"
-        API -->|Auth| IDP(Auth Service)
-        API -->|Business Logic| App(Core Application)
-        App -->|Metadata| DB[(PostgreSQL)]
-        App -->|Vectors| Vec[(Vector DB)]
+    subgraph "Frontend Layer"
+        Client(SPA / Web Client)
+        Framework(Vanilla JS + Tailwind)
     end
     
-    subgraph "AI Processing Layer"
-        App -->|Prompt Eng| LLM(OpenAI/Gemini API)
-        LLM -->|Analysis| M[Investment Memo Gen]
-        LLM -->|Scoring| S[Readiness Scorer]
+    Client -->|HTTPS / JSON| API
+    
+    subgraph "Backend Layer"
+        API[Node.js API Gateway]
+        Auth[RBAC Middleware]
+        Logic[Business Logic]
     end
+    
+    API --> Auth
+    Auth --> Logic
+    
+    subgraph "Data Persistence"
+        DB[(PostgreSQL\nUser Data)]
+        Vec[(Pinecone\nVector Embeddings)]
+        Vault[(Secure Doc Storage)]
+    end
+    
+    Logic -->|CRUD| DB
+    Logic -->|Semantic Search| Vec
+    Logic -->|Encrypted Blob| Vault
+    
+    subgraph "AI Engine"
+        LLM(OpenAI / Gemini)
+        Agent[Senior Analyst Agent]
+    end
+    
+    Logic -->|Prompt| LLM
+    LLM -->|Analysis| Agent
+    Agent -->|Structured Data| Logic
 ```
 
 ## 7. Technology Stack
@@ -236,32 +266,106 @@ fundlink/
 └── README.md                # This file
 ```
 
-## 11. Wireframes & UI Structure
-Since FundLink is a Single Page Application (SPA), the UI is composed of dynamic views injected into the main container.
+## 11. User Interface Flow (Wireframes)
+The application follows a strictly defined navigation path based on User Roles.
 
-### A. Public Facing
-*   **Landing Page** (`#landing`): Hero section with "I am a Founder" / "I am an Investor" split.
-*   **Role Selection** (`#role-select`): Cards to confirm user intent.
+```mermaid
+graph TD
+    classDef public fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef founder fill:#e1f5fe,stroke:#0277bd,stroke-width:2px;
+    classDef investor fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef secure fill:#fff3e0,stroke:#ef6c00,stroke-width:2px;
 
-### B. Founder Views
-*   **Dashboard** (`#founder-dashboard`):
-    *   **Sidebar**: Navigation (Profile, Sent Requests, Inbox, Settings).
-    *   **Main Area**: Widgets showing "Readiness Score", "Deal Interest", and "Recent Activity".
-*   **Profile Editor** (`#founder-profile`): Form to update startup details (Stage, Sector, Pitch Deck upload).
-*   **Sent Requests** (`#founder-sent`): List of investors contacted, with status chips (Pending, Accepted, Rejected).
-*   **Inbox** (`#founder-inbox`): Incoming connection requests from Investors.
+    %% Public
+    Landing([Landing Page]) -->|Select Role| Role{Role Selection}
+    Role -->|Founder| F_Auth[Founder Auth & Verify]
+    Role -->|Investor| I_Auth[Investor Auth & Verify]
+    
+    %% Founder Flow
+    F_Auth -->|Success| F_Dash[Founder Dashboard]
+    
+    subgraph "Founder Portal"
+        direction TB
+        F_Dash --> F_Profile[Profile Editor]
+        F_Dash --> F_Sent[Sent Requests]
+        F_Dash --> F_Inbox[Inbox / Received]
+    end
+    
+    %% Investor Flow
+    I_Auth -->|Success| I_Feed[Investor Feed]
+    
+    subgraph "Investor Portal"
+        direction TB
+        I_Feed -->|Analyze| I_Modal[AI Report Modal]
+        I_Feed -->|Connect| I_Req[Connection Request]
+        I_Feed --> I_Port[Portfolio]
+    end
+    
+    %% Interactions
+    I_Req -.->|Notification| F_Inbox
+    F_Inbox -->|Accept| Workspace
+    
+    subgraph "Secure Enclave"
+        Workspace[Shared Negotiation Workspace]
+        Workspace --> Chat[Encrypted Chat]
+        Workspace --> Docs[Data Room]
+        Workspace --> Deal[Deal Closure]
+    end
+    
+    class Landing,Role public;
+    class F_Auth,F_Dash,F_Profile,F_Sent,F_Inbox founder;
+    class I_Auth,I_Feed,I_Modal,I_Req,I_Port investor;
+    class Workspace,Chat,Docs,Deal secure;
+```
 
-### C. Investor Views
-*   **Evaluation Feed** (`#investor-feed`):
-    *   **Card Layout**: Anonymized startup profiles (Sector, Ask, AI Score).
-    *   **Action Buttons**: "Analyze AI" (opens modal), "Connect" (sends request).
-*   **Portfolio** (`#investor-portfolio`): Managed investments and active negotiations.
+## 12. Technical Wiring (SPA Routing)
+This diagram maps how the **Route** triggers a **Controller**, which then renders a specific **HTML Template**.
 
-### D. Secure Collaboration
-*   **Negotiation Workspace** (`#workspace`):
-    *   **Chat Interface**: Real-time messaging protected by E2E encryption simulation.
-    *   **Document Viewer**: Read-only view of sensitive documents.
-    *   **Term Sheet Generator**: AI-assisted deal closure form.
+```mermaid
+graph LR
+    subgraph "Routing Layer (main.js)"
+        R1[#landing]
+        R2[#role-select]
+        R3[#founder-auth]
+        R4[#founder-dashboard]
+        R5[#investor-feed]
+        R6[#workspace]
+    end
+
+    subgraph "Controller Layer"
+        C1[renderStatic]
+        C2[renderStatic]
+        C3[Auth Module]
+        C4[founderDashboard.js]
+        C5[investorFeed.js]
+        C6[workspace.js]
+    end
+
+    subgraph "View Layer (HTML)"
+        V1[fundlink_public_landing_page.html]
+        V2[role_commitment_&_authentication_5.html]
+        V3[role_commitment_&_authentication_3.html]
+        V4[founder_control_dashboard_3.html]
+        V5[investor_evaluation_dashboard_5.html]
+        V6[secure_workspace_negotiation.html]
+    end
+
+    %% Connections
+    R1 --> C1 --> V1
+    R2 --> C2 --> V2
+    R3 --> C3 --> V3
+    R4 --> C4 --> V4
+    R5 --> C5 --> V5
+    R6 --> C6 --> V6
+
+    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px;
+    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+
+    class R1,R2,R3,R4,R5,R6 route;
+    class C1,C2,C3,C4,C5,C6 ctrl;
+    class V1,V2,V3,V4,V5,V6 view;
+```
 
 ## 8. Estimated Implementation Cost (Suture/Scale)
 

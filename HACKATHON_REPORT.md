@@ -59,34 +59,64 @@ Early-stage fundraising is broken.
 ## 5. Process Flow
 ```mermaid
 graph TD
-    A[Founder Uploads Deck] -->|AI Encryption| B[Secure Vault]
-    B -->|AI Analysis| C[Shadow Profile Created]
-    D[Investor Thesis] -->|Matching Engine| C
-    C -->|High Match Score| E[Investor Feed]
-    E -->|Investor Clicks 'Connect'| F[Connection Request]
-    F -->|Founder Approves| G[Identity Revealed]
-    G -->|Unlock| H[Secure Workspace]
-    H -->|Negotiation| I[Term Sheet / Deal]
+    %% Nodes
+    A([Founder Uploads Pitch Deck]) -->|Encrypt & Store| B[Secure Vault]
+    B -->|AI Extraction| C[/Shadow Profile Created/]
+    
+    D([Investor Defines Thesis]) -->|Query| E{Matching Engine}
+    C --> E
+    
+    E -->|Score > 80%| F[Investor Feed]
+    E -->|Score < 80%| X[Archive / Nurture]
+    
+    F -->|View Profile| G[AI Due Diligence Report]
+    G -->|Request Access| H{Connection Request}
+    
+    H -->|Founder Approves| I[Identity Revealed]
+    H -->|Founder Rejects| J[Anonymity Preserved]
+    
+    I -->|Mutual Unlock| K[Secure Negotiation Workspace]
+    K -->|Chat & Docs| L[Term Sheet]
+    L -->|Sign| M([Deal Closed])
 ```
 
 ## 6. Architecture Diagram
 ```mermaid
 graph LR
-    Client(Web Client) -->|HTTPS| CDN(Cloudflare CDN)
-    CDN -->|Load Balance| API(Node.js API Gateway)
-    
-    subgraph "Secure Enclave"
-        API -->|Auth| IDP(Auth Service)
-        API -->|Business Logic| App(Core Application)
-        App -->|Metadata| DB[(PostgreSQL)]
-        App -->|Vectors| Vec[(Vector DB)]
+    subgraph "Frontend Layer"
+        Client(SPA / Web Client)
+        Framework(Vanilla JS + Tailwind)
     end
     
-    subgraph "AI Processing Layer"
-        App -->|Prompt Eng| LLM(OpenAI/Gemini API)
-        LLM -->|Analysis| M[Investment Memo Gen]
-        LLM -->|Scoring| S[Readiness Scorer]
+    Client -->|HTTPS / JSON| API
+    
+    subgraph "Backend Layer"
+        API[Node.js API Gateway]
+        Auth[RBAC Middleware]
+        Logic[Business Logic]
     end
+    
+    API --> Auth
+    Auth --> Logic
+    
+    subgraph "Data Persistence"
+        DB[(PostgreSQL\nUser Data)]
+        Vec[(Pinecone\nVector Embeddings)]
+        Vault[(Secure Doc Storage)]
+    end
+    
+    Logic -->|CRUD| DB
+    Logic -->|Semantic Search| Vec
+    Logic -->|Encrypted Blob| Vault
+    
+    subgraph "AI Engine"
+        LLM(OpenAI / Gemini)
+        Agent[Senior Analyst Agent]
+    end
+    
+    Logic -->|Prompt| LLM
+    LLM -->|Analysis| Agent
+    Agent -->|Structured Data| Logic
 ```
 
 ## 7. Technology Stack
@@ -155,6 +185,55 @@ fundlink/
 │   └── pages/               # Page Renderers (SPA Logic)
 ├── index.html               # Single Page Application Entry Point
 └── README.md                # This file
+---
+
+## 11. Technical Wiring (SPA Routing)
+This diagram maps how the **Route** triggers a **Controller**, which then renders a specific **HTML Template**.
+
+```mermaid
+graph LR
+    subgraph "Routing Layer (main.js)"
+        R1[#landing]
+        R2[#role-select]
+        R3[#founder-auth]
+        R4[#founder-dashboard]
+        R5[#investor-feed]
+        R6[#workspace]
+    end
+
+    subgraph "Controller Layer"
+        C1[renderStatic]
+        C2[renderStatic]
+        C3[Auth Module]
+        C4[founderDashboard.js]
+        C5[investorFeed.js]
+        C6[workspace.js]
+    end
+
+    subgraph "View Layer (HTML)"
+        V1[fundlink_public_landing_page.html]
+        V2[role_commitment_&_authentication_5.html]
+        V3[role_commitment_&_authentication_3.html]
+        V4[founder_control_dashboard_3.html]
+        V5[investor_evaluation_dashboard_5.html]
+        V6[secure_workspace_negotiation.html]
+    end
+
+    %% Connections
+    R1 --> C1 --> V1
+    R2 --> C2 --> V2
+    R3 --> C3 --> V3
+    R4 --> C4 --> V4
+    R5 --> C5 --> V5
+    R6 --> C6 --> V6
+
+    classDef route fill:#f9f9f9,stroke:#333,stroke-width:1px;
+    classDef ctrl fill:#e1f5fe,stroke:#0277bd,stroke-width:1px;
+    classDef view fill:#fff3e0,stroke:#ef6c00,stroke-width:1px;
+
+    class R1,R2,R3,R4,R5,R6 route;
+    class C1,C2,C3,C4,C5,C6 ctrl;
+    class V1,V2,V3,V4,V5,V6 view;
 ```
 
 ---

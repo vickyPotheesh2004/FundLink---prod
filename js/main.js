@@ -274,6 +274,11 @@ class App {
                 window.location.hash = '#investor-auth';
             }
 
+            // Contact Partnerships Button
+            if (e.target.closest('#btn-contact-partnerships')) {
+                this.showToast('Partnership inquiry received! Our team will contact you shortly.', 'info');
+            }
+
             // Global Support Button Handler
             const supportBtn = e.target.closest('button');
             if (supportBtn && (supportBtn.innerText.includes('Support') || supportBtn.querySelector('.material-symbols-outlined')?.textContent === 'help_outline')) {
