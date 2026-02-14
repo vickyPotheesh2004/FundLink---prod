@@ -21,7 +21,8 @@ export async function renderFounderDashboard(section, app) {
     window.founderRequestConnection = (investorName, btnId) => {
         const btn = document.getElementById(btnId);
         if (confirm(`Send connection request to ${investorName}?`)) {
-            Auth.sendConnectionRequest('FOUNDER', 'INVESTOR', investorName); // Corrected args: from, to, targetName
+            // Use the legacy method for demo data compatibility
+            Auth.sendConnectionRequestLegacy('FOUNDER', 'INVESTOR', investorName);
             if (btn) {
                 btn.innerText = "Request Sent";
                 btn.classList.remove('bg-primary', 'hover:bg-blue-700');
@@ -117,6 +118,11 @@ export async function renderFounderDashboard(section, app) {
     // Navigate to Received Interests page
     window.navigateToReceivedInterests = () => {
         window.location.hash = '#founder-received';
+    };
+
+    // Navigate to Workspace
+    window.navigateToWorkspace = () => {
+        window.location.hash = '#accepted-workspace';
     };
 
     // Update notification badge count

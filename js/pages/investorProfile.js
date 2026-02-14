@@ -23,6 +23,8 @@ export function renderInvestorProfile(section, app) {
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
                             href="#investor-portfolio">Portfolio</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="#accepted-workspace">Workspaces</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
                             href="#investor-thesis">Investment Thesis</a>
                         <a class="text-primary text-sm font-semibold leading-normal border-b-2 border-primary pb-1"
                             href="#investor-profile">Profile</a>

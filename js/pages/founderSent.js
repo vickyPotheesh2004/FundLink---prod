@@ -104,9 +104,11 @@ export async function renderFounderSent(section, app) {
         // Attach event listeners for Withdraw buttons
         section.querySelectorAll('.btn-withdraw').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const id = parseInt(e.currentTarget.dataset.id);
+                const id = e.currentTarget.dataset.id;
+                // Handle both numeric and string IDs
+                const numericId = parseInt(id);
                 if (confirm('Are you sure you want to withdraw this connection request? This action cannot be undone.')) {
-                    withdrawRequest(id);
+                    withdrawRequest(isNaN(numericId) ? id : numericId);
                 }
             });
         });
@@ -114,7 +116,11 @@ export async function renderFounderSent(section, app) {
 
     function withdrawRequest(id) {
         const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-        const newRequests = requests.filter(r => r.id !== id);
+        // Handle both numeric and string IDs for comparison
+        const newRequests = requests.filter(r => {
+            // Compare as strings for consistency
+            return String(r.id) !== String(id);
+        });
         localStorage.setItem('fundlink_connection_requests', JSON.stringify(newRequests));
 
         // Re-render

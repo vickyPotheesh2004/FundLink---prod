@@ -510,6 +510,11 @@ export async function renderInvestorFeed(section, app) {
         if (sortBtn) sortBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Sorted: Highest Match';
     };
 
+    // Navigate to workspace
+    window.navigateToWorkspace = () => {
+        window.location.hash = '#accepted-workspace';
+    };
+
     // Close stage dropdown when clicking outside
     document.addEventListener('click', (e) => {
         const dropdown = document.getElementById('stage-dropdown-btn');
@@ -520,4 +525,87 @@ export async function renderInvestorFeed(section, app) {
             if (icon) icon.style.transform = '';
         }
     });
+
+    // Render registered founders in the deals grid
+    function renderRegisteredFounders() {
+        const grid = document.getElementById('deals-grid');
+        if (!grid) return;
+
+        // Get registered founders from Auth
+        const founders = Auth.getAllFounders();
+
+        if (founders.length === 0) {
+            // Keep existing demo cards if no registered founders
+            return;
+        }
+
+        // Clear existing content and add registered founders
+        founders.forEach(founder => {
+            const card = createFounderCard(founder);
+            grid.insertAdjacentHTML('afterbegin', card);
+        });
+    }
+
+    function createFounderCard(founder) {
+        const matchScore = Math.floor(Math.random() * (98 - 75) + 75);
+        return `
+            <div class="deal-card bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col overflow-hidden group"
+                data-domain="${founder.domain || 'saas'}" data-stage="${founder.stage || 'seed'}" data-location="${founder.location || 'emea'}" data-ticket="seed-range">
+                <div class="p-6 flex-1">
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <h3 class="text-lg font-bold text-[#0d121b] dark:text-white uppercase tracking-tight">
+                                    ${founder.companyName || 'Stealth Startup'}</h3>
+                                <span class="material-symbols-outlined text-slate-300 text-sm">verified_user</span>
+                            </div>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-0.5 bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold rounded uppercase">${founder.domain || 'Tech'}</span>
+                                <span class="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-500 text-[10px] font-bold rounded uppercase">${founder.stage || 'Seed'}</span>
+                            </div>
+                        </div>
+                        <div class="relative flex items-center justify-center size-14 rounded-full match-score-radial"
+                            style="--percentage: ${matchScore}%;">
+                            <div class="absolute inset-1 bg-white dark:bg-slate-900 rounded-full flex flex-col items-center justify-center">
+                                <span class="text-primary font-black text-sm">${matchScore}%</span>
+                                <span class="text-[8px] text-slate-400 font-bold uppercase leading-none">Match</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Problem Statement</h4>
+                        <p class="text-[#0d121b] dark:text-slate-200 font-medium leading-relaxed">
+                            ${founder.problemStatement || 'Innovative solution addressing key market challenges.'}</p>
+                    </div>
+                    <div class="grid grid-cols-3 gap-4 py-4 border-t border-slate-100 dark:border-slate-800">
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase">Target Raise</p>
+                            <p class="text-sm font-bold">${founder.targetRaise || '$1.5M'}</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase">Commitment</p>
+                            <p class="text-sm font-bold">${founder.commitment || '$500K'}</p>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase">Location</p>
+                            <p class="text-sm font-bold">${founder.location || 'EMEA'}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-slate-50 dark:bg-slate-800/50 p-4 border-t border-slate-100 dark:border-slate-800 flex gap-3">
+                    <button onclick="window.openAIReport('${founder.companyName || 'Stealth Startup'}')"
+                        class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-slate-300 dark:border-slate-700 text-sm font-bold text-[#0d121b] dark:text-white hover:bg-white dark:hover:bg-slate-700 transition-colors">
+                        <span class="material-symbols-outlined text-lg">analytics</span>
+                        Analyze AI
+                    </button>
+                    <button id="btn-connect-${founder.id}"
+                        onclick="window.connectWithStartup('btn-connect-${founder.id}', '${founder.companyName || 'Stealth Startup'}', '${founder.id}')"
+                        class="flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-primary text-white text-sm font-bold shadow-lg shadow-primary/20 hover:bg-blue-700 transition-colors">
+                        <span class="material-symbols-outlined text-lg">handshake</span>
+                        Connect
+                    </button>
+                </div>
+            </div>
+        `;
+    }
 }

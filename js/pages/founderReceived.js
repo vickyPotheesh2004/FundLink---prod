@@ -145,14 +145,14 @@ export async function renderFounderReceived(section, app) {
         // Attach Listeners
         section.querySelectorAll('.btn-accept').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const id = parseInt(e.currentTarget.dataset.id);
+                const id = e.currentTarget.dataset.id;
                 updateRequestStatus(id, 'accepted');
             });
         });
 
         section.querySelectorAll('.btn-decline').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                const id = parseInt(e.currentTarget.dataset.id);
+                const id = e.currentTarget.dataset.id;
                 updateRequestStatus(id, 'declined');
             });
         });
@@ -160,7 +160,8 @@ export async function renderFounderReceived(section, app) {
 
     const updateRequestStatus = (id, status) => {
         const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-        const idx = requests.findIndex(r => r.id === id);
+        // Handle both numeric and string IDs for comparison
+        const idx = requests.findIndex(r => String(r.id) === String(id));
         if (idx !== -1) {
             requests[idx].status = status;
             localStorage.setItem('fundlink_connection_requests', JSON.stringify(requests));

@@ -24,6 +24,8 @@ export function renderInvestorRequests(section, app) {
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
                             href="#investor-portfolio">Portfolio</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
+                            href="#accepted-workspace">Workspaces</a>
+                        <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
                             href="#investor-thesis">Investment Thesis</a>
                         <a class="text-[#4c669a] dark:text-slate-400 text-sm font-medium leading-normal hover:text-primary"
                             href="#investor-profile">Profile</a>
@@ -176,7 +178,8 @@ export function renderInvestorRequests(section, app) {
 
     window.handleRequest = (id, newStatus) => {
         const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-        const idx = requests.findIndex(r => r.id === id);
+        // Handle both numeric and string IDs for comparison
+        const idx = requests.findIndex(r => String(r.id) === String(id));
         if (idx !== -1) {
             requests[idx].status = newStatus;
             localStorage.setItem('fundlink_connection_requests', JSON.stringify(requests));
@@ -187,7 +190,8 @@ export function renderInvestorRequests(section, app) {
     window.withdrawRequest = (id) => {
         if (confirm('Are you sure you want to withdraw this connection request?')) {
             const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-            const filtered = requests.filter(r => r.id !== id);
+            // Handle both numeric and string IDs for comparison
+            const filtered = requests.filter(r => String(r.id) !== String(id));
             localStorage.setItem('fundlink_connection_requests', JSON.stringify(filtered));
             renderRequests();
         }
