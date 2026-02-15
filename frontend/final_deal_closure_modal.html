@@ -1,158 +1,196 @@
 <!DOCTYPE html>
 
-<html class="light" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Final Deal Closure Modal | FundLink</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-        tailwind.config = {
-          darkMode: "class",
-          theme: {
-            extend: {
-              colors: {
-                "primary": "#135bec",
-                "background-light": "#f6f6f8",
-                "background-dark": "#101622",
-              },
-              fontFamily: {
-                "display": ["Inter", "sans-serif"]
-              },
-              borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-            },
+<html class="light" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>Final Deal Closure Modal | FundLink</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+    rel="stylesheet" />
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#135bec",
+            "background-light": "#f6f6f8",
+            "background-dark": "#101622",
           },
-        }
-    </script>
-<style>
-        .modal-blur-backdrop {
-            backdrop-filter: blur(8px);
-        }
-        .legal-gradient {
-            background: linear-gradient(180deg, rgba(19, 91, 236, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
-        }
-        .dark .legal-gradient {
-            background: linear-gradient(180deg, rgba(19, 91, 236, 0.1) 0%, rgba(16, 22, 34, 0) 100%);
-        }
-    </style>
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+        },
+      },
+    }
+  </script>
+  <style>
+    .modal-blur-backdrop {
+      backdrop-filter: blur(8px);
+    }
+
+    .legal-gradient {
+      background: linear-gradient(180deg, rgba(19, 91, 236, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+    }
+
+    .dark .legal-gradient {
+      background: linear-gradient(180deg, rgba(19, 91, 236, 0.1) 0%, rgba(16, 22, 34, 0) 100%);
+    }
+  </style>
 </head>
+
 <body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
-<!-- Background Content (Simulated Dashboard) -->
-<div class="relative flex h-screen w-full flex-col overflow-hidden opacity-40 grayscale pointer-events-none">
-<header class="flex items-center justify-between border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-3 bg-white dark:bg-slate-900">
-<div class="flex items-center gap-4">
-<div class="size-6 text-primary">
-<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h2 class="text-lg font-bold">FundLink</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="flex items-center gap-9">
-<span class="text-sm font-medium">Dashboard</span>
-<span class="text-sm font-medium">Matches</span>
-<span class="text-sm font-medium">Deals</span>
-</div>
-<div class="rounded-full size-10 bg-slate-300"></div>
-</div>
-</header>
-<main class="flex-1 p-10">
-<div class="max-w-4xl mx-auto space-y-6">
-<div class="h-8 w-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
-<div class="h-64 w-full bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
-<div class="grid grid-cols-3 gap-4">
-<div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
-<div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
-<div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
-</div>
-</div>
-</main>
-</div>
-<!-- Modal Backdrop -->
-<div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 modal-blur-backdrop p-4">
-<!-- Modal Container -->
-<div class="relative w-full max-w-[640px] bg-white dark:bg-slate-900 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
-<!-- Legal Gradient Header -->
-<div class="legal-gradient px-8 pt-8 pb-6">
-<div class="flex items-center gap-3 mb-4">
-<div class="flex items-center justify-center size-10 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
-<span class="material-symbols-outlined text-2xl">gavel</span>
-</div>
-<div>
-<h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">Final Deal Commitment</h2>
-<p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Transaction ID: FL-9942-DEAL-ALPHA</p>
-</div>
-</div>
-<div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-lg p-4 flex gap-3">
-<span class="material-symbols-outlined text-primary text-xl">info</span>
-<p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
-                        You are about to terminate the negotiation phase for <strong class="text-slate-900 dark:text-white font-semibold">Project Alpha</strong>. This action is legally binding and triggers the platform's automatic escrow and documentation protocols.
-                    </p>
-</div>
-</div>
-<!-- Choice Selection -->
-<div class="px-8 py-4">
-<div class="grid grid-cols-2 gap-4">
-<!-- Option: Accept -->
-<label class="relative flex flex-col items-center justify-center p-6 border-2 border-primary bg-primary/5 rounded-xl cursor-pointer group transition-all">
-<input checked="" class="hidden peer" name="deal_choice" type="radio" value="accept"/>
-<div class="absolute top-3 right-3 opacity-100">
-<span class="material-symbols-outlined text-primary">check_circle</span>
-</div>
-<span class="material-symbols-outlined text-4xl text-primary mb-2">handshake</span>
-<span class="text-sm font-bold text-primary uppercase tracking-wider">Commit to Deal</span>
-<p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2">Proceed to signing and fund transfer</p>
-</label>
-<!-- Option: Decline -->
-<label class="relative flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-800 hover:border-red-400/50 rounded-xl cursor-pointer group transition-all">
-<input class="hidden peer" name="deal_choice" type="radio" value="decline"/>
-<div class="absolute top-3 right-3 opacity-0 peer-checked:opacity-100">
-<span class="material-symbols-outlined text-red-500">cancel</span>
-</div>
-<span class="material-symbols-outlined text-4xl text-slate-400 dark:text-slate-600 group-hover:text-red-400 mb-2 transition-colors">block</span>
-<span class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider group-hover:text-red-500 transition-colors">Decline</span>
-<p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2">Terminate discussion and archive record</p>
-</label>
-</div>
-</div>
-<!-- Friction Verification -->
-<div class="px-8 py-6 bg-slate-50 dark:bg-slate-950/50 border-t border-b border-slate-100 dark:border-slate-800/50">
-<div class="max-w-md mx-auto">
-<label class="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center mb-4">Verification Required</label>
-<p class="text-xs text-center text-slate-600 dark:text-slate-400 mb-4">
-                        To confirm this transaction, type <span class="font-mono font-bold text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-800 px-1 rounded">ACCEPT</span> below to authorize the finality of this decision.
-                    </p>
-<div class="relative">
-<input class="w-full text-center font-mono text-lg tracking-[0.2em] bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-lg py-3 focus:ring-primary focus:border-primary uppercase text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-700" placeholder="Type 'ACCEPT' here" type="text"/>
-</div>
-</div>
-</div>
-<!-- Footer Actions -->
-<div class="p-8 flex items-center justify-between gap-6">
-<button class="text-sm font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 flex items-center gap-2">
-<span class="material-symbols-outlined text-lg">arrow_back</span>
-                    Return to Negotiation
-                </button>
-<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
-                    Confirm Final Commitment
-                    <span class="material-symbols-outlined">lock</span>
-</button>
-</div>
-<!-- Visual Alert Footer -->
-<div class="bg-red-600 py-1.5 px-8">
-<p class="text-[10px] text-white/90 font-bold uppercase tracking-[0.1em] text-center flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[14px]">warning</span>
-                    This action cannot be undone once confirmed
-                </p>
-</div>
-</div>
-</div>
-<!-- Hidden Background Images for metadata purposes -->
-<div class="hidden">
-<img alt="" data-alt="Abstract subtle geometric grid pattern" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgAO5RGsG9iGUcvuOGOR8UjXZV2IfCmiIPsLrQrBSw1AAU5HIs0avVEedAxU_GEZPv_iAqIKMZi5Dyj66pk01T2YdTOMs8wrJLxjTntVKSkVInLWcRP5hVQZkVrKItNN6oLx8UqmwSJBzoNM2T3nK2gY1N52Yh2tHBsAifHnRhRcMo6LwsN03hHlbrJyzXfUnIqxCPxEYD715-fxEf-6lYCDYdHpUmT4FEA9D7gpQ7iuNaT_82Exw8nxY4_Yu2Lwhgkc32E63VBRg"/>
-<img alt="" data-alt="Modern high-tech skyscraper facade detail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_9Qrbeud3d128gh2CUnqGpTAGhhmxxwH5Mpsq5h5lN0I22VQ2iDU-6epTb8x1_WlbfWODXUWEJ6mepjtfs0n0OuDgpsOc8Y3-kE56xbxkbQTbQh6d9F88SHHmPL0J8BcLhKYeODma8XWVZkPsIasmer8oGBOQ3EDj_wwAjE-lXK5uFDJ1DCTqULXwY7Gv9wgRqeqevwqkq7H4CSbOKZznotqRVLQ5myP0LlR7UObiUGoJQvh9kGTwkt6RgZi0TEzSFp_R0o3lcFk"/>
-</div>
-</body></html>
+  <!-- Background Content (Simulated Dashboard) -->
+  <div class="relative flex h-screen w-full flex-col overflow-hidden opacity-40 grayscale pointer-events-none">
+    <header
+      class="flex items-center justify-between border-b border-solid border-slate-200 dark:border-slate-800 px-10 py-3 bg-white dark:bg-slate-900">
+      <div class="flex items-center gap-4">
+        <div class="size-6 text-primary">
+          <svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path clip-rule="evenodd"
+              d="M12.0799 24L4 19.2479L9.95537 8.75216L18.04 13.4961L18.0446 4H29.9554L29.96 13.4961L38.0446 8.75216L44 19.2479L35.92 24L44 28.7521L38.0446 39.2479L29.96 34.5039L29.9554 44H18.0446L18.04 34.5039L9.95537 39.2479L4 28.7521L12.0799 24Z"
+              fill="currentColor" fill-rule="evenodd"></path>
+          </svg>
+        </div>
+        <h2 class="text-lg font-bold">FundLink</h2>
+      </div>
+      <div class="flex flex-1 justify-end gap-8">
+        <div class="flex items-center gap-9">
+          <span class="text-sm font-medium">Dashboard</span>
+          <span class="text-sm font-medium">Matches</span>
+          <span class="text-sm font-medium">Deals</span>
+        </div>
+        <div class="rounded-full size-10 bg-slate-300"></div>
+      </div>
+    </header>
+    <main class="flex-1 p-10">
+      <div class="max-w-4xl mx-auto space-y-6">
+        <div class="h-8 w-64 bg-slate-200 dark:bg-slate-800 rounded"></div>
+        <div class="h-64 w-full bg-slate-200 dark:bg-slate-800 rounded-xl"></div>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
+          <div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
+          <div class="h-32 bg-slate-200 dark:bg-slate-800 rounded-lg"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <!-- Modal Backdrop -->
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/80 modal-blur-backdrop p-4">
+    <!-- Modal Container -->
+    <div
+      class="relative w-full max-w-[640px] bg-white dark:bg-slate-900 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col">
+      <!-- Legal Gradient Header -->
+      <div class="legal-gradient px-8 pt-8 pb-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div
+            class="flex items-center justify-center size-10 rounded-full bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400">
+            <span class="material-symbols-outlined text-2xl">gavel</span>
+          </div>
+          <div>
+            <h2 class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white leading-tight">Final Deal
+              Commitment</h2>
+            <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">Transaction ID: FL-9942-DEAL-ALPHA</p>
+          </div>
+        </div>
+        <div class="bg-primary/5 dark:bg-primary/10 border border-primary/20 rounded-lg p-4 flex gap-3">
+          <span class="material-symbols-outlined text-primary text-xl">info</span>
+          <p class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+            You are about to terminate the negotiation phase for <strong
+              class="text-slate-900 dark:text-white font-semibold">Project Alpha</strong>. This action is legally
+            binding and triggers the platform's automatic escrow and documentation protocols.
+          </p>
+        </div>
+      </div>
+      <!-- Choice Selection -->
+      <div class="px-8 py-4">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Option: Accept -->
+          <label
+            class="relative flex flex-col items-center justify-center p-6 border-2 border-primary bg-primary/5 rounded-xl cursor-pointer group transition-all">
+            <input checked="" class="hidden peer" name="deal_choice" type="radio" value="accept" />
+            <div class="absolute top-3 right-3 opacity-100">
+              <span class="material-symbols-outlined text-primary">check_circle</span>
+            </div>
+            <span class="material-symbols-outlined text-4xl text-primary mb-2">handshake</span>
+            <span class="text-sm font-bold text-primary uppercase tracking-wider">Commit to Deal</span>
+            <p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2">Proceed to signing and fund
+              transfer</p>
+          </label>
+          <!-- Option: Decline -->
+          <label
+            class="relative flex flex-col items-center justify-center p-6 border-2 border-slate-200 dark:border-slate-800 hover:border-red-400/50 rounded-xl cursor-pointer group transition-all">
+            <input class="hidden peer" name="deal_choice" type="radio" value="decline" />
+            <div class="absolute top-3 right-3 opacity-0 peer-checked:opacity-100">
+              <span class="material-symbols-outlined text-red-500">cancel</span>
+            </div>
+            <span
+              class="material-symbols-outlined text-4xl text-slate-400 dark:text-slate-600 group-hover:text-red-400 mb-2 transition-colors">block</span>
+            <span
+              class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider group-hover:text-red-500 transition-colors">Decline</span>
+            <p class="text-[11px] text-center text-slate-500 dark:text-slate-400 mt-2">Terminate discussion and archive
+              record</p>
+          </label>
+        </div>
+      </div>
+      <!-- Friction Verification -->
+      <div
+        class="px-8 py-6 bg-slate-50 dark:bg-slate-950/50 border-t border-b border-slate-100 dark:border-slate-800/50">
+        <div class="max-w-md mx-auto">
+          <label
+            class="block text-[11px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest text-center mb-4">Verification
+            Required</label>
+          <p class="text-xs text-center text-slate-600 dark:text-slate-400 mb-4">
+            To confirm this transaction, type <span
+              class="font-mono font-bold text-slate-900 dark:text-white bg-slate-200 dark:bg-slate-800 px-1 rounded">ACCEPT</span>
+            below to authorize the finality of this decision.
+          </p>
+          <div class="relative">
+            <input
+              class="w-full text-center font-mono text-lg tracking-[0.2em] bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 rounded-lg py-3 focus:ring-primary focus:border-primary uppercase text-slate-900 dark:text-white placeholder:text-slate-300 dark:placeholder:text-slate-700"
+              placeholder="Type 'ACCEPT' here" type="text" />
+          </div>
+        </div>
+      </div>
+      <!-- Footer Actions -->
+      <div class="p-8 flex items-center justify-between gap-6">
+        <button
+          class="text-sm font-semibold text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 flex items-center gap-2">
+          <span class="material-symbols-outlined text-lg">arrow_back</span>
+          Return to Negotiation
+        </button>
+        <button
+          class="bg-primary hover:bg-primary/90 text-white px-8 py-3.5 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-primary/20 transition-all active:scale-[0.98]">
+          Confirm Final Commitment
+          <span class="material-symbols-outlined">lock</span>
+        </button>
+      </div>
+      <!-- Visual Alert Footer -->
+      <div class="bg-red-600 py-1.5 px-8">
+        <p
+          class="text-[10px] text-white/90 font-bold uppercase tracking-[0.1em] text-center flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-[14px]">warning</span>
+          This action cannot be undone once confirmed
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Hidden Background Images for metadata purposes -->
+  <div class="hidden">
+    <img alt="Abstract subtle geometric grid pattern"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgAO5RGsG9iGUcvuOGOR8UjXZV2IfCmiIPsLrQrBSw1AAU5HIs0avVEedAxU_GEZPv_iAqIKMZi5Dyj66pk01T2YdTOMs8wrJLxjTntVKSkVInLWcRP5hVQZkVrKItNN6oLx8UqmwSJBzoNM2T3nK2gY1N52Yh2tHBsAifHnRhRcMo6LwsN03hHlbrJyzXfUnIqxCPxEYD715-fxEf-6lYCDYdHpUmT4FEA9D7gpQ7iuNaT_82Exw8nxY4_Yu2Lwhgkc32E63VBRg" />
+    <img alt="Modern high-tech skyscraper facade detail"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_9Qrbeud3d128gh2CUnqGpTAGhhmxxwH5Mpsq5h5lN0I22VQ2iDU-6epTb8x1_WlbfWODXUWEJ6mepjtfs0n0OuDgpsOc8Y3-kE56xbxkbQTbQh6d9F88SHHmPL0J8BcLhKYeODma8XWVZkPsIasmer8oGBOQ3EDj_wwAjE-lXK5uFDJ1DCTqULXwY7Gv9wgRqeqevwqkq7H4CSbOKZznotqRVLQ5myP0LlR7UObiUGoJQvh9kGTwkt6RgZi0TEzSFp_R0o3lcFk" />
+  </div>
+</body>
+
+</html>
