@@ -25,9 +25,14 @@ export async function renderFounderReceived(section, app) {
     let currentTab = 'pending';
 
     const getRequests = () => {
-        // Mocking incoming requests from investors TO founders
+        // Get incoming requests from investors TO founders
         const activeRequests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-        return activeRequests.filter(r => r.to === 'FOUNDER');
+        // Filter for requests where founder is the recipient
+        return activeRequests.filter(r =>
+            r.to === 'FOUNDER' ||
+            r.toRole === 'FOUNDER' ||
+            r.toUserId === Auth.getCurrentUserId()
+        );
     };
 
     const renderGrid = () => {
@@ -35,6 +40,8 @@ export async function renderFounderReceived(section, app) {
         const pending = requests.filter(r => r.status === 'pending');
         const accepted = requests.filter(r => r.status === 'accepted');
         const declined = requests.filter(r => r.status === 'declined');
+
+        console.log('[FounderReceived] Requests:', { pending: pending.length, accepted: accepted.length, declined: declined.length });
 
         // Update Badges
         const pendingBadge = section.querySelector('#pending-badge');
@@ -86,7 +93,10 @@ export async function renderFounderReceived(section, app) {
             const thesisMatch = req.thesisMatch || '92%';
             const ticketSize = req.ticketSize || '$1M - $2M';
             const investorType = req.investorType || 'Institutional VC';
-            const receivedTime = new Date(req.timestamp).toLocaleDateString();
+            const receivedTime = req.timestamp ? new Date(req.timestamp).toLocaleDateString() : 'Recently';
+
+            // Get investor name - prefer fromName, then from, then targetName
+            const investorName = req.fromName || req.from || req.targetName || 'Unknown Investor';
 
             return `
             <div class="bg-white dark:bg-slate-900 rounded-xl p-5 border border-slate-200 dark:border-slate-800 card-shadow flex flex-col sm:flex-row gap-5 items-start">
@@ -101,7 +111,7 @@ export async function renderFounderReceived(section, app) {
                         <span class="text-slate-300 dark:text-slate-700">|</span>
                         <span class="text-slate-500 text-[11px] font-medium">Received ${receivedTime}</span>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">${req.from}</h3>
+                    <h3 class="text-lg font-bold text-slate-900 dark:text-white truncate">${investorName}</h3>
                     <p class="text-slate-500 text-sm mt-1 mb-4 line-clamp-1 italic">"Interested in your sector."</p>
                     <div class="grid grid-cols-2 gap-4 mb-6">
                         <div>
@@ -165,10 +175,20 @@ export async function renderFounderReceived(section, app) {
         if (idx !== -1) {
             requests[idx].status = status;
             localStorage.setItem('fundlink_connection_requests', JSON.stringify(requests));
+
             // Show toast
             if (app && app.showToast) {
                 app.showToast(`Request ${status}`, 'success');
             }
+
+            // Update notification count
+            window.updateNotificationCount?.();
+
+            // Dispatch event for other components
+            window.dispatchEvent(new CustomEvent('fundlink:requestUpdate', {
+                detail: { type: status, requestId: id }
+            }));
+
             renderGrid();
         }
     };
@@ -189,5 +209,9 @@ export async function renderFounderReceived(section, app) {
         });
     });
 
+    // Initial render
     renderGrid();
+
+    // Update notification count when page loads
+    window.updateNotificationCount?.();
 }

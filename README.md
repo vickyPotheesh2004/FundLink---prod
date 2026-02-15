@@ -161,7 +161,9 @@ graph LR
 *   **npm**: v8.0.0 or higher
 *   **Web Browser**: Chrome, Edge, or Firefox (Latest)
 
-### Installation Guide
+### Installation & Run Guide
+
+Follow these steps to get the project running on your local machine:
 
 1.  **Clone the Repository**
     ```bash
@@ -175,11 +177,9 @@ graph LR
     ```
 
 3.  **Run the Application**
-    You can start the server using npm or node directly:
+    Start the server:
     ```bash
     npm start
-    # OR
-    node backend/server.js
     ```
     *The server will start on port 3000 by default.*
 

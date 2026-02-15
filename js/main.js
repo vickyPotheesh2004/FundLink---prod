@@ -42,26 +42,29 @@ const ROUTES = {
         role: null,
         renderer: async (s, a) => {
             await renderStatic(s, a, '/frontend/role_commitment_&_authentication_2.html');
-            const btn = document.getElementById('btn-verify-investor');
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    Auth.login('INVESTOR');
-                    // Create initial investor profile
-                    Auth.saveUserProfile({
-                        name: 'Investor User',
-                        firmName: 'My VC Fund',
-                        thesis: ['saas', 'fintech'],
-                        stage: ['seed', 'series-a'],
-                        location: 'bangalore',
-                        ticketSize: '1m-5m',
-                        ticketRange: '$1M - $5M',
-                        description: 'Early-stage investor',
-                        domains: ['SaaS', 'FinTech'],
-                        investorType: 'Institutional VC'
+            // Use setTimeout to ensure DOM is ready
+            setTimeout(() => {
+                const btn = document.getElementById('btn-verify-investor');
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        Auth.login('INVESTOR');
+                        // Create initial investor profile
+                        Auth.saveUserProfile({
+                            name: 'Investor User',
+                            firmName: 'My VC Fund',
+                            thesis: ['saas', 'fintech'],
+                            stage: ['seed', 'series-a'],
+                            location: 'bangalore',
+                            ticketSize: '1m-5m',
+                            ticketRange: '$1M - $5M',
+                            description: 'Early-stage investor',
+                            domains: ['SaaS', 'FinTech'],
+                            investorType: 'Institutional VC'
+                        });
+                        window.location.hash = '#investor-verify';
                     });
-                    window.location.hash = '#investor-verify';
-                });
-            }
+                }
+            }, 100);
         }
     },
     'investor-verify': {
@@ -83,24 +86,27 @@ const ROUTES = {
         role: null,
         renderer: async (s, a) => {
             await renderStatic(s, a, '/frontend/role_commitment_&_authentication_3.html');
-            const btn = document.getElementById('btn-verify-identity');
-            if (btn) {
-                btn.addEventListener('click', () => {
-                    Auth.login('FOUNDER');
-                    // Create initial founder profile
-                    Auth.saveUserProfile({
-                        name: 'Founder User',
-                        companyName: 'My Startup',
-                        stage: 'seed',
-                        domain: 'saas',
-                        location: 'bangalore',
-                        ticketSize: '500k-1m',
-                        description: 'Innovative SaaS startup',
-                        aiScore: Math.floor(Math.random() * 20) + 75 // Random score 75-95
+            // Use setTimeout to ensure DOM is ready
+            setTimeout(() => {
+                const btn = document.getElementById('btn-verify-identity');
+                if (btn) {
+                    btn.addEventListener('click', () => {
+                        Auth.login('FOUNDER');
+                        // Create initial founder profile
+                        Auth.saveUserProfile({
+                            name: 'Founder User',
+                            companyName: 'My Startup',
+                            stage: 'seed',
+                            domain: 'saas',
+                            location: 'bangalore',
+                            ticketSize: '500k-1m',
+                            description: 'Innovative SaaS startup',
+                            aiScore: Math.floor(Math.random() * 20) + 75 // Random score 75-95
+                        });
+                        window.location.hash = '#founder-verify';
                     });
-                    window.location.hash = '#founder-verify';
-                });
-            }
+                }
+            }, 100);
         }
     },
     'founder-verify': {
@@ -201,13 +207,19 @@ class App {
             return;
         }
 
-        // Role guard
+        // Role guard - Allow seamless access for logged-in users
+        // If user is logged in but with different role, auto-switch role
         if (route.role && route.role !== 'ANY') {
-            if (!Auth.isLoggedIn() || Auth.getRole() !== route.role) {
-                console.warn(`[Router] Access denied for #${hash}. Required: ${route.role}`);
-                this.showToast('Access restricted. Please log in with the correct role.', 'error');
+            if (!Auth.isLoggedIn()) {
+                console.warn(`[Router] User not logged in. Redirecting to role selection.`);
                 window.location.hash = '#role-select';
                 return;
+            }
+            // Auto-switch role if needed for seamless access
+            if (Auth.getRole() !== route.role) {
+                console.log(`[Router] Auto-switching role from ${Auth.getRole()} to ${route.role} for seamless access`);
+                Auth.switchRole(route.role);
+                this.showToast(`Switched to ${route.role} view`, 'success');
             }
         }
         if (route.role === 'ANY' && !Auth.isLoggedIn()) {
@@ -375,4 +387,163 @@ window.FundLinkDemo = {
         window.FundLinkApp?.showToast(`Request sent to ${targetName}!`, 'info');
     },
     // ...
+};
+
+// ─── Global Role Switch Handler ─────────────────────────────────────────
+// This function is called from HTML templates via onchange="window.handleRoleSwitch(this.value)"
+window.handleRoleSwitch = (newRole) => {
+    // Role switching is always allowed - no restrictions
+    if (Auth.switchRole(newRole)) {
+        // Navigate to appropriate dashboard
+        const targetRoute = newRole === 'FOUNDER' ? '#founder-dashboard' : '#investor-feed';
+        window.FundLinkApp?.showToast(`Switched to ${newRole} view`, 'success');
+        window.location.hash = targetRoute;
+    }
+};
+
+// ─── Global Demo Mode UI Handler ────────────────────────────────────────
+// Initialize demo mode UI elements (called from page renderers)
+// Always show role switcher for seamless access
+window.initDemoModeUI = () => {
+    const demoLabel = document.getElementById('demo-mode-label');
+    const roleSwitcherContainer = document.getElementById('role-switcher-container');
+    const roleSwitcher = document.getElementById('role-switcher');
+
+    // Always show role switcher for seamless access
+    if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
+
+    // Set current role in switcher
+    if (roleSwitcher) {
+        roleSwitcher.value = Auth.getRole() || 'FOUNDER';
+    }
+
+    // Show demo label if in demo mode
+    if (demoLabel) {
+        if (Auth.isDemoMode()) {
+            demoLabel.classList.remove('hidden');
+        } else {
+            demoLabel.classList.add('hidden');
+        }
+    }
+};
+
+// ─── Global Navigation Helpers ──────────────────────────────────────────
+window.navigateToReceivedInterests = () => {
+    console.log('[Main] Navigating to received interests...');
+    window.location.hash = '#founder-received';
+};
+
+window.navigateToWorkspace = () => {
+    window.location.hash = '#accepted-workspace';
+};
+
+// ─── Global Notification Count Update ───────────────────────────────────
+window.updateNotificationCount = () => {
+    const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
+    // Count pending requests where founder is the recipient
+    const pendingCount = requests.filter(r =>
+        (r.to === 'FOUNDER' || r.toRole === 'FOUNDER') &&
+        r.status === 'pending'
+    ).length;
+
+    console.log('[Main] Updating notification count:', pendingCount);
+
+    // Update header notification badge
+    const badge = document.getElementById('notification-badge');
+    if (badge) {
+        badge.textContent = pendingCount;
+        badge.classList.toggle('hidden', pendingCount === 0);
+    }
+
+    // Update Network Insights card count
+    const countEl = document.getElementById('pending-interests-count');
+    if (countEl) {
+        countEl.textContent = pendingCount;
+    }
+
+    return pendingCount;
+};
+
+// ─── Global Notification Icon Click Handler ──────────────────────────────
+window.handleNotificationClick = () => {
+    console.log('[Main] Notification icon clicked');
+    window.navigateToReceivedInterests();
+};
+
+// ─── Global Founder Dashboard Functions (stubs - overridden by page renderer) ───
+window.sortFoundersByMatchScore = () => {
+    console.log('[Main] sortFoundersByMatchScore called - waiting for page renderer');
+};
+
+window.resetFounderFilters = () => {
+    console.log('[Main] resetFounderFilters called - waiting for page renderer');
+};
+
+window.founderRequestConnection = (investorName, btnId) => {
+    console.log('[Main] founderRequestConnection called - waiting for page renderer');
+};
+
+window.applyFounderFilters = () => {
+    console.log('[Main] applyFounderFilters called - waiting for page renderer');
+};
+
+window.searchInvestors = (query) => {
+    console.log('[Main] searchInvestors called - waiting for page renderer');
+};
+
+// ─── Global Investor Feed Functions (stubs - overridden by page renderer) ───
+window.sortCardsByMatchScore = () => {
+    console.log('[Main] sortCardsByMatchScore called - waiting for page renderer');
+};
+
+window.setMinScore = (value) => {
+    console.log('[Main] setMinScore called - waiting for page renderer');
+};
+
+window.toggleStageDropdown = () => {
+    console.log('[Main] toggleStageDropdown called - waiting for page renderer');
+};
+
+window.selectAllStages = () => {
+    console.log('[Main] selectAllStages called - waiting for page renderer');
+};
+
+window.clearAllStages = () => {
+    console.log('[Main] clearAllStages called - waiting for page renderer');
+};
+
+window.applyFilters = () => {
+    console.log('[Main] applyFilters called - waiting for page renderer');
+};
+
+window.resetFilters = () => {
+    console.log('[Main] resetFilters called - waiting for page renderer');
+};
+
+window.openAIReport = (startupName) => {
+    console.log('[Main] openAIReport called - waiting for page renderer');
+};
+
+window.closeAIReport = () => {
+    console.log('[Main] closeAIReport called - waiting for page renderer');
+};
+
+window.connectWithStartup = (btnId, startupName, founderId) => {
+    console.log('[Main] connectWithStartup called - waiting for page renderer');
+};
+
+window.updateThesisSelection = (checkbox) => {
+    console.log('[Main] updateThesisSelection called - waiting for page renderer');
+};
+
+window.handleScoreSlider = (value) => {
+    console.log('[Main] handleScoreSlider called - waiting for page renderer');
+};
+
+window.updateStageSelection = () => {
+    console.log('[Main] updateStageSelection called - waiting for page renderer');
+};
+
+window.removeStageTag = (stage) => {
+    console.log('[Main] removeStageTag called - waiting for page renderer');
 };

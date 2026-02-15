@@ -1,18 +1,21 @@
 
 # FundLink Technical Requirements
 
-## 1. Core Stack (Current Implementation)
+## 1. Core Stack
 *   **Runtime**: Node.js v16+ (Recommended: v18 LTS)
 *   **Package Manager**: npm v8+ or yarn v1.22+
 *   **Frontend**:
     *   HTML5 (Semantic Web Standards)
-    *   CSS3 (Tailwind CSS v3.x via CDN for rapid prototyping)
-    *   JavaScript (ES6+ Modules, No Build Step required for dev)
-    *   Icons: Material Symbols Outlined (Google Fonts)
-    *   Fonts: Inter (Google Fonts)
-*   **Backend / Simulation**:
-    *   Local Storage API (Client-side persistence for simulation)
-    *   Node.js (for running verification scripts)
+    *   CSS3 (Tailwind CSS v3.x)
+    *   JavaScript (ES6+ Modules)
+*   **Backend**:
+    *   Node.js with Express.js
+    *   Environment handling: `dotenv`
+    *   Security: `helmet`, `cors`, `rate-limit`
+*   **AI Integration**:
+    *   OpenAI API (GPT-4)
+    *   Google Gemini API (1.5 Flash/Pro)
+    *   Simulation Mode (for development/testing)
 
 ## 2. Module Dependencies
 
@@ -21,74 +24,82 @@
 | :--- | :--- | :--- |
 | `js/main.js` | Application bootstrap & routing | All page modules |
 | `js/modules/auth.js` | Authentication & RBAC | None |
-| `js/modules/AIClient.js` | AI simulation & API client | None |
+| `js/modules/AIClient.js` | AI API Client (OpenAI/Gemini/Demo) | None |
 | `js/modules/renderStatic.js` | Static HTML loader | None |
+
+### Backend Modules
+| Module | Purpose |
+| :--- | :--- |
+| `backend/server.js` | API Gateway & Middleware |
+| `backend/controllers/aiController.js` | AI Request Handling & Rate Limiting |
+| `backend/ai/matchScore.js` | Matchmaking Algorithm |
 
 ### Page Modules
 | Module | Purpose | Route |
 | :--- | :--- | :--- |
-| `js/pages/founderDashboard.js` | Founder main dashboard | `#founder-dashboard` |
-| `js/pages/founderProfile.js` | Founder profile management | `#founder-profile` |
-| `js/pages/founderReceived.js` | Founder received requests | `#founder-received` |
-| `js/pages/investorRequests.js` | Investor connection requests | `#investor-requests` |
-| `js/pages/acceptedWorkspace.js` | **NEW**: Accepted connections workspace | `#accepted-workspace` |
-| `js/pages/workspace.js` | Secure negotiation workspace | `#workspace` |
-| `js/pages/dealClosure.js` | Deal closure module | `#deal-closure` |
-
-### New Module: Accepted Connections Workspace
-The `acceptedWorkspace.js` module provides:
-- **Connection List**: Displays all accepted connections in a sidebar
-- **Partner Selection**: Click to select and view partner details
-- **Talk Tab**: Secure messaging interface
-- **Deal Disclosure Tab**: Deal summary and shared information status
-- **Documents Tab**: Shared documents viewer
-- **AI Report Generation**: Partnership analysis reports
+| `js/pages/founderDashboard.js` | Founder operations | `#founder-dashboard` |
+| `js/pages/investorFeed.js` | Investor deal flow | `#investor-feed` |
+| `js/pages/workspace.js` | Secure negotiation | `#workspace` |
+| `js/pages/acceptedWorkspace.js` | Connection management | `#accepted-workspace` |
 
 ## 3. Infrastructure (Target Production)
-*   **Web Server**: Nginx or Apache (Reverse Proxy)
-*   **Application Server**: Node.js (Express/NestJS)
-*   **Database**: PostgreSQL 14+ (Relational Data)
-*   **Vector Database**: Pinecone or Milvus (AI Matching)
-*   **Caching**: Redis (Session Management)
-*   **CDN**: Cloudflare (Static Assets & Security)
+*   **Application Server**: Node.js (Express) on Cloud Run / Vercel
+*   **Database**: PostgreSQL 14+ (Users, Connections, Messages)
+*   **Vector Database**: Pinecone / Milvus (Embeddings for matchmaking)
+*   **Object Storage**: AWS S3 / GCS (Secure Vault for Pitch Decks)
+*   **Caching**: Redis (Rate Limiting, Session Management)
 
-## 4. Development Environment
-*   **OS**: Windows 10/11, macOS, or Linux
-*   **IDE**: VS Code (Recommended Extensions: Tailwind CSS IntelliSense, Prettier)
-*   **Browser**: Chrome 90+, Edge 90+, Firefox 90+ (ES Module support required)
+## 4. Environment Variables (`.env`)
 
-## 5. External Services (Future Integration)
-*   **AI/LLM Provider**: OpenAI API (GPT-4) or Google Gemini API
-*   **Auth Provider**: Firebase Auth or Auth0
-*   **Storage**: AWS S3 or Google Cloud Storage (Secure Document Vault)
+The application requires the following environment variables for proper operation:
 
-## 6. Storage Keys (Local Storage Simulation)
+```ini
+# Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Security
+ALLOWED_ORIGINS=http://localhost:3000
+
+# AI Provider Configuration ('demo', 'openai', 'gemini')
+AI_PROVIDER=demo
+AI_RATE_LIMIT=20
+
+# OpenAI (If AI_PROVIDER=openai)
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o
+
+# Gemini (If AI_PROVIDER=gemini)
+GEMINI_API_KEY=...
+GEMINI_MODEL=gemini-1.5-flash
+```
+
+## 5. Security Requirements
+*   **Authentication**: JWT-based stateless authentication (replacing localStorage).
+*   **Authorization**: Role-Based Access Control (RBAC) enforced at API Gateway.
+*   **Data Protection**:
+    *   TLS 1.3 encryption in transit.
+    *   AES-256 encryption at rest for sensitive vault data.
+*   **API Security**:
+    *   Rate Limiting (Token Bucket / Sliding Window).
+    *   CORS configuration.
+    *   Input Validation (Sanitization) on all endpoints.
+
+## 6. API Requirements
+The backend must expose the following RESTful endpoints (see `DESIGN.md` for full spec):
+
+*   `POST /api/auth/*` - Authentication & Registration
+*   `POST /api/ai/analyze` - Pitch Deck Analysis
+*   `POST /api/ai/match` - Compatibility Scoring
+*   `POST /api/ai/report` - Due Diligence Reporting
+*   `GET /api/user/profile` - User Profile Management
+*   `POST /api/connections/*` - Connection Lifecycle
+
+## 7. Storage Keys (Local Storage - Deprecated/Dev Only)
+*Note: Production updates will migrate these to PostgreSQL.*
 
 | Key | Purpose |
 | :--- | :--- |
-| `fundlink_role` | Current user role (FOUNDER/INVESTOR) |
-| `fundlink_user_profile` | User profile data |
-| `fundlink_connection_requests` | All connection requests |
-| `fundlink_workspace_connections` | Active workspace connections |
-| `fundlink_workspace_messages` | Messages per connection |
-| `fundlink_selected_connection` | Currently selected connection ID |
-
-## 7. Routing Structure
-
-```
-#landing                    → Public landing page
-#role-select               → Role selection
-#investor-auth             → Investor authentication
-#investor-feed             → Investor evaluation feed
-#investor-requests         → Investor connection requests
-#investor-portfolio        → Investor portfolio
-#investor-thesis           → Investment thesis
-#investor-profile          → Investor profile
-#founder-auth              → Founder authentication
-#founder-dashboard         → Founder dashboard
-#founder-profile           → Founder profile
-#founder-received          → Founder received requests
-#accepted-workspace        → NEW: Accepted connections workspace
-#workspace                 → Secure negotiation workspace
-#deal-closure              → Deal closure
-```
+| `fundlink_role` | Current user role |
+| `fundlink_user_profiles` | Mock database for user profiles |
+| `fundlink_connection_requests` | Mock database for connections |

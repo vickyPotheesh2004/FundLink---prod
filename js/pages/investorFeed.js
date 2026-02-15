@@ -428,6 +428,8 @@ export async function renderInvestorFeed(section, app) {
     };
 
     window.openAIReport = async (startupName) => {
+        console.log('[InvestorFeed] Opening AI report for:', startupName);
+
         const modal = document.getElementById('ai-report-modal');
         const backdrop = document.getElementById('ai-modal-backdrop');
         const panel = document.getElementById('ai-modal-panel');
@@ -435,59 +437,148 @@ export async function renderInvestorFeed(section, app) {
         const scoreVal = document.getElementById('ai-score-val');
         const thesis = document.getElementById('ai-thesis');
 
+        if (!modal) {
+            console.error('[InvestorFeed] AI report modal not found');
+            alert('AI Report modal not found. Please refresh the page.');
+            return;
+        }
+
         modal.classList.remove('hidden');
         // Small delay to allow display:block to apply before opacity transition
         requestAnimationFrame(() => {
-            backdrop.classList.remove('opacity-0');
-            panel.classList.remove('opacity-0', 'scale-95');
+            if (backdrop) backdrop.classList.remove('opacity-0');
+            if (panel) panel.classList.remove('opacity-0', 'scale-95');
         });
 
-        title.innerText = `Analyzing ${startupName}...`;
+        if (title) title.innerText = `Analyzing ${startupName}...`;
+        if (scoreVal) scoreVal.innerText = '...';
+        if (thesis) thesis.innerText = 'Generating analysis...';
 
         // Call AI Module
         try {
-            const report = await app.ai.generateSeniorAnalystReport(startupName);
-            title.innerText = `AI Due Diligence: ${startupName}`;
-            scoreVal.innerText = Math.floor(Math.random() * (98 - 75) + 75);
-            thesis.innerText = `"${report.executive_framing.solution_thesis}"`;
+            // Check if app.ai exists, if not create a new AIClient
+            let aiClient = app?.ai;
+            if (!aiClient) {
+                console.log('[InvestorFeed] Creating new AIClient instance');
+                const { AIClient } = await import('../modules/AIClient.js');
+                aiClient = new AIClient('DEMO');
+            }
+
+            const report = await aiClient.generateSeniorAnalystReport(startupName);
+            console.log('[InvestorFeed] AI report generated:', report);
+
+            if (title) title.innerText = `AI Due Diligence: ${startupName}`;
+            if (scoreVal) scoreVal.innerText = Math.floor(Math.random() * (98 - 75) + 75);
+            if (thesis) thesis.innerText = `"${report?.executive_framing?.solution_thesis || 'Strong value proposition with market potential.'}"`;
+
+            if (app && app.showToast) {
+                app.showToast(`AI analysis complete for ${startupName}`, 'success');
+            }
         } catch (err) {
-            console.error("AI Report Failed", err);
-            title.innerText = `Analysis Failed`;
-            thesis.innerText = "Could not generate report.";
+            console.error("[InvestorFeed] AI Report Failed:", err);
+            if (title) title.innerText = `Analysis Failed`;
+            if (thesis) thesis.innerText = "Could not generate report. Please try again.";
+
+            if (app && app.showToast) {
+                app.showToast('AI analysis failed. Please try again.', 'error');
+            }
         }
     };
 
     window.closeAIReport = () => {
+        console.log('[InvestorFeed] Closing AI report modal');
+
         const modal = document.getElementById('ai-report-modal');
         const backdrop = document.getElementById('ai-modal-backdrop');
         const panel = document.getElementById('ai-modal-panel');
 
-        backdrop.classList.add('opacity-0');
-        panel.classList.add('opacity-0', 'scale-95');
+        if (backdrop) backdrop.classList.add('opacity-0');
+        if (panel) panel.classList.add('opacity-0', 'scale-95');
         setTimeout(() => {
-            modal.classList.add('hidden');
+            if (modal) modal.classList.add('hidden');
         }, 300);
     };
 
+    // Connect with startup - supports both 2-arg and 3-arg calls
+    // Called as: connectWithStartup(btnId, startupName) or connectWithStartup(btnId, startupName, founderId)
     window.connectWithStartup = (btnId, startupName, founderId) => {
-        const btn = document.getElementById(btnId);
-        if (!btn) return;
+        console.log('[InvestorFeed] connectWithStartup called with:', { btnId, startupName, founderId });
 
+        const btn = document.getElementById(btnId);
+        if (!btn) {
+            console.error('[InvestorFeed] Button not found:', btnId);
+            return;
+        }
+
+        // Prevent duplicate requests
+        if (btn.disabled) {
+            console.log('[InvestorFeed] Button already disabled, request already sent');
+            return;
+        }
+
+        // Get existing requests to check for duplicates
+        const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
+        const existingRequest = requests.find(r =>
+            r.targetName === startupName &&
+            r.from === 'INVESTOR' &&
+            r.to === 'FOUNDER' &&
+            r.status === 'pending'
+        );
+
+        if (existingRequest) {
+            alert(`You already have a pending request to ${startupName}`);
+            return;
+        }
+
+        // Update button state immediately
         btn.innerText = "Request Sent";
         btn.classList.remove('bg-primary', 'hover:bg-blue-700');
         btn.classList.add('bg-slate-400', 'cursor-not-allowed');
         btn.disabled = true;
 
-        // Get current user ID and send connection request
+        // Create connection request
         const currentUserId = Auth.getCurrentUserId();
-        if (currentUserId && founderId) {
-            Auth.sendConnectionRequest(currentUserId, founderId);
-            alert(`Connection request sent to ${startupName}!`);
-        } else {
-            // Fallback to legacy method for demo data
-            Auth.sendConnectionRequest('INVESTOR', 'FOUNDER', startupName);
-            alert(`✅ Connection request sent to ${startupName}!\n\n👉 DEMO STEP: Switch to the 'Founder View' -> 'Inbox' to see and accept this request.`);
+        const currentUserProfile = Auth.getCurrentUserProfile();
+        const investorName = currentUserProfile?.name || currentUserProfile?.firmName || 'Investor';
+
+        // Generate founderId if not provided (using startup name as identifier)
+        const effectiveFounderId = founderId || `founder_${startupName.toLowerCase().replace(/\s+/g, '_')}`;
+
+        const newRequest = {
+            id: `req_${Date.now()}`,
+            from: 'INVESTOR',
+            fromUserId: currentUserId,
+            fromName: investorName,
+            to: 'FOUNDER',
+            toUserId: effectiveFounderId,
+            targetName: startupName,
+            status: 'pending',
+            timestamp: new Date().toISOString(),
+            thesisMatch: Math.floor(Math.random() * 15) + 85 + '%',
+            ticketSize: '$1M - $2M',
+            investorType: 'Institutional VC'
+        };
+
+        // Save to localStorage
+        requests.push(newRequest);
+        localStorage.setItem('fundlink_connection_requests', JSON.stringify(requests));
+
+        // Dispatch event for real-time updates
+        window.dispatchEvent(new CustomEvent('fundlink:requestUpdate', {
+            detail: { type: 'new', request: newRequest }
+        }));
+
+        console.log('[InvestorFeed] Connection request sent:', newRequest);
+
+        // Show success message
+        if (app && app.showToast) {
+            app.showToast(`Connection request sent to ${startupName}!`, 'success');
         }
+
+        // Update notification count for founder view
+        window.updateNotificationCount?.();
+
+        alert(`✅ Connection request sent to ${startupName}!\n\n👉 DEMO STEP: Switch to 'Founder View' to see this request in 'Received Interests'.`);
     };
 
     window.sortCardsByMatchScore = () => {
@@ -508,6 +599,71 @@ export async function renderInvestorFeed(section, app) {
         cards.forEach(card => container.appendChild(card));
         const sortBtn = document.getElementById('btn-sort-match');
         if (sortBtn) sortBtn.innerHTML = '<span class="material-symbols-outlined text-sm">check</span> Sorted: Highest Match';
+
+        if (app && app.showToast) app.showToast('Sorted by match score', 'success');
+    };
+
+    // Export CSV functionality
+    window.exportToCSV = () => {
+        const grid = document.getElementById('deals-grid');
+        if (!grid) {
+            console.error('[InvestorFeed] Deals grid not found');
+            return;
+        }
+
+        const cards = grid.querySelectorAll('.deal-card');
+        const visibleCards = Array.from(cards).filter(card => card.style.display !== 'none');
+
+        if (visibleCards.length === 0) {
+            if (app && app.showToast) app.showToast('No deals to export', 'warning');
+            return;
+        }
+
+        // CSV Headers
+        const headers = ['Startup Name', 'Domain', 'Stage', 'Location', 'Match Score', 'Target Raise', 'Commitment', 'Status'];
+
+        // Extract data from cards
+        const rows = visibleCards.map(card => {
+            const name = card.querySelector('h3')?.textContent?.trim() || 'Unknown';
+            const domain = card.getAttribute('data-domain') || 'N/A';
+            const stage = card.getAttribute('data-stage') || 'N/A';
+            const location = card.getAttribute('data-location') || 'N/A';
+            const scoreEl = card.querySelector('.match-score-radial span.text-primary');
+            const score = scoreEl ? scoreEl.textContent.trim() : 'N/A';
+
+            const stats = card.querySelectorAll('.grid grid-cols-3 gap-4 p, .text-sm.font-bold');
+            let targetRaise = 'N/A';
+            let commitment = 'N/A';
+
+            const statTexts = card.querySelectorAll('.text-sm.font-bold');
+            statTexts.forEach((stat, idx) => {
+                if (idx === 0) targetRaise = stat.textContent.trim();
+                if (idx === 1) commitment = stat.textContent.trim();
+            });
+
+            return [name, domain, stage, location, score, targetRaise, commitment, 'Available'];
+        });
+
+        // Create CSV content
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+        ].join('\n');
+
+        // Create and download file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+
+        link.setAttribute('href', url);
+        link.setAttribute('download', `fundlink_deals_${new Date().toISOString().split('T')[0]}.csv`);
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        if (app && app.showToast) app.showToast(`Exported ${visibleCards.length} deals to CSV`, 'success');
+        console.log(`[InvestorFeed] Exported ${visibleCards.length} deals to CSV`);
     };
 
     // Navigate to workspace
@@ -610,35 +766,33 @@ export async function renderInvestorFeed(section, app) {
     }
 
     // 7. Demo Mode Initialization
-    // Initialize demo mode UI elements
+    // Initialize demo mode UI elements - Always show role switcher for seamless access
     window.initDemoModeUI = () => {
         const demoLabel = document.getElementById('demo-mode-label');
         const roleSwitcherContainer = document.getElementById('role-switcher-container');
         const roleSwitcher = document.getElementById('role-switcher');
 
-        if (Auth.isDemoMode()) {
-            // Show demo mode UI
-            if (demoLabel) demoLabel.classList.remove('hidden');
-            if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
+        // Always show role switcher for seamless access
+        if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
 
-            // Set current role in switcher
-            if (roleSwitcher) {
-                roleSwitcher.value = Auth.getRole() || 'INVESTOR';
+        // Set current role in switcher
+        if (roleSwitcher) {
+            roleSwitcher.value = Auth.getRole() || 'INVESTOR';
+        }
+
+        // Show demo label if in demo mode
+        if (demoLabel) {
+            if (Auth.isDemoMode()) {
+                demoLabel.classList.remove('hidden');
+            } else {
+                demoLabel.classList.add('hidden');
             }
-        } else {
-            // Hide demo mode UI
-            if (demoLabel) demoLabel.classList.add('hidden');
-            if (roleSwitcherContainer) roleSwitcherContainer.classList.add('hidden');
         }
     };
 
-    // Handle role switching from UI
+    // Handle role switching from UI - Always allowed for seamless access
     window.handleRoleSwitch = (newRole) => {
-        if (!Auth.isDemoMode()) {
-            // Enable demo mode first
-            Auth.enableDemoMode();
-        }
-
+        // Role switching is always allowed - no demo mode required
         if (Auth.switchRole(newRole)) {
             // Navigate to appropriate dashboard
             const targetRoute = newRole === 'FOUNDER' ? '#founder-dashboard' : '#investor-feed';
@@ -651,6 +805,18 @@ export async function renderInvestorFeed(section, app) {
 
     // Initialize demo mode UI on load
     window.initDemoModeUI();
+
+    // Wire up AI modal close button
+    const closeAIModalBtn = document.getElementById('close-ai-report-modal');
+    if (closeAIModalBtn) {
+        closeAIModalBtn.addEventListener('click', window.closeAIReport);
+    }
+
+    // Also close modal when clicking backdrop
+    const aiBackdrop = document.getElementById('ai-modal-backdrop');
+    if (aiBackdrop) {
+        aiBackdrop.addEventListener('click', window.closeAIReport);
+    }
 
     // Listen for demo mode changes
     window.addEventListener('fundlink:demoModeChanged', () => {

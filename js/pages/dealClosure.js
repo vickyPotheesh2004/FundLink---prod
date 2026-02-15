@@ -31,7 +31,7 @@ export async function renderDealClosure(section, app) {
 
     if (backBtn) {
         backBtn.addEventListener('click', () => {
-            window.location.hash = '#workspace';
+            window.location.hash = '#accepted-workspace';
         });
     }
 
@@ -87,7 +87,7 @@ export async function renderDealClosure(section, app) {
 
             // Navigate away
             setTimeout(() => {
-                window.location.hash = '#workspace';
+                window.location.hash = '#accepted-workspace';
             }, 2000);
         });
     }

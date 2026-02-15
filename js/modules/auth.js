@@ -39,16 +39,11 @@ export const Auth = {
     },
 
     /**
-     * Switch role in demo mode (only allowed when demo mode is enabled)
+     * Switch role - always allowed for seamless access
      * @param {string} newRole - 'FOUNDER' or 'INVESTOR'
      * @returns {boolean} - Success status
      */
     switchRole(newRole) {
-        if (!this.isDemoMode()) {
-            console.warn('[Auth] Role switching requires demo mode to be enabled');
-            return false;
-        }
-
         if (!Object.values(this.ROLES).includes(newRole)) {
             console.error(`[Auth] Invalid role: ${newRole}`);
             return false;
@@ -56,11 +51,11 @@ export const Auth = {
 
         const previousRole = this.getRole();
         localStorage.setItem('fundlink_role', newRole);
-        console.log(`[Auth] Role switched from ${previousRole} to ${newRole} (Demo Mode)`);
+        console.log(`[Auth] Role switched from ${previousRole} to ${newRole}`);
 
         // Dispatch event for UI updates
         window.dispatchEvent(new CustomEvent('fundlink:roleSwitched', {
-            detail: { previousRole, newRole, demoMode: true }
+            detail: { previousRole, newRole }
         }));
 
         return true;
@@ -68,26 +63,17 @@ export const Auth = {
 
     /**
      * Attempts to log in a user with a specific role.
-     * In demo mode, role switching is allowed. Otherwise, enforces immutability.
+     * Role switching is always allowed for seamless access.
      * @param {string} role - 'FOUNDER' or 'INVESTOR'
      */
     login(role) {
         const currentRole = this.getRole();
 
-        // In demo mode, allow role switching
-        if (this.isDemoMode() && currentRole && currentRole !== role) {
-            console.log(`[Auth] Demo mode: Allowing role switch from ${currentRole} to ${role}`);
-            localStorage.setItem('fundlink_role', role);
-            console.log(`[Auth] User logged in as ${role}`);
-            return true;
+        // Always allow role switching for seamless access
+        if (currentRole && currentRole !== role) {
+            console.log(`[Auth] Allowing role switch from ${currentRole} to ${role}`);
         }
 
-        // Normal mode: enforce role immutability
-        if (currentRole && currentRole !== role) {
-            console.warn(`[Auth] Attempted role switch from ${currentRole} to ${role}. Action blocked.`);
-            alert(`Access Denied: You are permanently registered as a ${currentRole}.`);
-            return false;
-        }
         localStorage.setItem('fundlink_role', role);
         console.log(`[Auth] User logged in as ${role}`);
         return true;

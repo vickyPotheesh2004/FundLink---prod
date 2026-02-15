@@ -76,19 +76,3 @@
 *All scripts returned exit code 0 (Success).*
 
 ---
-
-## 4. Change Log
-
-### Version 1.1.0 (2026-02-14)
-- **NEW**: Accepted Connections Workspace (`js/pages/acceptedWorkspace.js`)
-  - Displays all accepted connection profiles in a unified dashboard
-  - Talk tab for secure messaging between connected partners
-  - Deal Disclosure tab for managing shared information and deal terms
-  - Documents tab for sharing pitch decks, financial models, and term sheets
-  - AI Report generation for partnership analysis
-  - Direct navigation to Deal Closure module
-- **UPDATED**: Investor Requests page now links to Accepted Connections Workspace
-- **UPDATED**: Founder Received page now shows "Open Workspace" button for accepted connections
-- **UPDATED**: Main router (`js/main.js`) includes new route `#accepted-workspace`
-- **UPDATED**: README.md with new feature documentation
-- **UPDATED**: REQUIREMENTS.md with new module dependencies

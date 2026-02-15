@@ -1,4 +1,3 @@
-
 import { Auth } from '../modules/auth.js';
 import { AIClient } from '../modules/AIClient.js';
 
@@ -26,28 +25,62 @@ export async function renderFounderProfile(section, app) {
         founderBio: 'founder-bio'
     };
 
-    // Load saved data
+    // Load saved data from both localStorage and Auth profile
+    const userProfile = Auth.getCurrentUserProfile();
+
     Object.keys(fields).forEach(key => {
         const saved = localStorage.getItem('fundlink_profile_' + key);
-        if (saved) {
-            const el = document.getElementById(fields[key]);
-            if (el) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = saved;
-                else el.innerText = saved;
+        const el = document.getElementById(fields[key]);
+        if (el) {
+            // Prefer Auth profile data, fallback to localStorage
+            let value = saved;
+            if (userProfile) {
+                if (key === 'companyName' && userProfile.companyName) value = userProfile.companyName;
+                if (key === 'founderName' && userProfile.name) value = userProfile.name;
+                if (key === 'companyIndustry' && userProfile.domain) value = userProfile.domain;
+                if (key === 'companyStage' && userProfile.stage) value = userProfile.stage;
+            }
+
+            if (value) {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.value = value;
+                else el.innerText = value;
             }
         }
     });
 
-    // Save Logic
+    // Save Logic - saves to both localStorage and Auth profile
     window.saveAllProfile = () => {
+        const profileData = {};
+
         Object.keys(fields).forEach(key => {
             const el = document.getElementById(fields[key]);
             if (el) {
                 const val = (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') ? el.value : el.innerText;
                 localStorage.setItem('fundlink_profile_' + key, val);
+
+                // Map to Auth profile fields
+                if (key === 'companyName') profileData.companyName = val;
+                if (key === 'founderName') profileData.name = val;
+                if (key === 'companyIndustry') profileData.domain = val;
+                if (key === 'companyStage') profileData.stage = val;
+                if (key === 'innovationObj') profileData.description = val;
             }
         });
-        alert('Profile updated successfully!');
+
+        // Save to Auth profile
+        const currentProfile = Auth.getCurrentUserProfile() || {};
+        Auth.saveUserProfile({
+            ...currentProfile,
+            ...profileData
+        });
+
+        if (app && app.showToast) {
+            app.showToast('Profile updated successfully!', 'success');
+        } else {
+            alert('Profile updated successfully!');
+        }
+
+        console.log('[FounderProfile] Profile saved:', profileData);
     };
 
     const btn1 = document.getElementById('edit-company-btn');
@@ -76,7 +109,11 @@ export async function renderFounderProfile(section, app) {
     if (readinessBtn) {
         readinessBtn.addEventListener('click', async () => {
             if (Auth.isReadinessComplete()) {
-                alert("You have already completed the Readiness Assessment.");
+                if (app && app.showToast) {
+                    app.showToast("You have already completed the Readiness Assessment.", 'info');
+                } else {
+                    alert("You have already completed the Readiness Assessment.");
+                }
                 return;
             }
 
@@ -87,7 +124,7 @@ export async function renderFounderProfile(section, app) {
 
             try {
                 // Get data from profile fields
-                const description = document.getElementById('innovation-objective').value || "No description provided.";
+                const description = document.getElementById('innovation-objective')?.value || "No description provided.";
 
                 const pitchData = {
                     description: description
@@ -100,20 +137,27 @@ export async function renderFounderProfile(section, app) {
                 const backdrop = document.getElementById('readiness-backdrop');
                 const panel = document.getElementById('readiness-panel');
 
-                modal.classList.remove('hidden');
-                setTimeout(() => {
-                    backdrop.classList.remove('opacity-0');
-                    panel.classList.remove('opacity-0', 'scale-95');
-                }, 10);
+                if (modal && backdrop && panel) {
+                    modal.classList.remove('hidden');
+                    setTimeout(() => {
+                        backdrop.classList.remove('opacity-0');
+                        panel.classList.remove('opacity-0', 'scale-95');
+                    }, 10);
 
-                // Update UI
-                document.getElementById('readiness-score-val').innerText = result.score;
+                    // Update UI
+                    const scoreVal = document.getElementById('readiness-score-val');
+                    if (scoreVal) scoreVal.innerText = result.score;
 
-                const strengthsList = document.getElementById('readiness-strengths');
-                if (strengthsList) strengthsList.innerHTML = result.analysis.strengths.map(s => `<li>${s}</li>`).join('');
+                    const strengthsList = document.getElementById('readiness-strengths');
+                    if (strengthsList && result.analysis?.strengths) {
+                        strengthsList.innerHTML = result.analysis.strengths.map(s => `<li>${s}</li>`).join('');
+                    }
 
-                const improvementList = document.getElementById('readiness-improvements');
-                if (improvementList) improvementList.innerHTML = result.analysis.gap_analysis.critical.map(s => `<li>${s}</li>`).join('');
+                    const improvementList = document.getElementById('readiness-improvements');
+                    if (improvementList && result.analysis?.gap_analysis?.critical) {
+                        improvementList.innerHTML = result.analysis.gap_analysis.critical.map(s => `<li>${s}</li>`).join('');
+                    }
+                }
 
                 // Mark as complete
                 Auth.setReadinessComplete();
@@ -121,9 +165,17 @@ export async function renderFounderProfile(section, app) {
                 btn.classList.remove('bg-primary', 'hover:bg-blue-700');
                 btn.classList.add('bg-green-600', 'hover:bg-green-700');
 
+                if (app && app.showToast) {
+                    app.showToast('Readiness assessment completed!', 'success');
+                }
+
             } catch (error) {
-                console.error(error);
-                alert("Analysis failed. Please try again.");
+                console.error('[FounderProfile] Readiness assessment failed:', error);
+                if (app && app.showToast) {
+                    app.showToast("Analysis failed. Please try again.", 'error');
+                } else {
+                    alert("Analysis failed. Please try again.");
+                }
                 btn.innerHTML = originalText;
                 btn.disabled = false;
             }
@@ -135,10 +187,13 @@ export async function renderFounderProfile(section, app) {
         const backdrop = document.getElementById('readiness-backdrop');
         const panel = document.getElementById('readiness-panel');
 
-        backdrop.classList.add('opacity-0');
-        panel.classList.add('opacity-0', 'scale-95');
+        if (backdrop) backdrop.classList.add('opacity-0');
+        if (panel) panel.classList.add('opacity-0', 'scale-95');
         setTimeout(() => {
-            modal.classList.add('hidden');
+            if (modal) modal.classList.add('hidden');
         }, 300);
     };
+
+    // Initialize demo mode UI
+    window.initDemoModeUI?.();
 }

@@ -36,6 +36,9 @@ export function renderAcceptedWorkspace(section, app) {
             </div>
             <div class="flex items-center gap-3">
                 <a href="${isFounder ? '#founder-profile' : '#investor-profile'}" class="text-xs font-semibold text-slate-500 hover:text-primary transition-colors">Back to Dashboard</a>
+                <button onclick="Auth.logout()" class="p-2 text-slate-400 hover:text-red-500 transition-colors" title="Sign Out">
+                    <span class="material-symbols-outlined">logout</span>
+                </button>
             </div>
         </div>
     </header>

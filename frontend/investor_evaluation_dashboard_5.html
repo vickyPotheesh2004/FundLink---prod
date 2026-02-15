@@ -400,13 +400,13 @@
                                     active investment criteria.</p>
                             </div>
                             <div class="flex gap-2">
-                                <button
-                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm">
+                                <button onclick="window.sortCardsByMatchScore()"
+                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                                     <span class="material-symbols-outlined text-sm">sort</span>
                                     Sort: Highest Match
                                 </button>
-                                <button
-                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm">
+                                <button onclick="window.exportToCSV()"
+                                    class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-sm font-semibold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
                                     <span class="material-symbols-outlined text-sm">download</span>
                                     Export CSV
                                 </button>

@@ -20,16 +20,51 @@ export async function renderFounderDashboard(section, app) {
     // We attach a global handler for simplicity in the HTML onclicks we will add
     window.founderRequestConnection = (investorName, btnId) => {
         const btn = document.getElementById(btnId);
+
+        // Check for existing pending request
+        const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
+        const existingRequest = requests.find(r =>
+            r.targetName === investorName &&
+            r.from === 'FOUNDER' &&
+            r.to === 'INVESTOR' &&
+            r.status === 'pending'
+        );
+
+        if (existingRequest) {
+            if (app && app.showToast) app.showToast(`You already have a pending request to ${investorName}`, 'warning');
+            return;
+        }
+
         if (confirm(`Send connection request to ${investorName}?`)) {
-            // Use the legacy method for demo data compatibility
-            Auth.sendConnectionRequestLegacy('FOUNDER', 'INVESTOR', investorName);
+            // Create connection request
+            const currentUserId = Auth.getCurrentUserId();
+            const currentUserProfile = Auth.getCurrentUserProfile();
+            const founderName = currentUserProfile?.name || currentUserProfile?.companyName || 'Founder';
+
+            const newRequest = {
+                id: `req_${Date.now()}`,
+                from: 'FOUNDER',
+                fromUserId: currentUserId,
+                fromName: founderName,
+                to: 'INVESTOR',
+                targetName: investorName,
+                status: 'pending',
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            requests.push(newRequest);
+            localStorage.setItem('fundlink_connection_requests', JSON.stringify(requests));
+
             if (btn) {
                 btn.innerText = "Request Sent";
                 btn.classList.remove('bg-primary', 'hover:bg-blue-700');
                 btn.classList.add('bg-slate-400', 'cursor-not-allowed');
                 btn.disabled = true;
             }
-            if (app && app.showToast) app.showToast(`Request sent to ${investorName}`, 'info');
+            if (app && app.showToast) app.showToast(`Request sent to ${investorName}`, 'success');
+
+            console.log('[FounderDashboard] Connection request sent:', newRequest);
         }
     };
 
@@ -46,6 +81,8 @@ export async function renderFounderDashboard(section, app) {
         const stage = stageEl ? stageEl.value : 'all';
 
         const cards = document.querySelectorAll('.investor-card');
+        let visibleCount = 0;
+
         cards.forEach(card => {
             const dDomain = card.getAttribute('data-domain');
             const dTicket = card.getAttribute('data-ticket');
@@ -59,7 +96,10 @@ export async function renderFounderDashboard(section, app) {
             if (stage !== 'all' && dStage !== stage) show = false;
 
             card.style.display = show ? 'flex' : 'none';
+            if (show) visibleCount++;
         });
+
+        console.log(`[FounderDashboard] Filters applied, ${visibleCount} cards visible`);
     };
 
     window.resetFounderFilters = () => {
@@ -76,6 +116,7 @@ export async function renderFounderDashboard(section, app) {
         if (search) search.value = '';
 
         window.applyFounderFilters();
+        if (app && app.showToast) app.showToast('Filters cleared', 'info');
     };
 
     window.sortFoundersByMatchScore = () => {
@@ -98,6 +139,8 @@ export async function renderFounderDashboard(section, app) {
             sortBtn.classList.remove('bg-primary/10', 'text-primary', 'border-primary/30');
             sortBtn.classList.add('bg-green-100', 'text-green-700', 'border-green-300');
         }
+
+        if (app && app.showToast) app.showToast('Sorted by match score', 'success');
     };
 
     window.searchInvestors = (query) => {
@@ -117,6 +160,7 @@ export async function renderFounderDashboard(section, app) {
     // 5. Notification and Received Interests Functions
     // Navigate to Received Interests page
     window.navigateToReceivedInterests = () => {
+        console.log('[FounderDashboard] Navigating to received interests...');
         window.location.hash = '#founder-received';
     };
 
@@ -125,10 +169,26 @@ export async function renderFounderDashboard(section, app) {
         window.location.hash = '#accepted-workspace';
     };
 
+    // Navigate to Settings
+    window.navigateToSettings = () => {
+        window.location.hash = '#founder-settings';
+    };
+
+    // Navigate to Profile
+    window.navigateToProfile = () => {
+        window.location.hash = '#founder-profile';
+    };
+
     // Update notification badge count
     window.updateNotificationCount = () => {
         const requests = JSON.parse(localStorage.getItem('fundlink_connection_requests') || '[]');
-        const pendingCount = requests.filter(r => r.to === 'FOUNDER' && r.status === 'pending').length;
+        // Count pending requests where founder is the recipient
+        const pendingCount = requests.filter(r =>
+            (r.to === 'FOUNDER' || r.toRole === 'FOUNDER') &&
+            r.status === 'pending'
+        ).length;
+
+        console.log('[FounderDashboard] Updating notification count:', pendingCount);
 
         // Update header notification badge
         const badge = document.getElementById('notification-badge');
@@ -142,46 +202,54 @@ export async function renderFounderDashboard(section, app) {
         if (countEl) {
             countEl.textContent = pendingCount;
         }
+
+        return pendingCount;
     };
 
     // Initialize notification count on load
-    window.updateNotificationCount();
+    setTimeout(() => {
+        window.updateNotificationCount();
+    }, 100);
 
     // Listen for storage changes to update notification count
     window.addEventListener('storage', () => {
         window.updateNotificationCount();
     });
 
+    // Listen for request updates
+    window.addEventListener('fundlink:requestUpdate', () => {
+        window.updateNotificationCount();
+    });
+
     // 6. Demo Mode Initialization
-    // Initialize demo mode UI elements
+    // Initialize demo mode UI elements - Always show role switcher for seamless access
     window.initDemoModeUI = () => {
         const demoLabel = document.getElementById('demo-mode-label');
         const roleSwitcherContainer = document.getElementById('role-switcher-container');
         const roleSwitcher = document.getElementById('role-switcher');
 
-        if (Auth.isDemoMode()) {
-            // Show demo mode UI
-            if (demoLabel) demoLabel.classList.remove('hidden');
-            if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
+        // Always show role switcher for seamless access
+        if (roleSwitcherContainer) roleSwitcherContainer.classList.remove('hidden');
 
-            // Set current role in switcher
-            if (roleSwitcher) {
-                roleSwitcher.value = Auth.getRole() || 'FOUNDER';
+        // Set current role in switcher
+        if (roleSwitcher) {
+            roleSwitcher.value = Auth.getRole() || 'FOUNDER';
+        }
+
+        // Show demo label if in demo mode
+        if (demoLabel) {
+            if (Auth.isDemoMode()) {
+                demoLabel.classList.remove('hidden');
+            } else {
+                demoLabel.classList.add('hidden');
             }
-        } else {
-            // Hide demo mode UI
-            if (demoLabel) demoLabel.classList.add('hidden');
-            if (roleSwitcherContainer) roleSwitcherContainer.classList.add('hidden');
         }
     };
 
-    // Handle role switching from UI
+    // Handle role switching from UI - Always allowed for seamless access
     window.handleRoleSwitch = (newRole) => {
-        if (!Auth.isDemoMode()) {
-            // Enable demo mode first
-            Auth.enableDemoMode();
-        }
-
+        console.log('[FounderDashboard] Role switch requested:', newRole);
+        // Role switching is always allowed - no demo mode required
         if (Auth.switchRole(newRole)) {
             // Navigate to appropriate dashboard
             const targetRoute = newRole === 'FOUNDER' ? '#founder-dashboard' : '#investor-feed';
@@ -193,7 +261,10 @@ export async function renderFounderDashboard(section, app) {
     };
 
     // Initialize demo mode UI on load
-    window.initDemoModeUI();
+    setTimeout(() => {
+        window.initDemoModeUI();
+        window.updateNotificationCount();
+    }, 100);
 
     // Listen for demo mode changes
     window.addEventListener('fundlink:demoModeChanged', () => {

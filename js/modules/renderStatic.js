@@ -12,6 +12,16 @@ export async function renderStatic(section, app, htmlPath) {
 
         section.innerHTML = content;
 
+        // Initialize demo mode UI if the function exists
+        if (typeof window.initDemoModeUI === 'function') {
+            setTimeout(() => window.initDemoModeUI(), 50);
+        }
+
+        // Initialize notification count if the function exists
+        if (typeof window.updateNotificationCount === 'function') {
+            setTimeout(() => window.updateNotificationCount(), 50);
+        }
+
         // Re-attach scripts if any (simple approach)
         // Note: Inline scripts in fetched HTML won't run automatically. 
         // We rely on main.js to handle logic, or we'd need to eval them (risky).
