@@ -187,6 +187,22 @@ Follow these steps to get the project running on your local machine:
     Open your web browser and go to:
     **`http://localhost:3000`**
 
+### Troubleshooting: Port Already in Use
+
+If the server fails to start with `Error: listen EADDRINUSE: address already in use :::3000`, follow these steps to free up the port:
+
+1.  **Find the conflicting process**:
+    ```bash
+    netstat -ano | findstr :3000
+    ```
+    *Note the PID (Process ID) from the output (e.g., `LISTENING 3296`).*
+
+2.  **Terminate the process**:
+    ```bash
+    taskkill /F /PID <PID>
+    ```
+    *Replace `<PID>` with the actual process ID found in the previous step.*
+
 ### User Usage Scenarios
 
 #### Scenario A: The Founder Journey (Seeking Capital)
